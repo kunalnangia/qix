@@ -1,0 +1,276 @@
+DATABASE SCHEMA
+================================================================================
+
+TABLE: ai_test_generation_requests
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+project_id                     uuid                 True       
+user_input                     text                 False      
+generated_tests                jsonb                True       
+status                         text                 True       'processing'::text
+created_by                     uuid                 True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  created_by -> profiles(id)
+  project_id -> projects(id)
+
+================================================================================
+
+TABLE: api_test_configs
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+test_case_id                   uuid                 True       
+method                         text                 False      
+endpoint                       text                 False      
+headers                        jsonb                True       
+body                           jsonb                True       
+expected_status                integer              True       
+expected_response              jsonb                True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  test_case_id -> test_cases(id)
+
+================================================================================
+
+TABLE: performance_metrics
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+execution_id                   uuid                 True       
+page_load_time                 integer              True       
+first_contentful_paint         integer              True       
+largest_contentful_paint       integer              True       
+time_to_interactive            integer              True       
+cumulative_layout_shift        numeric              True       
+memory_usage                   integer              True       
+cpu_usage                      numeric              True       
+network_requests               integer              True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  execution_id -> test_executions(id)
+
+================================================================================
+
+TABLE: profiles
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      
+email                          text                 False      
+full_name                      text                 True       
+avatar_url                     text                 True       
+role                           USER-DEFINED         True       'tester'::user_role
+team_id                        uuid                 True       
+created_at                     timestamp with time zone True       now()
+updated_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+================================================================================
+
+TABLE: projects
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+name                           text                 False      
+description                    text                 True       
+base_url                       text                 True       
+team_id                        uuid                 True       
+created_by                     uuid                 True       
+status                         USER-DEFINED         True       'active'::test_status
+created_at                     timestamp with time zone True       now()
+updated_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  created_by -> profiles(id)
+  team_id -> teams(id)
+
+================================================================================
+
+TABLE: security_scan_results
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+test_case_id                   uuid                 True       
+vulnerability_type             text                 True       
+severity                       USER-DEFINED         True       
+description                    text                 True       
+location                       text                 True       
+remediation                    text                 True       
+status                         text                 True       'open'::text
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  test_case_id -> test_cases(id)
+
+================================================================================
+
+TABLE: teams
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+name                           text                 False      
+description                    text                 True       
+created_by                     uuid                 True       
+created_at                     timestamp with time zone True       now()
+updated_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  created_by -> profiles(id)
+
+================================================================================
+
+TABLE: test_cases
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+title                          text                 False      
+description                    text                 True       
+project_id                     uuid                 True       
+test_type                      USER-DEFINED         True       'functional'::test_type
+priority                       USER-DEFINED         True       'medium'::priority_level
+status                         USER-DEFINED         True       'draft'::test_status
+steps                          jsonb                True       
+expected_result                text                 True       
+actual_result                  text                 True       
+created_by                     uuid                 True       
+assigned_to                    uuid                 True       
+tags                           ARRAY                True       
+ai_generated                   boolean              True       false
+self_healing_enabled           boolean              True       true
+created_at                     timestamp with time zone True       now()
+updated_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  assigned_to -> profiles(id)
+  created_by -> profiles(id)
+  project_id -> projects(id)
+
+================================================================================
+
+TABLE: test_executions
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+test_plan_id                   uuid                 True       
+test_case_id                   uuid                 True       
+status                         USER-DEFINED         True       'pending'::execution_status
+started_at                     timestamp with time zone True       
+completed_at                   timestamp with time zone True       
+duration_ms                    integer              True       
+error_message                  text                 True       
+screenshots                    ARRAY                True       
+logs                           jsonb                True       
+executed_by                    uuid                 True       
+browser_info                   jsonb                True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  executed_by -> profiles(id)
+  test_case_id -> test_cases(id)
+  test_plan_id -> test_plans(id)
+
+================================================================================
+
+TABLE: test_plan_cases
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+test_plan_id                   uuid                 True       
+test_case_id                   uuid                 True       
+execution_order                integer              True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  test_case_id -> test_cases(id)
+  test_plan_id -> test_plans(id)
+
+================================================================================
+
+TABLE: test_plans
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+name                           text                 False      
+description                    text                 True       
+project_id                     uuid                 True       
+created_by                     uuid                 True       
+scheduled_date                 timestamp with time zone True       
+status                         USER-DEFINED         True       'draft'::test_status
+environment                    text                 True       
+browser_config                 jsonb                True       
+created_at                     timestamp with time zone True       now()
+updated_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  created_by -> profiles(id)
+  project_id -> projects(id)
+
+================================================================================
+
+TABLE: visual_baselines
+--------------------------------------------------------------------------------
+COLUMNS:
+Name                           Type                 Nullable   Default
+--------------------------------------------------------------------------------
+id                             uuid                 False      uuid_generate_v4()
+test_case_id                   uuid                 True       
+screenshot_url                 text                 False      
+viewport_width                 integer              True       
+viewport_height                integer              True       
+browser                        text                 True       
+created_at                     timestamp with time zone True       now()
+
+PRIMARY KEY: id
+
+FOREIGN KEYS:
+  test_case_id -> test_cases(id)
+
+================================================================================
+

@@ -1,0 +1,38 @@
+from setuptools import setup, find_packages
+
+setup(
+    name="intellitest_backend",
+    version="0.1.0",
+    packages=find_packages(),
+    install_requires=[
+        'fastapi>=0.68.0',
+        'uvicorn>=0.15.0',
+        'sqlalchemy>=1.4.0',
+        'pydantic>=1.8.0',
+        'python-jose[cryptography]>=3.3.0',
+        'passlib[bcrypt]>=1.7.4',
+        'python-multipart>=0.0.5',
+        'python-dotenv>=0.19.0',
+        'email-validator>=1.1.3',
+        'psycopg2-binary>=2.9.1',
+        'alembic>=1.7.0',
+        'python-multipart>=0.0.5',
+        'requests>=2.26.0',
+        'pytest>=6.2.5',
+        'httpx>=0.23.0',
+        'websockets>=10.0',
+        'python-dateutil>=2.8.2',
+    ],
+    python_requires='>=3.8',
+    author="Your Name",
+    author_email="your.email@example.com",
+    description="Backend for IntelliTest AI Automation Platform",
+    long_description=open('README.md').read(),
+    long_description_content_type="text/markdown",
+    url="https://github.com/yourusername/intellitest-backend",
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+)

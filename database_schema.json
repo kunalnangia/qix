@@ -1,0 +1,860 @@
+{
+  "timestamp": "2025-07-19T13:55:35.031817",
+  "tables": {
+    "ai_test_generation_requests": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "project_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "user_input",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "generated_tests",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": true,
+          "default": "'processing'::text"
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "created_by",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "project_id",
+          "references": "projects(id)"
+        }
+      ]
+    },
+    "api_test_configs": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "test_case_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "method",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "endpoint",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "headers",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "body",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "expected_status",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "expected_response",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "test_case_id",
+          "references": "test_cases(id)"
+        }
+      ]
+    },
+    "performance_metrics": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "execution_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "page_load_time",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "first_contentful_paint",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "largest_contentful_paint",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "time_to_interactive",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "cumulative_layout_shift",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "memory_usage",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "cpu_usage",
+          "type": "numeric",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "network_requests",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "execution_id",
+          "references": "test_executions(id)"
+        }
+      ]
+    },
+    "profiles": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "email",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "full_name",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "avatar_url",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "role",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'tester'::user_role"
+        },
+        {
+          "name": "team_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": []
+    },
+    "projects": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "base_url",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "team_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'active'::test_status"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "created_by",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "team_id",
+          "references": "teams(id)"
+        }
+      ]
+    },
+    "security_scan_results": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "test_case_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "vulnerability_type",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "severity",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "location",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "remediation",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "text",
+          "nullable": true,
+          "default": "'open'::text"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "test_case_id",
+          "references": "test_cases(id)"
+        }
+      ]
+    },
+    "teams": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "created_by",
+          "references": "profiles(id)"
+        }
+      ]
+    },
+    "test_cases": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "project_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "test_type",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'functional'::test_type"
+        },
+        {
+          "name": "priority",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'medium'::priority_level"
+        },
+        {
+          "name": "status",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'draft'::test_status"
+        },
+        {
+          "name": "steps",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "expected_result",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "actual_result",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "assigned_to",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "tags",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "ai_generated",
+          "type": "boolean",
+          "nullable": true,
+          "default": "false"
+        },
+        {
+          "name": "self_healing_enabled",
+          "type": "boolean",
+          "nullable": true,
+          "default": "true"
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "assigned_to",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "created_by",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "project_id",
+          "references": "projects(id)"
+        }
+      ]
+    },
+    "test_executions": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "test_plan_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "test_case_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'pending'::execution_status"
+        },
+        {
+          "name": "started_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "completed_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "duration_ms",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "error_message",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "screenshots",
+          "type": "ARRAY",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "logs",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "executed_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "browser_info",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "executed_by",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "test_case_id",
+          "references": "test_cases(id)"
+        },
+        {
+          "column": "test_plan_id",
+          "references": "test_plans(id)"
+        }
+      ]
+    },
+    "test_plan_cases": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "test_plan_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "test_case_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "execution_order",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "test_case_id",
+          "references": "test_cases(id)"
+        },
+        {
+          "column": "test_plan_id",
+          "references": "test_plans(id)"
+        }
+      ]
+    },
+    "test_plans": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "description",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "project_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_by",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "scheduled_date",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "status",
+          "type": "USER-DEFINED",
+          "nullable": true,
+          "default": "'draft'::test_status"
+        },
+        {
+          "name": "environment",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "browser_config",
+          "type": "jsonb",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        },
+        {
+          "name": "updated_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "created_by",
+          "references": "profiles(id)"
+        },
+        {
+          "column": "project_id",
+          "references": "projects(id)"
+        }
+      ]
+    },
+    "visual_baselines": {
+      "columns": [
+        {
+          "name": "id",
+          "type": "uuid",
+          "nullable": false,
+          "default": "uuid_generate_v4()"
+        },
+        {
+          "name": "test_case_id",
+          "type": "uuid",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "screenshot_url",
+          "type": "text",
+          "nullable": false,
+          "default": null
+        },
+        {
+          "name": "viewport_width",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "viewport_height",
+          "type": "integer",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "browser",
+          "type": "text",
+          "nullable": true,
+          "default": null
+        },
+        {
+          "name": "created_at",
+          "type": "timestamp with time zone",
+          "nullable": true,
+          "default": "now()"
+        }
+      ],
+      "primary_key": [
+        "id"
+      ],
+      "foreign_keys": [
+        {
+          "column": "test_case_id",
+          "references": "test_cases(id)"
+        }
+      ]
+    }
+  }
+}
