@@ -1,10 +1,23 @@
-# IntelliTest AI Automation Platform
+# QIX - Quality Intelligence eXperience
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
+[![CI/CD](https://github.com/kunalnangia/qix/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/kunalnangia/qix/actions)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
-IntelliTest is an AI-powered test automation platform that helps teams create, manage, and execute automated tests with the power of AI. The platform provides features like test case generation, visual testing, and test execution powered by AI.
+QIX (Quality Intelligence eXperience) is an AI-powered test automation platform that helps teams create, manage, and execute automated tests with the power of AI. The platform provides features like test case generation, visual testing, and test execution powered by AI.
+
+## 📋 Table of Contents
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Prerequisites](#-prerequisites)
+- [🚀 Quick Start](#-quick-start)
+- [Development Setup](#-development-setup)
+- [Testing](#-testing)
+- [Deployment](#-deployment)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ## 🚀 Features
 
@@ -12,8 +25,10 @@ IntelliTest is an AI-powered test automation platform that helps teams create, m
 - **Visual Testing**: Compare UI changes visually across different test runs
 - **Project Management**: Organize test cases into projects and test plans
 - **Team Collaboration**: Share test results and collaborate with team members
-- **CI/CD Integration**: Seamlessly integrate with your CI/CD pipeline
+- **CI/CD Integration**: GitHub Actions for automated testing and deployment
 - **Comprehensive Reporting**: Get detailed reports on test execution and coverage
+- **RESTful API**: Built with FastAPI for high performance and async support
+- **Modern Frontend**: Responsive UI built with Next.js and React
 
 ## 🛠️ Tech Stack
 
@@ -25,9 +40,32 @@ IntelliTest is an AI-powered test automation platform that helps teams create, m
 - **Caching**: Redis
 - **Async Tasks**: Celery
 - **Containerization**: Docker
+- **Testing**: Pytest
+- **Code Quality**: Black, isort, flake8
 
 ### Frontend
-- **Framework**: Next.js (React)
+- **Framework**: Next.js (React) with TypeScript
+- **State Management**: React Query
+- **UI Components**: Chakra UI
+- **Form Handling**: React Hook Form
+- **Testing**: Jest, React Testing Library
+
+### Infrastructure
+- **Version Control**: GitHub
+- **CI/CD**: GitHub Actions
+- **Container Orchestration**: Docker Compose
+- **Monitoring**: (To be implemented)
+
+## 📋 Prerequisites
+
+Before you begin, ensure you have the following installed:
+
+- Python 3.9 or higher
+- Node.js 16.x or higher
+- PostgreSQL 13+
+- Redis
+- Docker (optional, for containerized deployment)
+- Git
 - **UI Library**: Tailwind CSS + Shadcn/UI
 - **State Management**: React Query
 - **Form Handling**: React Hook Form
