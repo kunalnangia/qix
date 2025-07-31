@@ -1,17 +1,16 @@
 import os
-import uuid
-from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime, ForeignKey, JSON, Enum
-from sqlalchemy.dialects.postgresql import UUID as PG_UUID
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker, Session, relationship, scoped_session
-from sqlalchemy.sql import func
-from contextlib import contextmanager
-from dotenv import load_dotenv
-from typing import Optional, List, Dict, Any
-from datetime import datetime
-import enum
 import logging
-import time
+import traceback
+from typing import AsyncGenerator
+from contextlib import contextmanager
+
+from sqlalchemy import create_engine, text
+from sqlalchemy.orm import sessionmaker, scoped_session
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
+from dotenv import load_dotenv
+
+# Import Base from base.py to avoid circular imports
+from .base import Base
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -19,82 +18,240 @@ logger = logging.getLogger(__name__)
 
 # Load environment variables from .env file
 env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), '.env')
-print(f"Looking for .env file at: {env_path}")
-print(f"File exists: {os.path.exists(env_path)}")
+logger.info(f"Loading environment from: {env_path}")
 
 # Load environment variables
 load_dotenv(env_path, override=True)
-
-# Debug: Print all environment variables
-print("Environment variables:")
-for key, value in os.environ.items():
-    if "DATABASE" in key or "SECRET" in key or "KEY" in key:
-        print(f"{key} = {'*' * 8 if value else 'Not set'}")
-    else:
-        print(f"{key} = {value}")
 
 # Get database URL from environment variable
 DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL:
     raise ValueError("No DATABASE_URL found in environment variables")
 
-print(f"Using DATABASE_URL: {DATABASE_URL}")
+logger.info("Database URL configured")
 
-print(f"Connecting to database: {DATABASE_URL}")
+# Base is now imported from base.py
 
-# Create SQLAlchemy engine with connection pool settings
+# Create sync engine for migrations and sync operations
 engine = create_engine(
-    DATABASE_URL,
-    pool_pre_ping=True,
+    str(DATABASE_URL).replace("postgresql://", "postgresql+psycopg2://"),
+    echo=True,  # Enable SQL query logging for debugging
+    pool_pre_ping=True,  # Enable connection health checks
     pool_size=5,
     max_overflow=10,
-    pool_recycle=300,
-    pool_timeout=30,
+    pool_recycle=300,  # Recycle connections after 5 minutes
+    pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
     connect_args={
-        'connect_timeout': 10,
-        'keepalives': 1,
-        'keepalives_idle': 30,
-        'keepalives_interval': 10,
-        'keepalives_count': 5
+        'connect_timeout': 10,  # 10 seconds connection timeout
+        'keepalives': 1,  # Enable TCP keepalive
+        'keepalives_idle': 30,  # Start sending keepalive packets after 30 seconds of inactivity
+        'keepalives_interval': 10,  # Send keepalive packets every 10 seconds
+        'keepalives_count': 5  # Consider the connection dead after 5 failed keepalive attempts
     }
 )
 
-# Session factory
+# Create async engine for FastAPI with asyncpg
+# Note: asyncpg requires connection parameters in the connection string
+connection_string = (
+    str(DATABASE_URL)
+    .replace("postgresql://", "postgresql+asyncpg://")
+    + "?connect_timeout=10"
+    + "&keepalives=1"
+    + "&keepalives_idle=30"
+    + "&keepalives_interval=10"
+    + "&keepalives_count=5"
+    + "&command_timeout=60"
+    + "&application_name=intellitest_backend"
+    + "&statement_timeout=60000"
+)
+
+async_engine = create_async_engine(
+    connection_string,
+    echo=True,  # Enable SQL query logging for debugging
+    pool_pre_ping=True,  # Enable connection health checks
+    pool_size=5,
+    max_overflow=10,
+    pool_recycle=300,  # Recycle connections after 5 minutes
+    pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
+    # No connect_args for asyncpg - all parameters should be in the connection string
+    connect_args={
+        'server_settings': {
+            'application_name': 'intellitest_backend',
+            'statement_timeout': '60000'  # 60 seconds statement timeout
+        }
+    }
+)
+
+# Session factories
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+AsyncSessionLocal = async_sessionmaker(
+    bind=async_engine,
+    class_=AsyncSession,
+    expire_on_commit=False,
+    autocommit=False,
+    autoflush=False
+)
 
-# Base class for models
-Base = declarative_base()
+# Scoped session for thread safety
+ScopedSession = scoped_session(SessionLocal)
 
-# Dependency to get DB session
+# Dependency for getting async database session
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    """
+    Async database session dependency for FastAPI
+    """
+    async with AsyncSessionLocal() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception as e:
+            await session.rollback()
+            logger.error(f"Database session error: {e}")
+            raise
+        finally:
+            await session.close()
+
+# Sync session for migrations and scripts
 @contextmanager
-def get_db():
-    """Generator that yields a database session and ensures it's closed after use."""
-    db = SessionLocal()
+def get_sync_db():
+    """
+    Sync database session for migrations and scripts
+    """
+    db = ScopedSession()
     try:
         yield db
         db.commit()
     except Exception as e:
         db.rollback()
-        print(f"Database error: {e}")
+        logger.error(f"Database error: {e}")
         raise
     finally:
         db.close()
 
 def create_tables():
-    """Create all database tables."""
+    """
+    Create all database tables using sync engine
+    """
     try:
         Base.metadata.create_all(bind=engine)
-        print("Database tables created successfully")
+        logger.info("Database tables created successfully")
     except Exception as e:
-        print(f"Error creating database tables: {e}")
+        logger.error(f"Error creating database tables: {e}")
         raise
 
-def init_db():
-    """Initialize the database by creating all tables."""
-    try:
-        print("Initializing database...")
-        create_tables()
-        print("Database initialized successfully")
-    except Exception as e:
-        print(f"Error initializing database: {e}")
-        raise
+async def init_db():
+    """
+    Initialize database with async engine
+    """
+    import asyncio
+    import time
+    from sqlalchemy.ext.asyncio import create_async_engine
+    from sqlalchemy.sql import text
+    from sqlalchemy.exc import OperationalError, InterfaceError, TimeoutError as SQLAlchemyTimeoutError
+    
+    async def _test_connection():
+        """Test database connection with retry logic"""
+        last_error = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                async with async_engine.connect() as conn:
+                    await conn.execute(text("SELECT 1"))
+                    logger.info("✅ Database connection test successful")
+                    return True
+            except (OperationalError, InterfaceError, SQLAlchemyTimeoutError) as e:
+                last_error = e
+                if attempt < max_retries:
+                    wait_time = retry_delay * attempt
+                    logger.warning(f"⚠️ Connection attempt {attempt} failed. Retrying in {wait_time} seconds...")
+                    await asyncio.sleep(wait_time)
+                continue
+            except Exception as e:
+                last_error = e
+                break
+        
+        logger.error(f"❌ Failed to connect to database after {max_retries} attempts")
+        if last_error:
+            logger.error(f"Last error: {str(last_error)}")
+            logger.debug(traceback.format_exc())
+        return False
+    
+    async def _create_tables():
+        """Create database tables with retry logic"""
+        last_error = None
+        for attempt in range(1, max_retries + 1):
+            try:
+                async with async_engine.begin() as conn:
+                    logger.info(f"Creating database tables (attempt {attempt}/{max_retries})...")
+                    await conn.run_sync(Base.metadata.create_all)
+                    logger.info("✅ Database tables created successfully")
+                    return True
+            except (OperationalError, InterfaceError, SQLAlchemyTimeoutError) as e:
+                last_error = e
+                if attempt < max_retries:
+                    wait_time = retry_delay * attempt
+                    logger.warning(f"⚠️ Table creation attempt {attempt} failed. Retrying in {wait_time} seconds...")
+                    await asyncio.sleep(wait_time)
+                continue
+            except Exception as e:
+                last_error = e
+                break
+        
+        logger.error(f"❌ Failed to create database tables after {max_retries} attempts")
+        if last_error:
+            logger.error(f"Last error: {str(last_error)}")
+            logger.debug(traceback.format_exc())
+        return False
+    
+    async def _init_db():
+        """Initialize the database with connection and table creation"""
+        # Test connection first
+        if not await _test_connection():
+            return False
+            
+        # Create tables
+        if not await _create_tables():
+            return False
+            
+        return True
+    
+    # Run the async function with retry logic for the event loop
+    last_error = None
+    for attempt in range(1, max_retries + 1):
+        try:
+            return await _init_db()
+        except RuntimeError as e:
+            if "no running event loop" in str(e):
+                try:
+                    import nest_asyncio
+                    nest_asyncio.apply()
+                    return await _init_db()
+                except Exception as nest_error:
+                    last_error = nest_error
+                    logger.error(f"❌ Failed to initialize asyncio: {str(nest_error)}")
+                    if attempt < max_retries:
+                        wait_time = retry_delay * attempt
+                        logger.warning(f"⚠️ Retrying in {wait_time} seconds...")
+                        time.sleep(wait_time)
+                    continue
+            else:
+                last_error = e
+                logger.error(f"❌ Runtime error: {str(e)}")
+                if attempt < max_retries:
+                    wait_time = retry_delay * attempt
+                    logger.warning(f"⚠️ Retrying in {wait_time} seconds...")
+                    time.sleep(wait_time)
+                continue
+        except Exception as e:
+            last_error = e
+            logger.error(f"❌ Unexpected error: {str(e)}")
+            logger.debug(traceback.format_exc())
+            if attempt < max_retries:
+                wait_time = retry_delay * attempt
+                logger.warning(f"⚠️ Retrying in {wait_time} seconds...")
+                time.sleep(wait_time)
+            continue
+    
+    logger.error(f"❌ Failed to initialize database after {max_retries} attempts")
+    if last_error:
+        logger.error(f"Last error: {str(last_error)}")
+    return False

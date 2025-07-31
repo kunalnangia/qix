@@ -1,0 +1,28 @@
+=== Python Environment Check ===
+
+Python Version: 3.12.2 (tags/v3.12.2:6abddd9, Feb  6 2024, 21:26:36) [MSC v.1937 64 bit (AMD64)]
+Executable: C:\Program Files\Python312\python.exe
+Current Directory: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend
+Platform: win32
+Default Encoding: utf-8
+File System Encoding: utf-8
+
+=== Checking for .env file ===
+Looking for .env at: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+[OK] .env file found
+Successfully read 41 lines from .env
+
+First few non-comment lines (sensitive data masked):
+- PROJECT_NAME="IntelliTest AI Automation Platform"
+- SECRET_KEY=***MASKED***
+- ACCESS_TOKEN_EXPIRE_MINUTES=***MASKED***
+
+=== Checking Python Packages ===
+[OK] fastapi is installed
+[OK] uvicorn is installed
+[OK] sqlalchemy is installed
+[OK] psycopg2 is installed
+[MISSING] python-dotenv is not installed
+[OK] pydantic is installed
+
+=== Script completed successfully ===

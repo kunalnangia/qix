@@ -16,9 +16,8 @@ from .auth.security import (
     AuthService
 )
 
-# Initialize the database when the package is imported
-# This ensures tables are created when the application starts
-init_db()
+# Note: Database initialization is now handled in the FastAPI lifespan event
+# This prevents issues with async/await and ensures proper initialization order
 
 __all__ = [
     'app',

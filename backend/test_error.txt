@@ -1,0 +1,5 @@
+=== Script Error ===
+Error: 'charmap' codec can't encode character '\u2705' in position 3: character maps to <undefined>
+
+Traceback:
+Traceback (most recent call last):

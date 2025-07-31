@@ -1,0 +1,23 @@
+=== Direct Check Script ===
+1. Basic Python test successful
+
+2. Environment Variables:
+   Current Directory: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend
+   Python Executable: C:\Program Files\Python312\python.exe
+
+3. Looking for .env at: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+   [OK] .env file found
+   Line 1: # Application Settings
+   Line 2: PROJECT_NAME="IntelliTest AI Automation Platform"
+   Line 3: SECRET_KEY="your-super-secret-key-change-this-in-production"
+   Line 4: ACCESS_TOKEN_EXPIRE_MINUTES=11520
+   Line 5: SERVER_NAME="localhost"
+
+   Successfully read 22 non-comment lines from .env
+
+   First few non-comment lines (sensitive data masked):
+   - PROJECT_NAME="IntelliTest AI Automation Platform"
+   - SECRET_KEY=***MASKED***
+   - ACCESS_TOKEN_EXPIRE_MINUTES=***MASKED***
+
+4. Script completed successfully

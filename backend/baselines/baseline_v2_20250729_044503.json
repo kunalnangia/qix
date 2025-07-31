@@ -1,0 +1,1389 @@
+{
+  "metadata": {
+    "timestamp": "2025-07-29T04:45:00.739430",
+    "baseline_type": "second_baseline",
+    "project_root": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend"
+  },
+  "environment": {
+    "python_version": "3.12.2",
+    "python_implementation": "CPython",
+    "python_compiler": "MSC v.1937 64 bit (AMD64)",
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64"
+  },
+  "git": {
+    "branch": "master",
+    "commit": "7a74cc789e94b4b13cc9bfe4c33d90f7eee7586e",
+    "has_uncommitted_changes": true
+  },
+  "dependencies": {
+    "python_packages": [
+      {
+        "name": "aiofiles",
+        "version": "24.1.0"
+      },
+      {
+        "name": "alembic",
+        "version": "1.16.4"
+      },
+      {
+        "name": "annotated-types",
+        "version": "0.7.0"
+      },
+      {
+        "name": "anyio",
+        "version": "4.9.0"
+      },
+      {
+        "name": "asyncpg",
+        "version": "0.30.0"
+      },
+      {
+        "name": "bcrypt",
+        "version": "4.3.0"
+      },
+      {
+        "name": "black",
+        "version": "25.1.0"
+      },
+      {
+        "name": "boto3",
+        "version": "1.39.9"
+      },
+      {
+        "name": "botocore",
+        "version": "1.39.9"
+      },
+      {
+        "name": "certifi",
+        "version": "2025.7.14"
+      },
+      {
+        "name": "cffi",
+        "version": "1.17.1"
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.2"
+      },
+      {
+        "name": "click",
+        "version": "8.2.1"
+      },
+      {
+        "name": "colorama",
+        "version": "0.4.6"
+      },
+      {
+        "name": "coverage",
+        "version": "7.9.2"
+      },
+      {
+        "name": "cryptography",
+        "version": "45.0.5"
+      },
+      {
+        "name": "deprecation",
+        "version": "2.1.0"
+      },
+      {
+        "name": "distro",
+        "version": "1.9.0"
+      },
+      {
+        "name": "dnspython",
+        "version": "2.7.0"
+      },
+      {
+        "name": "ecdsa",
+        "version": "0.19.1"
+      },
+      {
+        "name": "email_validator",
+        "version": "2.2.0"
+      },
+      {
+        "name": "Faker",
+        "version": "37.4.2"
+      },
+      {
+        "name": "fastapi",
+        "version": "0.110.1"
+      },
+      {
+        "name": "flake8",
+        "version": "7.3.0"
+      },
+      {
+        "name": "gotrue",
+        "version": "2.12.3"
+      },
+      {
+        "name": "greenlet",
+        "version": "3.2.3"
+      },
+      {
+        "name": "h11",
+        "version": "0.16.0"
+      },
+      {
+        "name": "h2",
+        "version": "4.2.0"
+      },
+      {
+        "name": "hpack",
+        "version": "4.1.0"
+      },
+      {
+        "name": "httpcore",
+        "version": "1.0.9"
+      },
+      {
+        "name": "httptools",
+        "version": "0.6.4"
+      },
+      {
+        "name": "httpx",
+        "version": "0.28.1"
+      },
+      {
+        "name": "hyperframe",
+        "version": "6.1.0"
+      },
+      {
+        "name": "idna",
+        "version": "3.10"
+      },
+      {
+        "name": "iniconfig",
+        "version": "2.1.0"
+      },
+      {
+        "name": "isort",
+        "version": "6.0.1"
+      },
+      {
+        "name": "jiter",
+        "version": "0.10.0"
+      },
+      {
+        "name": "jmespath",
+        "version": "1.0.1"
+      },
+      {
+        "name": "jq",
+        "version": "1.10.0"
+      },
+      {
+        "name": "Mako",
+        "version": "1.3.10"
+      },
+      {
+        "name": "markdown-it-py",
+        "version": "3.0.0"
+      },
+      {
+        "name": "MarkupSafe",
+        "version": "3.0.2"
+      },
+      {
+        "name": "mccabe",
+        "version": "0.7.0"
+      },
+      {
+        "name": "mdurl",
+        "version": "0.1.2"
+      },
+      {
+        "name": "motor",
+        "version": "3.7.1"
+      },
+      {
+        "name": "mypy",
+        "version": "1.17.0"
+      },
+      {
+        "name": "mypy_extensions",
+        "version": "1.1.0"
+      },
+      {
+        "name": "numpy",
+        "version": "2.3.1"
+      },
+      {
+        "name": "oauthlib",
+        "version": "3.3.1"
+      },
+      {
+        "name": "openai",
+        "version": "1.97.1"
+      },
+      {
+        "name": "packaging",
+        "version": "25.0"
+      },
+      {
+        "name": "pandas",
+        "version": "2.3.1"
+      },
+      {
+        "name": "passlib",
+        "version": "1.7.4"
+      },
+      {
+        "name": "pathspec",
+        "version": "0.12.1"
+      },
+      {
+        "name": "pillow",
+        "version": "11.3.0"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.3.8"
+      },
+      {
+        "name": "pluggy",
+        "version": "1.6.0"
+      },
+      {
+        "name": "postgrest",
+        "version": "1.1.1"
+      },
+      {
+        "name": "psycopg2-binary",
+        "version": "2.9.10"
+      },
+      {
+        "name": "pyasn1",
+        "version": "0.6.1"
+      },
+      {
+        "name": "pycodestyle",
+        "version": "2.14.0"
+      },
+      {
+        "name": "pycparser",
+        "version": "2.22"
+      },
+      {
+        "name": "pydantic",
+        "version": "2.11.7"
+      },
+      {
+        "name": "pydantic-settings",
+        "version": "2.10.1"
+      },
+      {
+        "name": "pydantic_core",
+        "version": "2.33.2"
+      },
+      {
+        "name": "pyflakes",
+        "version": "3.4.0"
+      },
+      {
+        "name": "Pygments",
+        "version": "2.19.2"
+      },
+      {
+        "name": "PyJWT",
+        "version": "2.10.1"
+      },
+      {
+        "name": "pymongo",
+        "version": "4.13.2"
+      },
+      {
+        "name": "pytest",
+        "version": "8.4.1"
+      },
+      {
+        "name": "pytest-asyncio",
+        "version": "1.1.0"
+      },
+      {
+        "name": "pytest-cov",
+        "version": "6.2.1"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0"
+      },
+      {
+        "name": "python-dotenv",
+        "version": "1.1.1"
+      },
+      {
+        "name": "python-jose",
+        "version": "3.5.0"
+      },
+      {
+        "name": "python-multipart",
+        "version": "0.0.20"
+      },
+      {
+        "name": "pytz",
+        "version": "2025.2"
+      },
+      {
+        "name": "PyYAML",
+        "version": "6.0.2"
+      },
+      {
+        "name": "realtime",
+        "version": "2.6.0"
+      },
+      {
+        "name": "requests",
+        "version": "2.32.4"
+      },
+      {
+        "name": "requests-oauthlib",
+        "version": "2.0.0"
+      },
+      {
+        "name": "rich",
+        "version": "14.0.0"
+      },
+      {
+        "name": "rsa",
+        "version": "4.9.1"
+      },
+      {
+        "name": "s3transfer",
+        "version": "0.13.1"
+      },
+      {
+        "name": "shellingham",
+        "version": "1.5.4"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0"
+      },
+      {
+        "name": "sniffio",
+        "version": "1.3.1"
+      },
+      {
+        "name": "SQLAlchemy",
+        "version": "2.0.41"
+      },
+      {
+        "name": "SQLAlchemy-Utils",
+        "version": "0.41.2"
+      },
+      {
+        "name": "starlette",
+        "version": "0.37.2"
+      },
+      {
+        "name": "storage3",
+        "version": "0.12.0"
+      },
+      {
+        "name": "StrEnum",
+        "version": "0.4.15"
+      },
+      {
+        "name": "supabase",
+        "version": "2.17.0"
+      },
+      {
+        "name": "supafunc",
+        "version": "0.10.1"
+      },
+      {
+        "name": "tqdm",
+        "version": "4.67.1"
+      },
+      {
+        "name": "typer",
+        "version": "0.16.0"
+      },
+      {
+        "name": "typing-inspection",
+        "version": "0.4.1"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.14.1"
+      },
+      {
+        "name": "tzdata",
+        "version": "2025.2"
+      },
+      {
+        "name": "unicorn",
+        "version": "2.1.3"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.5.0"
+      },
+      {
+        "name": "uvicorn",
+        "version": "0.25.0"
+      },
+      {
+        "name": "watchfiles",
+        "version": "1.1.0"
+      },
+      {
+        "name": "websockets",
+        "version": "15.0.1"
+      }
+    ]
+  },
+  "file_structure": {
+    "name": "backend",
+    "type": "directory",
+    "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend",
+    "children": [
+      {
+        "name": "alembic.ini",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\alembic.ini",
+        "size": 2423,
+        "modified": 1753419504.343652,
+        "hash": "skipped"
+      },
+      {
+        "name": "app",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app",
+        "children": [
+          {
+            "name": "ai_service.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\ai_service.py",
+            "size": 12246,
+            "modified": 1753634980.9549847,
+            "hash": "92d34b5cb3dfb91ce339b9379ab3de84aa2cb36a7d17ca41fb5308641fefd6d7"
+          },
+          {
+            "name": "api",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api",
+            "children": [
+              {
+                "name": "v1",
+                "type": "directory",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1",
+                "children": [
+                  {
+                    "name": "routes",
+                    "type": "directory",
+                    "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes",
+                    "children": [
+                      {
+                        "name": "ai.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\ai.py",
+                        "size": 6337,
+                        "modified": 1753760946.8115878,
+                        "hash": "36e849c0099f397006e4df577d8ed928f498270aaf5180da693218a0d02f7972"
+                      },
+                      {
+                        "name": "attachments.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\attachments.py",
+                        "size": 6798,
+                        "modified": 1753414913.8670788,
+                        "hash": "407e60191cb0c931bc47927ad8a5e82b2ff2082126e5b22df7d285a5a170af43"
+                      },
+                      {
+                        "name": "auth.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\auth.py",
+                        "size": 2007,
+                        "modified": 1753760308.1945958,
+                        "hash": "4e34c55ef7fa9fe3d4927483ed61edbd55166d1297d2ec1e333976199f22bb41"
+                      },
+                      {
+                        "name": "comments.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\comments.py",
+                        "size": 3090,
+                        "modified": 1753760436.3632195,
+                        "hash": "76452157c6f30cf1cdbc7c56674adfe1ffb3c9c0cfe7a3fe07c652f227b54827"
+                      },
+                      {
+                        "name": "environments.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\environments.py",
+                        "size": 6535,
+                        "modified": 1753414869.8938768,
+                        "hash": "2e5b8d391dea2c087032fd5ffd060456c36ce21cb6ffcc0a089de01316a4fba3"
+                      },
+                      {
+                        "name": "executions.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\executions.py",
+                        "size": 4848,
+                        "modified": 1753760518.9362907,
+                        "hash": "4d9f7499d28d526b66c7586048b43b6056f9b58ed42d9bd647ba1cfddea63730"
+                      },
+                      {
+                        "name": "projects.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\projects.py",
+                        "size": 3146,
+                        "modified": 1753760250.441463,
+                        "hash": "46e9eb559880dfe1d39f49fca6e5981532b7d9ad6f6f2338320d1ad113d465e2"
+                      },
+                      {
+                        "name": "teams.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\teams.py",
+                        "size": 6216,
+                        "modified": 1753615287.242304,
+                        "hash": "395fbab0d578b444f8ad75e475783773316a09b9968ab1d8dc617d0b7270860b"
+                      },
+                      {
+                        "name": "test_cases.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\test_cases.py",
+                        "size": 5187,
+                        "modified": 1753632562.6769936,
+                        "hash": "0a5fa8976632774166138950be2414d60dcd6c7d072c152b9629485f73c9b321"
+                      },
+                      {
+                        "name": "__init__.py",
+                        "type": "file",
+                        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\routes\\__init__.py",
+                        "size": 214,
+                        "modified": 1753367961.4843583,
+                        "hash": "2814dbc3f7618338779bb76c3f454eedd68b00006d6cc43511473b1769cafdbe"
+                      }
+                    ]
+                  },
+                  {
+                    "name": "__init__.py",
+                    "type": "file",
+                    "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\v1\\__init__.py",
+                    "size": 74,
+                    "modified": 1753367932.6414368,
+                    "hash": "95a5f100df1f0492be892a92c459cf42346a672f0eef8ca1733a833e93b42c68"
+                  }
+                ]
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\api\\__init__.py",
+                "size": 71,
+                "modified": 1753367901.505363,
+                "hash": "1bdeb4a1eff2bca5c26100b8caf7f8cb6f9fa0b076ad309841a874271bf0baa8"
+              }
+            ]
+          },
+          {
+            "name": "auth",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\auth",
+            "children": [
+              {
+                "name": "security.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\auth\\security.py",
+                "size": 11474,
+                "modified": 1753412576.836876,
+                "hash": "23be16cdcd1fb20dc02e401eec468db55440ca9e93f513e7318750fbb962e2ab"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\auth\\__init__.py",
+                "size": 265,
+                "modified": 1753379427.3463337,
+                "hash": "59208f3781172a7266b810ad24eff70b0d7570d9fd402ac1727d9ce0148f3094"
+              }
+            ]
+          },
+          {
+            "name": "core",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\core",
+            "children": [
+              {
+                "name": "config.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\core\\config.py",
+                "size": 3036,
+                "modified": 1753519332.615816,
+                "hash": "32ebbfe4636d9bc93ef4800c92bd35227dcdfca0758488a40dce16d3449937d8"
+              },
+              {
+                "name": "security.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\core\\security.py",
+                "size": 3155,
+                "modified": 1753760195.5020347,
+                "hash": "89144e7697ef89ad06da1f00c5e63f5bf60fa64581b6787cbc92a3c316a7b965"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\core\\__init__.py",
+                "size": 115,
+                "modified": 1753415304.0769515,
+                "hash": "32cacd9f93879771ac591e92c7d93ea9f3da3a5708e1dd0980c31db04cbf21bd"
+              }
+            ]
+          },
+          {
+            "name": "db",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db",
+            "children": [
+              {
+                "name": "base.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db\\base.py",
+                "size": 350,
+                "modified": 1753516264.3613958,
+                "hash": "02bfeffcf53d12a77c301564301df9a07a0a89a7f8b41506bd5137f61edd5fe5"
+              },
+              {
+                "name": "reset_db.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db\\reset_db.py",
+                "size": 2707,
+                "modified": 1753677728.6183844,
+                "hash": "ecbd2eaae025247f79344fabb3721295eeb972a1da9d48b9f62c35b1a86f74eb"
+              },
+              {
+                "name": "seed_data.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db\\seed_data.py",
+                "size": 13928,
+                "modified": 1753677992.6438603,
+                "hash": "270e4f08ca23c5dc2e7eef97d918af8e98ae53da56dc3472e995c578dfed947e"
+              },
+              {
+                "name": "session.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db\\session.py",
+                "size": 9346,
+                "modified": 1753763134.9916563,
+                "hash": "45ccbdd17bc7c07dc79f63e10253735a9f51f384b02bd8fe84c58e45fc9763a2"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\db\\__init__.py",
+                "size": 112,
+                "modified": 1753367343.4726827,
+                "hash": "27793d75f5bef003be567c5e536ea5187dcd25acaf24940a2644c89df9ea02db"
+              }
+            ]
+          },
+          {
+            "name": "llm_chat.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\llm_chat.py",
+            "size": 4391,
+            "modified": 1753519864.0835373,
+            "hash": "e848ae97050e7cdbb87372aac1615a388cde3c456dda88dc85534682a15ea9f4"
+          },
+          {
+            "name": "main.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\main.py",
+            "size": 44195,
+            "modified": 1753761877.709083,
+            "hash": "cef21b6257df36e81b1b6b33601614cc4efa42021bf595a912977f9990498c27"
+          },
+          {
+            "name": "main.py.bak",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\main.py.bak",
+            "size": 24025,
+            "modified": 1753418991.8649416,
+            "hash": "skipped"
+          },
+          {
+            "name": "main_new.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\main_new.py",
+            "size": 3094,
+            "modified": 1753419177.57699,
+            "hash": "1c3ee8261f891633423de3f115506cc09a814ec2137039688194b6512eab5ace"
+          },
+          {
+            "name": "models",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\models",
+            "children": [
+              {
+                "name": "db_models.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\models\\db_models.py",
+                "size": 14613,
+                "modified": 1753676926.5183675,
+                "hash": "22883fe2bef1f5f4829842ef93e375ff8505fef94234a2ac0aeff7e40630a4d5"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\models\\__init__.py",
+                "size": 758,
+                "modified": 1753373082.7359736,
+                "hash": "54936c1328f43660e702e2da866da5dba03f402142de42ce411742749c3c43c6"
+              }
+            ]
+          },
+          {
+            "name": "schemas",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas",
+            "children": [
+              {
+                "name": "ai.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\ai.py",
+                "size": 3660,
+                "modified": 1753523184.495204,
+                "hash": "d979b17ae58a5d75e81098ec86b3fb662a4e121f44eaabdd65d3beaeeb33240e"
+              },
+              {
+                "name": "attachment.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\attachment.py",
+                "size": 835,
+                "modified": 1753415897.5166707,
+                "hash": "ce66caa6131b942e2f742866a963fd984fafe411a29511d4ce6f7f53639f79b7"
+              },
+              {
+                "name": "comment.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\comment.py",
+                "size": 979,
+                "modified": 1753552303.116288,
+                "hash": "df221459ed5e6a1a5047f1ef2b6bb45ca03b71f59bc77ab168bd8f5ee560a1f7"
+              },
+              {
+                "name": "dashboard.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\dashboard.py",
+                "size": 3859,
+                "modified": 1753522554.3981965,
+                "hash": "5bd21c24be116e69f047e8630862335843fdf67cb671f226838cf4d0fc0fc498"
+              },
+              {
+                "name": "environment.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\environment.py",
+                "size": 1238,
+                "modified": 1753415039.5481367,
+                "hash": "3159d53ecd6c7a13fe239c1fe55a97de2881068e4d573572d2e781d940e16693"
+              },
+              {
+                "name": "execution.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\execution.py",
+                "size": 3849,
+                "modified": 1753675890.042983,
+                "hash": "2e41682c65b2a0c3008f56d2f171fe378b4df9eaba9b9c588aa544074a658a87"
+              },
+              {
+                "name": "project.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\project.py",
+                "size": 2447,
+                "modified": 1753523857.7023299,
+                "hash": "a999226370d77a70df0ca9bf16bb19899fba26e8aafbb6de9c4b1deacf3ce5ec"
+              },
+              {
+                "name": "test_case.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\test_case.py",
+                "size": 1550,
+                "modified": 1753632513.6249845,
+                "hash": "cc82288216233abcd1eff346f32b50cc24307201377bb1b0dba3c9662cb658ac"
+              },
+              {
+                "name": "token.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\token.py",
+                "size": 744,
+                "modified": 1753759899.8202736,
+                "hash": "814eab4d9b7d56695fdeba8b82b21cc4ae4ab77b7396a3801e8e94d24cc15ff9"
+              },
+              {
+                "name": "user.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\user.py",
+                "size": 1623,
+                "modified": 1753521004.7679024,
+                "hash": "4027cdc2ece31d1bf1eb84af4be5b43e15776fa7c676bb2218eff49654833c59"
+              },
+              {
+                "name": "websocket.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\websocket.py",
+                "size": 8666,
+                "modified": 1753676173.5576742,
+                "hash": "abd2865b38ea3060cc1a13717ca015421e2af96097ad2ff60d1208e4bb234cc8"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\schemas\\__init__.py",
+                "size": 486,
+                "modified": 1753521619.59336,
+                "hash": "6fadc51f7324118e8bb9319c75e9afa8c0d6104ab5ff93d7814334d8f5d6ddd7"
+              }
+            ]
+          },
+          {
+            "name": "services",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\services",
+            "children": []
+          },
+          {
+            "name": "utils",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\utils",
+            "children": []
+          },
+          {
+            "name": "websocket",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\websocket",
+            "children": [
+              {
+                "name": "manager.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\websocket\\manager.py",
+                "size": 6979,
+                "modified": 1753372682.7820935,
+                "hash": "5b19170111752650571a661cbae9be44f59f02433f920e11ed797daec63d2bb6"
+              },
+              {
+                "name": "__init__.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\websocket\\__init__.py",
+                "size": 120,
+                "modified": 1753367610.1647298,
+                "hash": "6fa895dcba7e4ddbeb80b3f7faba247a290954da4e7563794052f01c4a6ad40c"
+              }
+            ]
+          },
+          {
+            "name": "__init__.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\app\\__init__.py",
+            "size": 814,
+            "modified": 1753676153.3944516,
+            "hash": "ff432ef21d42e9b80d53d3096e0c0ec5dd5ca289a5e5c786ae9a81fcf347a4ed"
+          }
+        ]
+      },
+      {
+        "name": "check_db.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\check_db.py",
+        "size": 5152,
+        "modified": 1753763430.6540508,
+        "hash": "5ab91b0dc1b19c4196047b9c7170ad779b3025717fe81a05bc0bf0c82cbc3722"
+      },
+      {
+        "name": "check_db_schema.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\check_db_schema.py",
+        "size": 1279,
+        "modified": 1753545841.0742545,
+        "hash": "cd52261c7c5aee16b964cece2608813f82e287f1ced494a3719165cb3ffd7272"
+      },
+      {
+        "name": "check_env.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\check_env.py",
+        "size": 1533,
+        "modified": 1753372247.2725275,
+        "hash": "38bd0c2f93d8f2a9087cd42e303b56d2b7087700a28bd97c836c8394fb574435"
+      },
+      {
+        "name": "create_baseline.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\create_baseline.py",
+        "size": 6576,
+        "modified": 1753764283.1432407,
+        "hash": "0e7eed1d031d116965f5f14455b7c651610940a79fbb3838f7b1a15f69e05766"
+      },
+      {
+        "name": "database",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database",
+        "children": [
+          {
+            "name": "config.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\config.py",
+            "size": 1961,
+            "modified": 1752935486.7928798,
+            "hash": "bf6d1263200abbf486dcd891b8c093975903f1efcc4d5edd63e218bb8b721dca"
+          },
+          {
+            "name": "database_postgres.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\database_postgres.py",
+            "size": 2375,
+            "modified": 1753356205.8389316,
+            "hash": "1589d70261e357663add38ca5597e6f09de9922c98519a4d868c16c4c6a5e604"
+          },
+          {
+            "name": "database_sqlite.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\database_sqlite.py",
+            "size": 917,
+            "modified": 1753353633.080644,
+            "hash": "a53e9df245e39bcac01aa84a2e4cd653ad7c253b4e7a032362a6ddef179dea41"
+          },
+          {
+            "name": "generate_sample_data.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\generate_sample_data.py",
+            "size": 10633,
+            "modified": 1752933599.8963106,
+            "hash": "362387d7744957f9964c6d83107b741845fef3f3d4b7dca8004b736dc24dba55"
+          },
+          {
+            "name": "init_db.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\init_db.py",
+            "size": 1696,
+            "modified": 1753414204.7717643,
+            "hash": "f6190a6388d6f4ea553b97e4e1b5a29354930dfeba3c0de923f0db11e304199f"
+          },
+          {
+            "name": "inspect_schema.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\inspect_schema.py",
+            "size": 2818,
+            "modified": 1752933010.1642516,
+            "hash": "c513319187df611e4310b6cf2dca53902c99c91344f12eab534c52943ce4dd43"
+          },
+          {
+            "name": "migrate.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\migrate.py",
+            "size": 3512,
+            "modified": 1752932750.668699,
+            "hash": "0ffdcf4026be7d217738c4eb87b4664910104fc3903679fc22f17ba059b51d6c"
+          },
+          {
+            "name": "migrations",
+            "type": "directory",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\migrations",
+            "children": [
+              {
+                "name": "env.py",
+                "type": "file",
+                "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\migrations\\env.py",
+                "size": 2334,
+                "modified": 1753414225.5271254,
+                "hash": "b914e000131b62bb76d68de84939de934a61a9923f56207b59515ce799202e48"
+              }
+            ]
+          },
+          {
+            "name": "test_connection.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\test_connection.py",
+            "size": 4427,
+            "modified": 1753414555.4124913,
+            "hash": "7f082a5a7ed04fff940a40bd2540bfc60dfb27e8833ced414ca910274d0310d3"
+          },
+          {
+            "name": "verify_schema.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\database\\verify_schema.py",
+            "size": 8243,
+            "modified": 1752932958.3013704,
+            "hash": "ec4e70672d5b0ca9a97b78d86eda7f41fb71a06729d9315395a905d910ebcce8"
+          }
+        ]
+      },
+      {
+        "name": "direct_db_test.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\direct_db_test.py",
+        "size": 4430,
+        "modified": 1753763473.3789601,
+        "hash": "c1b441176f04a05d4592004caeae707c87a011de93788bacbd1b3a1fc25d1ae8"
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\Dockerfile",
+        "size": 1090,
+        "modified": 1753546739.931365,
+        "hash": "skipped"
+      },
+      {
+        "name": "init_db.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\init_db.py",
+        "size": 3338,
+        "modified": 1753763077.8733366,
+        "hash": "2a66fce867290a36243aa5f6bff36601fecbd591aa7f3006aa7fd0a13c390b33"
+      },
+      {
+        "name": "migrations",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\migrations",
+        "children": [
+          {
+            "name": "update_uuid_columns.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\migrations\\update_uuid_columns.py",
+            "size": 1,
+            "modified": 1753357592.7881365,
+            "hash": "334359b90efed75da5f0ada1d5e6b256f4a6bd0aee7eb39c0f90182a021ffc8b"
+          }
+        ]
+      },
+      {
+        "name": "minimal_app.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\minimal_app.py",
+        "size": 1364,
+        "modified": 1753614287.8241231,
+        "hash": "74fabb3d0e4e9cd03cb1eebb28ccf62fe0c0e813717b14d15f32bc0f15bdecf2"
+      },
+      {
+        "name": "models",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\models",
+        "children": [
+          {
+            "name": "websocket_manager.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\models\\websocket_manager.py",
+            "size": 7041,
+            "modified": 1753414506.327162,
+            "hash": "d680181d6335c3fb75573604f16b9bdd324977570cb66ba690238eb1c84213d8"
+          },
+          {
+            "name": "websocket_message.py.txt",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\models\\websocket_message.py.txt",
+            "size": 7224,
+            "modified": 1753362788.5220582,
+            "hash": "0cbc42d365b9efd00b9096b91b2c221aaedcaa43a682dc0051d0bdec6899b338"
+          },
+          {
+            "name": "__init__.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\models\\__init__.py",
+            "size": 1200,
+            "modified": 1753414124.22676,
+            "hash": "69159dbbd7b8ef452fda47fe871b90e323a943186ad0b39386a161e53dc1db6e"
+          }
+        ]
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\package-lock.json",
+        "size": 86,
+        "modified": 1752937727.6316974,
+        "hash": "0e774495309e92b9d97bc79f71314135dbb1dd93c0a1a45e47cd1a6ab3d4950d"
+      },
+      {
+        "name": "QUICK_START.md",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\QUICK_START.md",
+        "size": 4074,
+        "modified": 1753419882.567429,
+        "hash": "401fb9f3ed6bbe556f20eded84fd9fed21da93b07868f906afde8efc084cfcf1"
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\README.md",
+        "size": 386,
+        "modified": 1753516698.1603632,
+        "hash": "b46d22e3a3dbd83c25d1da6ed1789fa2866ec06ac88ac96fb53d39f163416f21"
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\requirements.txt",
+        "size": 903,
+        "modified": 1753519938.8416488,
+        "hash": "cb68bbb018f27584c600ace1dab13f61fd1e4514523bfb42841cbfa1261631ba"
+      },
+      {
+        "name": "routes",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\routes",
+        "children": [
+          {
+            "name": "__init__.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\routes\\__init__.py",
+            "size": 56,
+            "modified": 1752863376.3530767,
+            "hash": "73969b9be258998b36a7bd032d0885db89f95fdf9bbd8de4e23c1e3371397893"
+          }
+        ]
+      },
+      {
+        "name": "run.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\run.py",
+        "size": 115,
+        "modified": 1753545032.7282631,
+        "hash": "13b8a77e57fac23113c1f1ce8126d2927a22a787d035e4cbffb92b18151a1327"
+      },
+      {
+        "name": "run_fastapi.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\run_fastapi.py",
+        "size": 1630,
+        "modified": 1753763722.8238273,
+        "hash": "6351cf7880be9f6092f90a006a8cdba5385992e84583b656d136d9db9c260242"
+      },
+      {
+        "name": "run_server.bat",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\run_server.bat",
+        "size": 235,
+        "modified": 1753614437.975004,
+        "hash": "skipped"
+      },
+      {
+        "name": "run_server.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\run_server.py",
+        "size": 1123,
+        "modified": 1753614164.7833886,
+        "hash": "c5ec3ce42e4088e837f9ddce7b4bfeda47653aaeae2a97e5f12678dbf24f0eed"
+      },
+      {
+        "name": "services",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\services",
+        "children": []
+      },
+      {
+        "name": "setup.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\setup.py",
+        "size": 4450,
+        "modified": 1753419741.895376,
+        "hash": "58315ff672aab60b89eff64c3b5beee3e7b8b4f27375a4a9f14f7678ccc2d485"
+      },
+      {
+        "name": "setup.py.bak",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\setup.py.bak",
+        "size": 1182,
+        "modified": 1753413652.2571216,
+        "hash": "skipped"
+      },
+      {
+        "name": "simple_app.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\simple_app.py",
+        "size": 584,
+        "modified": 1753614752.4894059,
+        "hash": "cea2a6f0bcbf8a37ff58a3f098fd57229bb82e426c10a55803bae2fb590742df"
+      },
+      {
+        "name": "simple_db_test.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\simple_db_test.py",
+        "size": 2215,
+        "modified": 1753515807.2520003,
+        "hash": "1e68c25ca4ca3a94d730bd3dead171b33d538602d043ef4364dfc88fcb76720e"
+      },
+      {
+        "name": "simple_test.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\simple_test.py",
+        "size": 924,
+        "modified": 1753762864.8478224,
+        "hash": "c093cc51ea7411998e71a7df3d4f4bb086dd5631c01f345d3bd44c633bd96b28"
+      },
+      {
+        "name": "sync_db.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\sync_db.py",
+        "size": 4936,
+        "modified": 1753763216.4171956,
+        "hash": "cea1967cf1cfe0567645731662dfe8115bac3837d95d6bee19c982402b87890a"
+      },
+      {
+        "name": "test.db",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test.db",
+        "size": 0,
+        "modified": 1753353391.244104,
+        "hash": "skipped"
+      },
+      {
+        "name": "tests",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\tests",
+        "children": [
+          {
+            "name": "test_project_endpoints.py",
+            "type": "file",
+            "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\tests\\test_project_endpoints.py",
+            "size": 3670,
+            "modified": 1753546253.4128776,
+            "hash": "fc516fb5e0d61b3ab2b80bb96352d51f41b24a8bdd293df3795d3fcab67474da"
+          }
+        ]
+      },
+      {
+        "name": "test_api.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_api.py",
+        "size": 2334,
+        "modified": 1753545747.605114,
+        "hash": "d1b099202cfe6ab7b4d83adad6e954804ab943735f7ffb733583cadac4a1949e"
+      },
+      {
+        "name": "test_api_endpoints.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_api_endpoints.py",
+        "size": 9344,
+        "modified": 1753763818.300105,
+        "hash": "7fd3e2dacdfd202fdb171183e1c4f0e1f9d3da5476ee39f4897503705e7188a1"
+      },
+      {
+        "name": "test_app.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_app.py",
+        "size": 114,
+        "modified": 1753545688.0588078,
+        "hash": "3d1f880fe076d6a764f3fd5e82d888471f9bba76e7623ed9c22736a920bb4764"
+      },
+      {
+        "name": "test_app_startup.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_app_startup.py",
+        "size": 6005,
+        "modified": 1753763676.4874897,
+        "hash": "8298678fb7c3dffde4956bf973e3afdc0119ddb7ee9bba4ca80c8e1bdfd8bda1"
+      },
+      {
+        "name": "test_connection.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_connection.py",
+        "size": 3390,
+        "modified": 1753762817.592189,
+        "hash": "5e91ac25c96999350cc6fee59d46b99eb954fd1212ebef3a2d974820ea96d699"
+      },
+      {
+        "name": "test_cors.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_cors.py",
+        "size": 2271,
+        "modified": 1753552066.748085,
+        "hash": "80fe1be345ca4fc79effe2517927b35c533082ad5ae35062958669a66bab27d8"
+      },
+      {
+        "name": "test_db.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_db.py",
+        "size": 994,
+        "modified": 1753371426.2527335,
+        "hash": "a9954d96ce0b5ff312be20ce789803c3ed78cbbc2362ef609eaa358555931aa6"
+      },
+      {
+        "name": "test_db_connection.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_db_connection.py",
+        "size": 4333,
+        "modified": 1753763140.2478561,
+        "hash": "1576d41c793a6f69216b9b3d7aecb9f1f8f86eb5511b0b6df8061f7387b30e42"
+      },
+      {
+        "name": "test_db_fallback.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_db_fallback.py",
+        "size": 2207,
+        "modified": 1753463802.1982186,
+        "hash": "9f5dfa9ce38ff39547d3a8310fa55039a28399673b66ef38f47a9f3575885fe7"
+      },
+      {
+        "name": "test_endpoints.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_endpoints.py",
+        "size": 6497,
+        "modified": 1753675477.7924535,
+        "hash": "98b6bc7cf8ea88e259878960359249d220ba678a747a4a869156ef3134c2e079"
+      },
+      {
+        "name": "test_fastapi.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_fastapi.py",
+        "size": 958,
+        "modified": 1753464076.3027768,
+        "hash": "1490a90d20c2749cb19c18d0df1e9d4c88218b3d8311cecf959537c18bd5104c"
+      },
+      {
+        "name": "test_health.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_health.py",
+        "size": 778,
+        "modified": 1753372378.2840426,
+        "hash": "4f5b2c621c2c63b1969004dc7953eb2145914708fa7aed7ea970b5387b404d91"
+      },
+      {
+        "name": "test_import.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_import.py",
+        "size": 979,
+        "modified": 1753605256.5424857,
+        "hash": "a6254c6abdadcd374c4298a33b29047a618edea536cc1cf05b48cd4c9ea4c94b"
+      },
+      {
+        "name": "test_supabase.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_supabase.py",
+        "size": 1359,
+        "modified": 1753763005.1533656,
+        "hash": "1345b92899a2a352a4a984caf67cdc28ece2a45cd3af60718657f52acdd048ff"
+      },
+      {
+        "name": "test_supabase_connection.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\test_supabase_connection.py",
+        "size": 2309,
+        "modified": 1753515750.9468403,
+        "hash": "50dc01783e960fabf06ed8d519ac56e8cdde9e05b3943b7ac044bca545c3d33f"
+      },
+      {
+        "name": "uploads",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\uploads",
+        "children": []
+      },
+      {
+        "name": "utils",
+        "type": "directory",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\utils",
+        "children": []
+      },
+      {
+        "name": "__init__.py",
+        "type": "file",
+        "path": "C:\\Users\\kunal\\Downloads\\EmergentIntelliTest-main\\backend\\__init__.py",
+        "size": 885,
+        "modified": 1753418903.071408,
+        "hash": "9cbae0d57cc7bf1872fc02b37df0b38f57e12cfccc25771d612a4eaf7b931f5e"
+      }
+    ]
+  }
+}

@@ -1,47 +1,126 @@
-# Here are your Instructions
+# IntelliTest AI Automation Platform
 
-Action: Based on my analysis of the InteLLItEST application, here's my understanding and plan:
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen)](https://nodejs.org/)
 
-## Current Status:
-The InteLLItEST AI-powered testing platform has been partially developed with:
-- ✅ Frontend React structure with components for Test Cases, AI Test Generation, Visual Testing, etc.
-- ✅ Backend FastAPI architecture with modular structure created
-- ✅ Database models, AI services, and route files scaffolded
-- ✅ OpenAI API integration prepared
+IntelliTest is an AI-powered test automation platform that helps teams create, manage, and execute automated tests with the power of AI. The platform provides features like test case generation, visual testing, and test execution powered by AI.
 
-## Immediate Next Steps - My Plan:
+## 🚀 Features
 
-### Phase 1: Backend Integration & Testing
-1. **Read test_result.md** to understand testing protocols and previous communications
-2. **Integrate backend modules** into `server.py`:
-   - Import and register all route modules (projects, test_cases, ai_routes, etc.)
-   - Initialize database connection
-   - Set up AI service integration
-3. **Test backend thoroughly** using `deep_testing_backend_v2` agent
-4. **Fix any backend issues** identified during testing
+- **AI-Powered Test Generation**: Generate test cases automatically using AI
+- **Visual Testing**: Compare UI changes visually across different test runs
+- **Project Management**: Organize test cases into projects and test plans
+- **Team Collaboration**: Share test results and collaborate with team members
+- **CI/CD Integration**: Seamlessly integrate with your CI/CD pipeline
+- **Comprehensive Reporting**: Get detailed reports on test execution and coverage
 
-### Phase 2: Frontend Integration (After Backend is Working)
-1. **Update frontend components** to connect with new backend APIs
-2. **Implement UI logic** for all the testing features
-3. **Ask for your permission** before running frontend testing
-4. **Test frontend** (only if you approve) using appropriate testing tools
+## 🛠️ Tech Stack
 
-### Phase 3: End-to-End Validation
-1. **Verify all features work together**
-2. **Address any integration issues**
-3. **Provide comprehensive summary** of implemented functionalities
+### Backend
+- **Framework**: FastAPI (Python 3.9+)
+- **Database**: PostgreSQL with SQLAlchemy ORM
+- **Authentication**: JWT (JSON Web Tokens)
+- **AI Integration**: OpenAI API
+- **Caching**: Redis
+- **Async Tasks**: Celery
+- **Containerization**: Docker
 
-## Important Notes:
-- Since this is a forked environment, backend/frontend URLs might need adjustment
-- I'll strictly follow the testing protocols in test_result.md
-- I'll ask for your explicit permission before any frontend testing
-- All backend routes will use '/api' prefix for proper Kubernetes routing
+### Frontend
+- **Framework**: Next.js (React)
+- **UI Library**: Tailwind CSS + Shadcn/UI
+- **State Management**: React Query
+- **Form Handling**: React Hook Form
+- **Data Fetching**: Axios
+- **Testing**: Jest, React Testing Library
 
-**Questions for you:**
-1. Are you aligned with this phased approach?
-2. Do you want me to proceed with Phase 1 (backend integration and testing) first?
-3. Are there any specific features or priorities you'd like me to focus on?
-4. Should I check for any URL/environment issues due to forking before starting?
+## 🚀 Quick Start
 
-**Important Forking Note:** Forking creates a new environment. If you've integrated any services that use the preview URL (e.g., https://**.preview.emergentagent.com/), we recommend updating it to the new preview URL. Failing to do so may cause your application to stop working properly.
-Observation: Question has been sent to the user. Waiting for response.
+### Prerequisites
+
+- Docker and Docker Compose
+- Python 3.9+
+- Node.js 16+
+- PostgreSQL 12+
+- Redis 6+
+
+### Development Setup
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/intellitest.git
+   cd intellitest
+   ```
+
+2. **Set up the backend**
+   ```bash
+   cd backend
+   python -m venv venv
+   source venv/bin/activate  # On Windows: .\venv\Scripts\activate
+   pip install -r requirements.txt
+   ```
+
+3. **Set up the frontend**
+   ```bash
+   cd ../frontend
+   npm install
+   ```
+
+4. **Set up environment variables**
+   - Copy `.env.example` to `.env` in both `backend` and `frontend` directories
+   - Update the variables according to your environment
+
+5. **Run the application**
+   - Start the backend:
+     ```bash
+     cd ../backend
+     uvicorn app.main:app --reload
+     ```
+   - Start the frontend:
+     ```bash
+     cd ../frontend
+     npm run dev
+     ```
+
+### Docker Setup
+
+1. **Generate SSL certificates** (for local HTTPS)
+   ```bash
+   chmod +x generate-certs.sh
+   ./generate-certs.sh
+   ```
+
+2. **Start the application**
+   ```bash
+   docker-compose up --build
+   ```
+
+3. **Access the application**
+   - Frontend: https://localhost:3000
+   - Backend API: https://localhost:8000/api/v1
+   - API Documentation: https://localhost:8000/docs
+
+## 📚 Documentation
+
+- [API Documentation](./docs/API_DOCUMENTATION.md)
+- [Deployment Guide](./DEPLOYMENT.md)
+- [Architecture](./docs/ARCHITECTURE.md)
+- [Testing Guide](./docs/TESTING.md)
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 📧 Contact
+
+For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+
+---
+
+<div align="center">
+  Made with ❤️ by Your Team Name
+</div>

@@ -259,13 +259,13 @@ class Team(TeamBase):
     updated_at: datetime = Field(default_factory=datetime.utcnow)
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class TeamDetail(Team):
     members: List[Dict[str, Any]] = []
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class TeamMemberBase(BaseModel):
     user_id: str
@@ -280,7 +280,7 @@ class TeamMember(TeamMemberBase):
     joined_at: datetime = Field(default_factory=datetime.utcnow)
     
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 # WebSocket Models
 class WebSocketMessage(BaseModel):

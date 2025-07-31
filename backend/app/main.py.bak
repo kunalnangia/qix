@@ -1,0 +1,744 @@
+import os
+import sys
+import logging
+from datetime import datetime, timedelta
+from typing import List, Dict, Any, Optional, Set, Union
+from contextlib import asynccontextmanager
+from pathlib import Path
+
+# Add the parent directory to the Python path
+sys.path.append(str(Path(__file__).parent.parent))
+
+# Import models first to ensure they are registered with SQLAlchemy
+from app.models import *
+
+# FastAPI imports
+from fastapi import FastAPI, APIRouter, HTTPException, Depends, WebSocket, WebSocketDisconnect, status, Request, BackgroundTasks
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+
+# SQLAlchemy imports
+from sqlalchemy.orm import Session
+from sqlalchemy.exc import SQLAlchemyError
+
+# Application imports
+from app.db.session import SessionLocal, init_db, engine, get_db
+from app.auth.security import get_current_user, create_access_token, get_password_hash, verify_password, oauth2_scheme, AuthService
+from app.websocket.manager import WebSocketManager, websocket_manager
+from app.api.v1.routes import test_cases, teams, environments, attachments
+
+# Pydantic imports
+from pydantic import BaseModel, Field, validator, EmailStr
+
+# Environment variables
+from dotenv import load_dotenv
+import os
+
+# Load environment variables from the .env file in the project root directory
+env_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), '.env')
+load_dotenv(env_path)
+
+# Print the database URL for debugging (remove in production)
+print(f"Database URL: {os.getenv('DATABASE_URL')}")
+
+# Initialize the WebSocket manager
+websocket_manager = WebSocketManager()
+from app.ai_service import AIService
+# Import schemas and models
+from app.models import *
+
+# Import routes
+from app.routes import test_cases
+
+# Service imports
+from app.auth import AuthService, get_current_user, get_password_hash, verify_password, create_access_token
+from app.websocket.manager import WebSocketManager, websocket_manager
+from app.ai_service import AIService
+
+
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Load environment variables
+load_dotenv()
+
+# Initialize services
+ai_service = AIService()
+
+# WebSocket manager is already initialized in websocket_manager.py
+# and imported as websocket_manager
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    try:
+        # Create database tables
+        logger.info("Creating database tables...")
+        models.Base.metadata.create_all(bind=engine)
+        logger.info("Database tables created successfully")
+    except Exception as e:
+        logger.error(f"Error creating database tables: {str(e)}")
+        logger.debug(traceback.format_exc())
+        sys.exit(1)
+
+    # Initialize default data if needed
+    init_db()
+    
+    yield
+    logger.info("Application shutdown")
+
+# Create the main app
+app = FastAPI(
+    title="IntelliTest AI Automation Platform",
+    description="Enterprise-grade AI-powered test automation platform",
+    version="1.0.0",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json",
+    lifespan=lifespan
+)
+
+# Create API router
+api_router = APIRouter(prefix="/api")
+
+# API versioning
+API_VERSION = "v1"
+
+# Error handlers
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request: Request, exc: HTTPException):
+    """Handle HTTP exceptions and return consistent error responses"""
+    logger.warning(
+        f"HTTP Exception: {exc.status_code} - {exc.detail} - "
+        f"Path: {request.url.path}"
+    )
+    
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={
+            "detail": exc.detail,
+            "status_code": exc.status_code,
+            "path": request.url.path,
+            "timestamp": datetime.utcnow().isoformat()
+        },
+        headers=exc.headers if hasattr(exc, 'headers') else None
+    )
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception):
+    """Handle all uncaught exceptions"""
+    logger.error(
+        f"Unhandled Exception: {str(exc)} - "
+        f"Path: {request.url.path}"
+    )
+    logger.debug(traceback.format_exc())
+    
+    return JSONResponse(
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+        content={
+            "detail": "Internal server error",
+            "error": str(exc),
+            "path": request.url.path,
+            "timestamp": datetime.utcnow().isoformat()
+        }
+    )
+
+try:
+    # Initialize the database with tables and any required data
+    print("Initializing database...")
+    init_db()
+    print("Database initialized successfully")
+    
+    # Verify tables were created
+    print("Creating database tables...")
+    Base.metadata.create_all(bind=engine)
+    print("Database tables created successfully")
+except Exception as e:
+    print(f"Error initializing database: {str(e)}")
+    print("Please check the database configuration and try again")
+
+# WebSocket endpoint
+@app.websocket("/api/ws/{user_id}")
+async def websocket_endpoint(websocket: WebSocket, user_id: str):
+    try:
+        await websocket_manager.connect(websocket, user_id)
+        while True:
+            data = await websocket.receive_text()
+            # Handle incoming WebSocket messages
+            try:
+                message = json.loads(data)
+                if message.get("type") == "join_room":
+                    await websocket_manager.join_room(user_id, message.get("room_id"))
+                elif message.get("type") == "leave_room":
+                    await websocket_manager.leave_room(user_id, message.get("room_id"))
+            except Exception as e:
+                logger.error(f"WebSocket message handling error: {e}")
+    except WebSocketDisconnect:
+        websocket_manager.disconnect(websocket)
+
+# Authentication endpoints
+@api_router.post("/auth/register", response_model=dict)
+async def register(
+    request: Request,
+    user_data: UserCreate,
+    db: Session = Depends(get_db)
+):
+    """
+    Register a new user
+    
+    Request body:
+    - email: User's email address
+    - password: User's password (min 8 characters)
+    - full_name: User's full name
+    
+    Returns:
+    - access_token: JWT token for authentication
+    - token_type: Bearer token type
+    - user: User information
+    """
+    logger.info(f"Registration attempt for email: {user_data.email}")
+    
+    try:
+        auth_service = AuthService(db)
+        
+        # Validate and create user
+        user = await auth_service.create_user({
+            "email": user_data.email,
+            "password": user_data.password,
+            "full_name": user_data.full_name,
+            "role": "tester"  # Default role
+        })
+        
+        # Create access token
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": str(user["id"]), "email": user["email"], "role": user["role"]},
+            expires_delta=access_token_expires
+        )
+        
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": user
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Registration error: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Registration failed"
+        )
+
+@api_router.post("/auth/login", response_model=dict)
+async def login(
+    request: Request,
+    user_data: UserLogin,
+    db: Session = Depends(get_db)
+):
+    """
+    Authenticate user and return JWT token
+    
+    Request body:
+    - email: User's email address
+    - password: User's password
+    
+    Returns:
+    - access_token: JWT token for authentication
+    - token_type: Bearer token type
+    - user: User information
+    """
+    try:
+        auth_service = AuthService(db)
+        
+        # Authenticate user
+        user = await auth_service.authenticate_user(user_data.email, user_data.password)
+        
+        # Create access token
+        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+        access_token = create_access_token(
+            data={"sub": str(user["id"]), "email": user["email"], "role": user["role"]},
+            expires_delta=access_token_expires
+        )
+        
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": user
+        }
+        
+    except HTTPException:
+        logger.info(f"User logged in successfully: {user['email']}")
+        return response_data
+        
+    except HTTPException as he:
+        # Re-raise HTTP exceptions with their original status code and detail
+        logger.warning(f"Login failed - {he.detail}")
+        raise
+        
+    except Exception as e:
+        # Log the full error for debugging
+        logger.error(f"Unexpected error during login: {str(e)}", exc_info=True)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An unexpected error occurred during login"
+        )
+
+@api_router.get("/auth/me", response_model=dict)
+async def get_current_user_info(
+    current_user: dict = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+    """
+    Get current authenticated user's information
+    
+    Requires:
+    - Valid JWT token in Authorization header
+    
+    Returns:
+    - User information including id, email, full_name, and role
+    """
+    try:
+        # Get fresh user data from database
+        auth_service = AuthService(db)
+        user = await auth_service.get_user(current_user["id"])
+        
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND,
+                detail="User not found"
+            )
+            
+        return {
+            "id": user["id"],
+            "email": user["email"],
+            "full_name": user["full_name"],
+            "role": user.get("role", "tester"),
+            "created_at": user.get("created_at"),
+            "updated_at": user.get("updated_at")
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting user info: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="Failed to retrieve user information"
+        )
+
+# Project endpoints
+@api_router.post("/projects", response_model=Project)
+async def create_project(project_data: ProjectCreate, current_user: dict = Depends(get_current_user)):
+    """Create a new project"""
+    db = get_database()
+    
+    project = Project(**project_data.dict(), created_by=current_user["id"])
+    await db.projects.insert_one(project.dict())
+    
+    # Create activity log
+    await create_activity_log(
+        db, current_user["id"], current_user["full_name"],
+        "created", "project", project.id, project.name,
+        f"Created project: {project.name}"
+    )
+    
+    return project
+
+@api_router.get("/projects", response_model=List[Project])
+async def get_projects(current_user: dict = Depends(get_current_user)):
+    """Get user's projects"""
+    db = get_database()
+    
+    projects = await db.projects.find({
+        "$or": [
+            {"created_by": current_user["id"]},
+            {"team_members": current_user["id"]}
+        ]
+    }).to_list(100)
+    
+    return [Project(**project) for project in projects]
+
+@api_router.get("/projects/{project_id}", response_model=Project)
+async def get_project(project_id: str, current_user: dict = Depends(get_current_user)):
+    """Get specific project"""
+    db = get_database()
+    
+    project = await db.projects.find_one({"id": project_id})
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    
+    return Project(**project)
+
+# Comments endpoints
+@api_router.post("/comments", response_model=Comment)
+async def create_comment(comment_data: CommentCreate, current_user: dict = Depends(get_current_user)):
+    """Create a new comment"""
+    db = get_database()
+    
+    comment = Comment(
+        **comment_data.dict(),
+        user_id=current_user["id"],
+        user_name=current_user["full_name"]
+    )
+    
+    await db.comments.insert_one(comment.dict())
+    
+    # Create activity log
+    await create_activity_log(
+        db, current_user["id"], current_user["full_name"],
+        "commented", "test_case", comment.test_case_id, "",
+        f"Added comment on test case"
+    )
+    
+    # Broadcast comment update
+    await websocket_manager.broadcast_comment_update(comment.dict())
+    
+    return comment
+
+@api_router.get("/comments/{test_case_id}", response_model=List[Comment])
+async def get_comments(test_case_id: str, current_user: dict = Depends(get_current_user)):
+    """Get comments for a test case"""
+    db = get_database()
+    
+    comments = await db.comments.find({"test_case_id": test_case_id}).sort("created_at", 1).to_list(100)
+    
+    return [Comment(**comment) for comment in comments]
+
+@api_router.put("/comments/{comment_id}/resolve")
+async def resolve_comment(comment_id: str, current_user: dict = Depends(get_current_user)):
+    """Resolve a comment"""
+    db = get_database()
+    
+    await db.comments.update_one(
+        {"id": comment_id},
+        {"$set": {"resolved": True, "updated_at": datetime.utcnow()}}
+    )
+    
+    comment = await db.comments.find_one({"id": comment_id})
+    
+    # Broadcast update
+    await websocket_manager.broadcast_comment_update(comment)
+    
+    return {"message": "Comment resolved"}
+
+# AI endpoints
+@api_router.post("/ai/generate-tests", response_model=List[TestCase])
+async def ai_generate_tests(
+    request: AITestGenerationRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Generate test cases using AI"""
+    try:
+        test_cases = await ai_service.generate_test_cases(
+            request.prompt,
+            request.test_type,
+            request.priority,
+            request.count
+        )
+        
+        # Set project_id and created_by
+        db = get_database()
+        for test_case in test_cases:
+            test_case.project_id = request.project_id
+            test_case.created_by = current_user["id"]
+            await db.test_cases.insert_one(test_case.dict())
+        
+        # Create activity log
+        await create_activity_log(
+            db, current_user["id"], current_user["full_name"],
+            "generated", "test_cases", "", "",
+            f"Generated {len(test_cases)} test cases using AI"
+        )
+        
+        return test_cases
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/ai/debug-test", response_model=AIAnalysisResult)
+async def ai_debug_test(
+    request: AIDebugRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Debug test failure using AI"""
+    try:
+        def get_database():
+            with get_db_session() as db:
+                yield db
+        if not execution:
+            raise HTTPException(status_code=404, detail="Execution not found")
+        
+        # Perform AI analysis
+        result = await ai_service.debug_test_failure(
+            TestCase(**test_case),
+            request.error_description,
+            request.logs
+        )
+        
+        # Store analysis in execution
+        await db.test_executions.update_one(
+            {"id": request.execution_id},
+            {"$set": {"ai_analysis": result.dict()}}
+        )
+        
+        return result
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@api_router.post("/ai/prioritize-tests", response_model=List[str])
+async def ai_prioritize_tests(
+    request: AIPrioritizationRequest,
+    current_user: dict = Depends(get_current_user)
+):
+    """Prioritize test cases using AI"""
+    try:
+        db = get_database()
+        
+        # Get test cases
+        test_cases = await db.test_cases.find(
+            {"id": {"$in": request.test_case_ids}}
+        ).to_list(100)
+        
+        if not test_cases:
+            raise HTTPException(status_code=404, detail="No test cases found")
+        
+        # Convert to TestCase objects
+        test_case_objects = [TestCase(**tc) for tc in test_cases]
+        
+        # Perform AI prioritization
+        prioritized_ids = await ai_service.prioritize_test_cases(
+            test_case_objects,
+            request.context
+        )
+        
+        return prioritized_ids
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Test Execution endpoints
+@api_router.post("/executions", response_model=TestExecution)
+async def create_test_execution(
+    execution_data: TestExecutionCreate,
+    current_user: dict = Depends(get_current_user)
+):
+    """Create a new test execution"""
+    db = get_database()
+    
+    execution = TestExecution(
+        **execution_data.dict(),
+        executed_by=current_user["id"]
+    )
+    
+    await db.test_executions.insert_one(execution.dict())
+    
+    # Broadcast execution update
+    await websocket_manager.broadcast_test_execution_update(execution.dict())
+    
+    return execution
+
+@api_router.get("/executions", response_model=List[TestExecution])
+async def get_test_executions(
+    test_case_id: Optional[str] = None,
+    current_user: dict = Depends(get_current_user)
+):
+    """Get test executions"""
+    db = get_database()
+    
+    filters = {}
+    if test_case_id:
+        filters["test_case_id"] = test_case_id
+    
+    executions = await db.test_executions.find(filters).sort("created_at", -1).to_list(100)
+    
+    return [TestExecution(**execution) for execution in executions]
+
+@api_router.put("/executions/{execution_id}/status")
+async def update_execution_status(
+    execution_id: str,
+    status: ExecutionStatus,
+    current_user: dict = Depends(get_current_user)
+):
+    """Update execution status"""
+    db = get_database()
+    
+    update_data = {"status": status, "updated_at": datetime.utcnow()}
+    
+    if status == ExecutionStatus.RUNNING:
+        update_data["started_at"] = datetime.utcnow()
+    elif status in [ExecutionStatus.COMPLETED, ExecutionStatus.FAILED]:
+        update_data["completed_at"] = datetime.utcnow()
+    
+    await db.test_executions.update_one(
+        {"id": execution_id},
+        {"$set": update_data}
+    )
+    
+    execution = await db.test_executions.find_one({"id": execution_id})
+    
+    # Broadcast execution update
+    await websocket_manager.broadcast_test_execution_update(execution)
+    
+    return {"message": "Execution status updated"}
+
+# Dashboard endpoints
+@api_router.get("/dashboard/stats", response_model=DashboardStats)
+async def get_dashboard_stats(current_user: dict = Depends(get_current_user)):
+    """Get dashboard statistics"""
+    db = get_database()
+    
+    # Get user's projects
+    projects = await db.projects.find({
+        "$or": [
+            {"created_by": current_user["id"]},
+            {"team_members": current_user["id"]}
+        ]
+    }).to_list(100)
+    
+    project_ids = [project["id"] for project in projects]
+    
+    # Get statistics
+    total_test_cases = await db.test_cases.count_documents({"project_id": {"$in": project_ids}})
+    
+    # Get executions for pass rate calculation
+    executions = await db.test_executions.find(
+        {"test_case_id": {"$in": project_ids}}
+    ).to_list(1000)
+    
+    total_executions = len(executions)
+    passed_executions = len([e for e in executions if e.get("status") == "completed"])
+    pass_rate = (passed_executions / total_executions * 100) if total_executions > 0 else 0
+    
+    # Calculate average execution time
+    completed_executions = [e for e in executions if e.get("duration")]
+    avg_execution_time = sum(e.get("duration", 0) for e in completed_executions) / len(completed_executions) if completed_executions else 0
+    
+    # Get active test runs
+    active_runs = await db.test_executions.count_documents({"status": "running"})
+    
+    # Get recent activity
+    recent_activity = await db.activity_feed.find().sort("created_at", -1).limit(10).to_list(10)
+    
+    return DashboardStats(
+        total_test_cases=total_test_cases,
+        total_executions=total_executions,
+        pass_rate=pass_rate,
+        average_execution_time=avg_execution_time,
+        active_test_runs=active_runs,
+        recent_activity=recent_activity
+    )
+
+@api_router.get("/dashboard/activity", response_model=List[ActivityFeed])
+async def get_activity_feed(current_user: dict = Depends(get_current_user)):
+    """Get activity feed"""
+    db = get_database()
+    
+    activities = await db.activity_feed.find().sort("created_at", -1).limit(50).to_list(50)
+    
+    return [ActivityFeed(**activity) for activity in activities]
+
+# Utility functions
+async def create_activity_log(db, user_id: str, user_name: str, action: str, target_type: str, target_id: str, target_name: str, description: str):
+    """Create activity log entry"""
+    activity = ActivityFeed(
+        user_id=user_id,
+        user_name=user_name,
+        action=action,
+        target_type=target_type,
+        target_id=target_id,
+        target_name=target_name,
+        description=description
+    )
+    
+    await db.activity_feed.insert_one(activity.dict())
+    
+    # Broadcast dashboard update
+    await websocket_manager.broadcast_dashboard_update({
+        "type": "activity_update",
+        "activity": activity.dict()
+    })
+
+# Health check endpoint
+@api_router.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    return {"status": "ok", "timestamp": datetime.utcnow().isoformat()}
+
+# Include API routers
+try:
+    app.include_router(test_cases.router, prefix="/api/v1", tags=["test-cases"])
+    app.include_router(teams.router, prefix="/api/v1", tags=["teams"])
+    app.include_router(environments.router, prefix="/api/v1", tags=["environments"])
+    app.include_router(attachments.router, prefix="/api/v1", tags=["attachments"])
+    logger.info("API routers initialized successfully")
+except Exception as e:
+    logger.error(f"Error initializing API routers: {str(e)}")
+    logger.debug(traceback.format_exc())
+    raise
+
+# Include API routers
+app.include_router(api_router, prefix=f"/{API_VERSION}")
+
+# Root endpoint for backward compatibility
+@app.get("/", tags=["Health"])
+async def root() -> dict:
+    """
+    Root endpoint for health checks and basic API information.
+    
+    Returns:
+        dict: API status and version information
+    """
+    return {
+        "message": "Welcome to IntelliTest API",
+        "status": "operational",
+        "version": "1.0.0",
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+@app.get("/health", tags=["Health"])
+async def health_check() -> dict:
+    """
+    Health check endpoint to verify the API is running and can connect to the database.
+    
+    Returns:
+        dict: Health status and database connection status
+    """
+    db_ok = False
+    try:
+        # Test database connection
+        db = SessionLocal()
+        db.execute("SELECT 1")
+        db_ok = True
+    except Exception as e:
+        logger.error(f"Database connection error: {str(e)}")
+        logger.debug(traceback.format_exc())
+    finally:
+        db.close()
+    
+    return {
+        "status": "healthy" if db_ok else "unhealthy",
+        "database": "connected" if db_ok else "disconnected",
+        "timestamp": datetime.utcnow().isoformat()
+    }
+
+if __name__ == "__main__":
+    import uvicorn
+    
+    # Configure logging
+    logging.basicConfig(
+        level=logging.INFO,
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
+    
+    # Run the application
+    uvicorn.run(
+        "server:app",
+        host=os.getenv("HOST", "0.0.0.0"),
+        port=int(os.getenv("PORT", 8001)),
+        reload=os.getenv("RELOAD", "true").lower() == "true",
+        log_level=os.getenv("LOG_LEVEL", "info"),
+    )

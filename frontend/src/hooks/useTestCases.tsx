@@ -34,7 +34,7 @@ export function useTestCases(projectId?: string) {
     try {
       setLoading(true);
       const token = localStorage.getItem('access_token');
-      let url = `http://127.0.0.1:8002/api/test-cases`;
+      let url = `http://127.0.0.1:8001/api/test-cases`;
       if (projectId) {
         url += `?project_id=${projectId}`;
       }
@@ -56,7 +56,7 @@ export function useTestCases(projectId?: string) {
   const createTestCase = async (testCaseData: Omit<TestCase, 'id' | 'created_at' | 'updated_at' | 'created_by'>) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://127.0.0.1:8002/api/test-cases', {
+      const response = await fetch('http://127.0.0.1:8001/api/test-cases', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +81,7 @@ export function useTestCases(projectId?: string) {
   const updateTestCase = async (id: string, updates: Partial<TestCase>) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8002/api/test-cases/${id}`, {
+      const response = await fetch(`http://127.0.0.1:8001/api/test-cases/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +103,7 @@ export function useTestCases(projectId?: string) {
   const deleteTestCase = async (id: string) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8002/api/test-cases/${id}`, {
+      const response = await fetch(`http://127.0.0.1:8001/api/test-cases/${id}`, {
         method: 'DELETE',
         headers: {
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})

@@ -1,17 +1,29 @@
-import { useState, useEffect } from 'react';
-// import { supabase } from '@/integrations/supabase/client'; // Supabase removed
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from './useAuth';
 
 export interface Project {
   id: string;
   name: string;
-  description?: string;
-  base_url?: string;
-  team_id?: string;
-  created_by?: string;
-  status: 'draft' | 'active' | 'inactive' | 'archived';
+  description: string | null;
+  team_id: string | null;
+  created_by: string;
+  is_active: boolean;
   created_at: string;
   updated_at: string;
+  test_case_count?: number;
+  environment_count?: number;
+  last_execution?: string | null;
+}
+
+export interface ProjectCreate {
+  name: string;
+  description?: string;
+  team_id?: string;
+  is_active?: boolean;
+}
+
+export interface ProjectUpdate extends Partial<ProjectCreate> {
+  id: string;
 }
 
 export function useProjects() {
@@ -19,105 +31,156 @@ export function useProjects() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
+  const API_BASE_URL = 'http://localhost:8001/api/v1';
 
-  const fetchProjects = async () => {
+  const getAuthHeaders = useCallback(() => {
+    const token = localStorage.getItem('access_token');
+    return {
+      'Content-Type': 'application/json',
+      ...(token ? { 'Authorization': `Bearer ${token}` } : {})
+    };
+  }, []);
+
+  const fetchProjects = useCallback(async () => {
     if (!user) return;
     
     try {
       setLoading(true);
-      const token = localStorage.getItem('access_token');
-      const response = await fetch('http://127.0.0.1:8002/api/projects', {
-        headers: {
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        }
+      const response = await fetch(`${API_BASE_URL}/projects`, {
+        headers: getAuthHeaders()
       });
-      if (!response.ok) throw new Error('Failed to fetch projects');
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Failed to fetch projects');
+      }
+      
       const data = await response.json();
-      setProjects(data || []);
+      setProjects(Array.isArray(data) ? data : []);
+      setError(null);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
+      setProjects([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [user, getAuthHeaders]);
+
+  const createProject = async (projectData: ProjectCreate) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/projects`, {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        body: JSON.stringify({
+          ...projectData,
+          is_active: projectData.is_active ?? true
+        })
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Failed to create project');
+      }
+      
+      await fetchProjects();
+      setError(null);
+      return await response.json();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to create project';
+      setError(message);
+      throw new Error(message);
     } finally {
       setLoading(false);
     }
   };
 
-  const createProject = async (projectData: Omit<Project, 'id' | 'created_at' | 'updated_at' | 'created_by'>) => {
+  const updateProject = async ({ id, ...updateData }: ProjectUpdate) => {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await fetch('http://127.0.0.1:8002/api/projects', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        },
-        body: JSON.stringify({
-          ...projectData,
-          created_by: user?.id
-        })
-      });
-      if (!response.ok) throw new Error('Failed to create project');
-      const data = await response.json();
-      setProjects(prev => [data, ...prev]);
-      return { data, error: null };
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to create project';
-      setError(errorMessage);
-      return { data: null, error: errorMessage };
-    }
-  };
-
-  const updateProject = async (id: string, updates: Partial<Project>) => {
-    try {
-      const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8002/api/projects/${id}`, {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        },
-        body: JSON.stringify(updates)
+        headers: getAuthHeaders(),
+        body: JSON.stringify(updateData)
       });
-      if (!response.ok) throw new Error('Failed to update project');
-      const data = await response.json();
-      setProjects(prev => prev.map(project => project.id === id ? data : project));
-      return { data, error: null };
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Failed to update project');
+      }
+      
+      await fetchProjects();
+      setError(null);
+      return await response.json();
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to update project';
-      setError(errorMessage);
-      return { data: null, error: errorMessage };
+      const message = err instanceof Error ? err.message : 'Failed to update project';
+      setError(message);
+      throw new Error(message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const deleteProject = async (id: string) => {
     try {
-      const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8002/api/projects/${id}`, {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
         method: 'DELETE',
-        headers: {
-          ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        }
+        headers: getAuthHeaders()
       });
-      if (!response.ok) throw new Error('Failed to delete project');
-      setProjects(prev => prev.filter(project => project.id !== id));
-      return { error: null };
+      
+      if (!response.ok && response.status !== 204) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Failed to delete project');
+      }
+      
+      await fetchProjects();
+      setError(null);
+      return true;
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to delete project';
-      setError(errorMessage);
-      return { error: errorMessage };
+      const message = err instanceof Error ? err.message : 'Failed to delete project';
+      setError(message);
+      throw new Error(message);
+    } finally {
+      setLoading(false);
     }
   };
 
+  const getProjectById = useCallback(async (id: string) => {
+    try {
+      setLoading(true);
+      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+        headers: getAuthHeaders()
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || 'Failed to fetch project');
+      }
+      
+      return await response.json();
+    } catch (err) {
+      const message = err instanceof Error ? err.message : 'Failed to fetch project';
+      setError(message);
+      throw new Error(message);
+    } finally {
+      setLoading(false);
+    }
+  }, [getAuthHeaders]);
+
   useEffect(() => {
     fetchProjects();
-  }, [user]);
+  }, [fetchProjects]);
 
   return {
     projects,
     loading,
     error,
+    fetchProjects,
     createProject,
     updateProject,
     deleteProject,
-    refetch: fetchProjects
+    getProjectById,
+    clearError: () => setError(null)
   };
 }

@@ -1,28 +1,41 @@
-from app.models import *
-from app.models.db_models import (
-    User, Project, TestStep, TestCase, TestPlan, 
-    TestExecution, Comment, Team, TeamMember, 
-    Environment, Attachment, TestPlanTestCase
-)
+from .db.session import SessionLocal, engine, get_db, AsyncSessionLocal, init_db, Base
+from .models.db_models import *
+from .core.config import settings
+from .auth.security import AuthService, get_current_user, create_access_token, get_password_hash, verify_password
 
-# Import WebSocket related models
-from app.schemas.websocket import WebSocketMessage, NotificationMessage
-
-# Import database and auth utilities
-from app.db.session import engine, Base, get_db, SessionLocal, init_db
-from app.auth.security import AuthService, get_current_user, create_access_token, get_password_hash, verify_password
-
-# Re-export models and schemas
 __all__ = [
-    'models',
-    'engine',
-    'Base',
-    'get_db',
     'SessionLocal',
+    'AsyncSessionLocal', 
+    'engine',
+    'get_db',
     'init_db',
+    'Base',
+    'settings',
+    # Auth
     'AuthService',
     'get_current_user',
     'create_access_token',
     'get_password_hash',
-    'verify_password'
+    'verify_password',
+    # Models
+    'User',
+    'Team',
+    'TeamMember',
+    'Project',
+    'Environment',
+    'TestCase',
+    'TestStep',
+    'TestPlan',
+    'TestExecution',
+    'Comment',
+    'Attachment',
+    # Enums
+    'TestType',
+    'Priority',
+    'Status',
+    'ExecutionStatus',
+    'CommentType'
 ]
+
+# Initialize database tables
+Base.metadata.create_all(bind=engine)

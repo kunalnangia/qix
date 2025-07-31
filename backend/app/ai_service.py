@@ -6,8 +6,9 @@ from typing import List, Dict, Any
 from datetime import datetime
 
 # Import models with correct paths
-from app.models.db_models import TestCase, TestStep, TestType, Priority
+from app.models.db_models import TestCase as DBTestCase, TestStep, TestType, Priority
 from app.schemas.ai import AIAnalysisResult
+from app.llm_chat import LlmChat
 
 # Initialize logger
 
@@ -27,7 +28,7 @@ class AIService:
             system_message=system_message
         ).with_model("openai", "gpt-4o")
     
-    async def generate_test_cases(self, prompt: str, test_type: TestType, priority: Priority, count: int = 1) -> List[TestCase]:
+    async def generate_test_cases(self, prompt: str, test_type: TestType, priority: Priority, count: int = 1) -> List[DBTestCase]:
         """Generate test cases using AI"""
         system_message = f"""You are an expert QA engineer specialized in creating comprehensive test cases. 
         Generate {count} detailed test case(s) for {test_type} testing with {priority} priority.
@@ -98,7 +99,7 @@ class AIService:
             logger.error(f"Error generating test cases: {str(e)}")
             raise Exception(f"Failed to generate test cases: {str(e)}")
     
-    async def debug_test_failure(self, test_case: TestCase, error_message: str, logs: str = None) -> AIAnalysisResult:
+    async def debug_test_failure(self, test_case: DBTestCase, error_message: str, logs: str = None) -> AIAnalysisResult:
         """Analyze test failure and provide debugging insights"""
         system_message = """You are an expert QA engineer and debugging specialist. 
         Analyze test failures and provide clear, actionable debugging insights.
@@ -154,7 +155,7 @@ class AIService:
                 confidence=0.0
             )
     
-    async def prioritize_test_cases(self, test_cases: List[TestCase], context: str) -> List[str]:
+    async def prioritize_test_cases(self, test_cases: List[DBTestCase], context: str) -> List[str]:
         """Prioritize test cases based on context using AI"""
         system_message = """You are an expert QA strategist specializing in test prioritization.
         Analyze the given context and test cases to determine optimal execution order.
@@ -258,7 +259,7 @@ class AIService:
                 "recommendations": ["Review test execution data manually"]
             }
     
-    async def suggest_test_improvements(self, test_case: TestCase, execution_history: List[Dict[str, Any]]) -> List[str]:
+    async def suggest_test_improvements(self, test_case: DBTestCase, execution_history: List[Dict[str, Any]]) -> List[str]:
         """Suggest improvements for a test case based on execution history"""
         system_message = """You are an expert QA engineer specializing in test optimization.
         Analyze test cases and their execution history to suggest improvements.

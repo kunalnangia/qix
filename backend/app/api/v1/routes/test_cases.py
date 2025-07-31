@@ -1,14 +1,16 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from typing import List, Optional
 from datetime import datetime
 import uuid
 
 from app.db import get_db
+from app import models
 from app.auth.security import get_current_user
-from app.schemas.websocket import TestType, Status, Priority, TestCase, TestCaseCreate, TestCaseUpdate
-
-# Use the imported models directly
+from app.schemas.test_case import (
+    TestType, Status, Priority, TestStep, TestStepCreate,
+    TestCaseCreate, TestCaseUpdate, TestCaseResponse
+)
 
 router = APIRouter(
     prefix="/test-cases",
@@ -16,7 +18,7 @@ router = APIRouter(
     responses={404: {"description": "Not found"}},
 )
 
-@router.post("/", response_model=TestCase, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=TestCaseResponse, status_code=status.HTTP_201_CREATED)
 async def create_test_case(
     test_case: TestCaseCreate,
     db: Session = Depends(get_db),
@@ -36,7 +38,7 @@ async def create_test_case(
         )
     
     # Convert Pydantic model to dict and add required fields
-    test_case_data = test_case.dict(exclude={"steps"})
+    test_case_data = test_case.dict(exclude={"test_steps"}, exclude_unset=True)
     db_test_case = models.TestCase(
         **test_case_data,
         id=str(uuid.uuid4()),
@@ -46,8 +48,8 @@ async def create_test_case(
     )
     
     # Add test steps if provided
-    if test_case.steps:
-        for step in test_case.steps:
+    if hasattr(test_case, 'test_steps') and test_case.test_steps:
+        for step in test_case.test_steps:
             db_step = models.TestStep(
                 id=str(uuid.uuid4()),
                 test_case_id=db_test_case.id,
@@ -64,7 +66,7 @@ async def create_test_case(
     
     return db_test_case
 
-@router.get("/", response_model=List[TestCase])
+@router.get("/", response_model=List[TestCaseResponse])
 async def list_test_cases(
     project_id: Optional[str] = None,
     test_type: Optional[TestType] = None,
@@ -77,7 +79,7 @@ async def list_test_cases(
     """
     List test cases with optional filtering
     """
-    query = db.query(models.TestCase)
+    query = db.query(models.TestCase).options(joinedload(models.TestCase.test_steps))
     
     if project_id:
         query = query.filter(models.TestCase.project_id == project_id)
@@ -88,7 +90,7 @@ async def list_test_cases(
     
     return query.offset(skip).limit(limit).all()
 
-@router.get("/{test_case_id}", response_model=TestCase)
+@router.get("/{test_case_id}", response_model=TestCaseResponse)
 async def get_test_case(
     test_case_id: str,
     db: Session = Depends(get_db),
@@ -97,7 +99,10 @@ async def get_test_case(
     """
     Get a test case by ID
     """
-    db_test_case = db.query(models.TestCase).filter(
+    # Use joinedload to ensure test steps are loaded with the test case
+    db_test_case = db.query(models.TestCase).options(
+        joinedload(models.TestCase.test_steps)
+    ).filter(
         models.TestCase.id == test_case_id
     ).first()
     
@@ -109,7 +114,7 @@ async def get_test_case(
     
     return db_test_case
 
-@router.put("/{test_case_id}", response_model=TestCase)
+@router.put("/{test_case_id}", response_model=TestCaseResponse)
 async def update_test_case(
     test_case_id: str,
     test_case: TestCaseUpdate,

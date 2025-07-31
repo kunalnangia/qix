@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, ConfigDict
 from datetime import datetime
 from typing import Optional, List
 from enum import Enum
@@ -28,8 +28,7 @@ class UserInDBBase(UserBase):
     created_at: datetime
     updated_at: datetime
 
-    class Config:
-        from_attributes = True
+    model_config = ConfigDict(from_attributes=True)  # Fixed Pydantic v2 config
 
 # Properties to return to client
 class User(UserInDBBase):
@@ -38,6 +37,20 @@ class User(UserInDBBase):
 # Properties stored in DB (includes hashed password)
 class UserInDB(UserInDBBase):
     hashed_password: str
+
+class UserLogin(BaseModel):
+    """Schema for user login request"""
+    email: EmailStr = Field(..., description="User's email address")
+    password: str = Field(..., min_length=1, description="User's password")
+    
+    model_config = ConfigDict(
+        json_schema_extra={
+            "example": {
+                "email": "user@example.com",
+                "password": "your_password"
+            }
+        }
+    )
 
 # For JWT token
 class Token(BaseModel):

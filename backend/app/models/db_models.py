@@ -1,12 +1,16 @@
-from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey, JSON, Enum as SQLEnum, Text
+from sqlalchemy import Column, String, Integer, Boolean, DateTime, ForeignKey, JSON, Enum as SQLEnum, Text, Table, UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 from datetime import datetime
 import uuid
 from enum import Enum
+from datetime import datetime
+from sqlalchemy import Column, String, Integer, Text, DateTime, ForeignKey, JSON, Enum as SQLEnum, Boolean
+from sqlalchemy.orm import relationship
+import uuid
 
-# Import Base from the models package to avoid circular imports
-from ..models import Base
+# Import Base from app.db.base to avoid circular imports
+from app.db.base import Base
 
 # Enums
 class TestType(str, Enum):
@@ -43,6 +47,7 @@ class CommentType(str, Enum):
     SUGGESTION = "suggestion"
     RESOLVED = "resolved"
 
+
 # User Model
 class User(Base):
     __tablename__ = "users"
@@ -52,13 +57,19 @@ class User(Base):
     full_name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     role = Column(String, default="tester")
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    test_cases = relationship("TestCase", back_populates="creator", lazy="selectin")
-    comments = relationship("Comment", back_populates="user", lazy="selectin")
-    test_executions = relationship("TestExecution", back_populates="executor", lazy="selectin")
+    created_test_cases = relationship("TestCase", foreign_keys="[TestCase.created_by]", back_populates="creator")
+    assigned_test_cases = relationship("TestCase", foreign_keys="[TestCase.assigned_to]", back_populates="assignee")
+    activity_logs = relationship("ActivityLog", back_populates="user")
+    comments = relationship("Comment", back_populates="user")
+    test_executions = relationship("TestExecution", back_populates="executor")
+    created_projects = relationship("Project", back_populates="creator")
+    team_memberships = relationship("TeamMember", back_populates="user")
+    uploaded_attachments = relationship("Attachment", back_populates="uploader")
 
 # Project Model
 class Project(Base):
@@ -68,23 +79,24 @@ class Project(Base):
     name = Column(String, nullable=False)
     description = Column(Text, nullable=True)
     created_by = Column(String, ForeignKey("users.id"), nullable=False)
+    team_id = Column(String, ForeignKey("teams.id"), nullable=True)
+    is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
-    team_id = Column(String, ForeignKey("teams.id"), nullable=True)
-    
     # Relationships
-    test_cases = relationship("TestCase", backref="project", lazy="selectin")
-    test_plans = relationship("TestPlan", backref="project", lazy="selectin")
-    team = relationship("Team", backref="projects", lazy="selectin")
-    environments = relationship("Environment", backref="project", lazy="selectin")
+    creator = relationship("User", back_populates="created_projects")
+    team = relationship("Team", back_populates="projects")
+    test_cases = relationship("TestCase", back_populates="project")
+    test_plans = relationship("TestPlan", back_populates="project")
+    environments = relationship("Environment", back_populates="project")
 
 # Test Step Model (for TestCase)
 class TestStep(Base):
     __tablename__ = "test_steps"
     
     id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
-    test_case_id = Column(String, ForeignKey("test_cases.id"), nullable=False)
+    test_case_id = Column(String, ForeignKey("test_cases.id", ondelete="CASCADE"), nullable=False)
     step_number = Column(Integer, nullable=False)
     description = Column(Text, nullable=False)
     expected_result = Column(Text, nullable=False)
@@ -118,12 +130,14 @@ class TestCase(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    project = relationship("Project", back_populates="test_cases", lazy="selectin")
-    creator = relationship("User", foreign_keys=[created_by], back_populates="test_cases", lazy="selectin")
-    assignee = relationship("User", foreign_keys=[assigned_to], lazy="selectin")
-    steps = relationship("TestStep", back_populates="test_case", cascade="all, delete-orphan", lazy="selectin")
-    test_executions = relationship("TestExecution", back_populates="test_case", lazy="selectin")
-    comments = relationship("Comment", back_populates="test_case", lazy="selectin")
+    project = relationship("Project", back_populates="test_cases")
+    creator = relationship("User", foreign_keys=[created_by], back_populates="created_test_cases")
+    assignee = relationship("User", foreign_keys=[assigned_to], back_populates="assigned_test_cases")
+    steps = relationship("TestStep", back_populates="test_case", cascade="all, delete-orphan")
+    test_executions = relationship("TestExecution", back_populates="test_case")
+    comments = relationship("Comment", back_populates="test_case")
+    test_plans = relationship("TestPlan", secondary="test_plan_test_cases", back_populates="test_cases")
+    test_plan_test_cases = relationship("TestPlanTestCase", back_populates="test_case", cascade="all, delete-orphan")
 
 # Test Plan Model
 class TestPlan(Base):
@@ -141,16 +155,12 @@ class TestPlan(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    project = relationship("Project", back_populates="test_plans", lazy="selectin")
-    test_executions = relationship("TestExecution", back_populates="test_plan", lazy="selectin")
-    test_cases = relationship("TestCase", secondary="test_plan_test_cases", back_populates="test_plans", lazy="selectin")
+    project = relationship("Project", back_populates="test_plans")
+    test_executions = relationship("TestExecution", back_populates="test_plan")
+    test_cases = relationship("TestCase", secondary="test_plan_test_cases", back_populates="test_plans")
+    test_plan_test_cases = relationship("TestPlanTestCase", back_populates="test_plan", cascade="all, delete-orphan")
 
-# Association table for many-to-many relationship between TestPlan and TestCase
-class TestPlanTestCase(Base):
-    __tablename__ = "test_plan_test_cases"
-    
-    test_plan_id = Column(String, ForeignKey("test_plans.id"), primary_key=True)
-    test_case_id = Column(String, ForeignKey("test_cases.id"), primary_key=True)
+
 
 # Test Execution Model
 class TestExecution(Base):
@@ -174,10 +184,10 @@ class TestExecution(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    test_case = relationship("TestCase", back_populates="test_executions", lazy="selectin")
-    test_plan = relationship("TestPlan", back_populates="test_executions", lazy="selectin")
-    executor = relationship("User", back_populates="test_executions", lazy="selectin")
-    environment = relationship("Environment", back_populates="test_executions", lazy="selectin")
+    test_case = relationship("TestCase", back_populates="test_executions")
+    test_plan = relationship("TestPlan", back_populates="test_executions")
+    executor = relationship("User", back_populates="test_executions")
+    environment = relationship("Environment", back_populates="test_executions")
 
 # Comment Model
 class Comment(Base):
@@ -195,9 +205,10 @@ class Comment(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    test_case = relationship("TestCase", back_populates="comments", lazy="selectin")
-    user = relationship("User", back_populates="comments", lazy="selectin")
-    parent_comment = relationship("Comment", remote_side=[id], backref="replies", lazy="selectin")
+    test_case = relationship("TestCase", back_populates="comments")
+    user = relationship("User", back_populates="comments")
+    parent_comment = relationship("Comment", remote_side=[id], back_populates="replies")
+    replies = relationship("Comment", back_populates="parent_comment", cascade="all, delete-orphan")
 
 
 # Team Model
@@ -212,8 +223,8 @@ class Team(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    members = relationship("TeamMember", back_populates="team", lazy="selectin")
-    projects = relationship("Project", back_populates="team", lazy="selectin")
+    members = relationship("TeamMember", back_populates="team")
+    projects = relationship("Project", back_populates="team")
 
 
 # Team Member Model (for many-to-many relationship between User and Team)
@@ -227,8 +238,8 @@ class TeamMember(Base):
     joined_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
-    team = relationship("Team", back_populates="members", lazy="selectin")
-    user = relationship("User", lazy="selectin")
+    team = relationship("Team", back_populates="members")
+    user = relationship("User", back_populates="team_memberships")
 
 
 # Environment Model
@@ -246,8 +257,8 @@ class Environment(Base):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     # Relationships
-    project = relationship("Project", back_populates="environments", lazy="selectin")
-    test_executions = relationship("TestExecution", back_populates="environment", lazy="selectin")
+    project = relationship("Project", back_populates="environments")
+    test_executions = relationship("TestExecution", back_populates="environment")
 
 
 # Attachment Model
@@ -266,4 +277,50 @@ class Attachment(Base):
     created_at = Column(DateTime, default=datetime.utcnow)
     
     # Relationships
-    uploader = relationship("User", lazy="selectin")
+    uploader = relationship("User", back_populates="uploaded_attachments")
+
+
+# Test Plan Test Case Association Model
+class TestPlanTestCase(Base):
+    """Association table for many-to-many relationship between TestPlan and TestCase with additional attributes"""
+    __tablename__ = 'test_plan_test_cases'
+    
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    test_plan_id = Column(String, ForeignKey('test_plans.id', ondelete='CASCADE'), nullable=False)
+    test_case_id = Column(String, ForeignKey('test_cases.id', ondelete='CASCADE'), nullable=False)
+    
+    # Optional fields for the association
+    order = Column(Integer, default=0)  # Order of test case in the test plan
+    is_mandatory = Column(Boolean, default=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    created_by = Column(String, ForeignKey('users.id'))
+    
+    # Relationships
+    test_plan = relationship("TestPlan", back_populates="test_plan_test_cases")
+    test_case = relationship("TestCase", back_populates="test_plan_test_cases")
+    creator = relationship("User")
+    
+    # Unique constraint to prevent duplicate associations
+    __table_args__ = (
+        UniqueConstraint('test_plan_id', 'test_case_id', name='unique_test_plan_test_case'),
+    )
+
+
+class ActivityLog(Base):
+    """Model for tracking user activities in the system"""
+    __tablename__ = "activity_logs"
+    
+    id = Column(String, primary_key=True, default=lambda: str(uuid.uuid4()))
+    user_id = Column(String, ForeignKey("users.id"), nullable=False)
+    user_name = Column(String, nullable=False)
+    action = Column(String, nullable=False)  # e.g., 'create', 'update', 'delete', 'login', etc.
+    target_type = Column(String, nullable=False)  # e.g., 'test_case', 'project', 'test_execution', etc.
+    target_id = Column(String, nullable=False)  # ID of the target entity
+    target_name = Column(String, nullable=True)  # Name/title of the target for display
+    details = Column(JSON, nullable=True)  # Additional details about the activity
+    ip_address = Column(String, nullable=True)
+    user_agent = Column(String, nullable=True)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    
+    # Relationships
+    user = relationship("User", back_populates="activity_logs")
