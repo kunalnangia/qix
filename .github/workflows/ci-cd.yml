@@ -10,8 +10,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    # Using Supabase PostgreSQL for testing
-
     steps:
     - uses: actions/checkout@v3
     
@@ -26,9 +24,24 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
     
+    - name: Load .env file
+      id: env
+      run: |
+        echo "Loading .env file"
+        if [ -f .env ]; then
+          # Export all variables from .env file
+          export $(grep -v '^#' .env | xargs)
+          # Make DATABASE_URL available to subsequent steps
+          echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
+          echo "Loaded DATABASE_URL from .env"
+        else
+          echo ".env file not found"
+          exit 1
+        fi
+    
     - name: Run tests
       env:
-        DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+        DATABASE_URL: ${{ env.DATABASE_URL }}
       run: |
         cd backend
         python -m pytest -v
