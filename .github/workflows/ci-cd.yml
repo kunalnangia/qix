@@ -10,20 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     
-    services:
-      postgres:
-        image: postgres:13
-        env:
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_USER: postgres
-          POSTGRES_DB: test
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+    # Using Supabase PostgreSQL for testing
 
     steps:
     - uses: actions/checkout@v3
@@ -41,7 +28,7 @@ jobs:
     
     - name: Run tests
       env:
-        DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test
+        DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
       run: |
         cd backend
         python -m pytest -v
