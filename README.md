@@ -134,9 +134,9 @@ Before you begin, ensure you have the following installed:
    ```
 
 3. **Access the application**
-   - Frontend: https://localhost:3000
-   - Backend API: https://localhost:8000/api/v1
-   - API Documentation: https://localhost:8000/docs
+   - Frontend: http://localhost:5175
+   - Backend API: http://localhost:8001/api/v1
+   - API Documentation: http://localhost:8001/docs
 
 ## 📚 Documentation
 
@@ -155,10 +155,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📧 Contact
 
-For questions or support, please contact [your-email@example.com](mailto:your-email@example.com).
+For questions or support, please contact [your-email@example.com](mailto:your-email@gmail.com).
 
 ---
 
 <div align="center">
-  Made with ❤️ by Your Team Name
+  Made with ❤️ by Kunal and Team
 </div>
