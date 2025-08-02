@@ -206,7 +206,7 @@ def generate_sample_data():
                 execution_id,
                 random.randint(500, 5000),
                 random.randint(300, 3000),
-                random.randint(1000, 8000),
+                random.randint(1000, 8001),
                 random.randint(1000, 10000),
                 random.uniform(0, 0.5),
                 random.randint(100, 1000) * 1000 * 1000,  # 100MB to 1GB

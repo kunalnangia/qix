@@ -20,7 +20,7 @@ def main():
     print("Searching for backend server...")
     
     # Common ports to check
-    ports_to_try = [8000, 8001, 8080, 3000, 5000, 8002]
+    ports_to_try = [8001, 3000, 5000, 8002]
     
     for port in ports_to_try:
         if test_backend_port(port):

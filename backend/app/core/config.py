@@ -39,12 +39,12 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8080"
     ]
     
-    # Database settings
-    POSTGRES_SERVER: str = "localhost"
-    POSTGRES_USER: str = "postgres"
-    POSTGRES_PASSWORD: str = "postgres"
-    POSTGRES_DB: str = "intellitest"
-    POSTGRES_PORT: int = 5432
+    # Database settings - using AWS Pooler connection
+    POSTGRES_SERVER: str = "aws-0-ap-southeast-1.pooler.supabase.com"
+    POSTGRES_USER: str = "postgres.lflecyuvttemfoyixngi"
+    POSTGRES_PASSWORD: str = "Ayeshaayesha121"
+    POSTGRES_DB: str = "postgres"
+    POSTGRES_PORT: int = 6543
     
     @computed_field
     @property
