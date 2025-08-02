@@ -33,36 +33,70 @@ logger.info("Database URL configured")
 # Base is now imported from base.py
 
 # Create sync engine for migrations and sync operations
-engine = create_engine(
-    str(DATABASE_URL).replace("postgresql://", "postgresql+psycopg2://"),
-    echo=True,  # Enable SQL query logging for debugging
-    pool_pre_ping=True,  # Enable connection health checks
-    pool_size=5,
-    max_overflow=10,
-    pool_recycle=300,  # Recycle connections after 5 minutes
-    pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
-    connect_args={
-        'keepalives': 1,  # Enable TCP keepalive
-        'keepalives_idle': 30,  # Start sending keepalive packets after 30 seconds of inactivity
-        'keepalives_interval': 10,  # Send keepalive packets every 10 seconds
-        'keepalives_count': 5  # Consider the connection dead after 5 failed keepalive attempts
-    }
-)
+if DATABASE_URL.startswith("sqlite"):
+    # SQLite configuration
+    engine = create_engine(
+        DATABASE_URL, 
+        connect_args={"check_same_thread": False},  # Needed for SQLite
+        echo=True
+    )
+else:
+    # PostgreSQL configuration
+    engine = create_engine(
+        str(DATABASE_URL).replace("postgresql://", "postgresql+psycopg2://"),
+        echo=True,  # Enable SQL query logging for debugging
+        pool_pre_ping=True,  # Enable connection health checks
+        pool_size=5,
+        max_overflow=10,
+        pool_recycle=300,  # Recycle connections after 5 minutes
+        pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
+        connect_args={
+            'keepalives': 1,  # Enable TCP keepalive
+            'keepalives_idle': 30,  # Start sending keepalive packets after 30 seconds of inactivity
+            'keepalives_interval': 10,  # Send keepalive packets every 10 seconds
+            'keepalives_count': 5  # Consider the connection dead after 5 failed keepalive attempts
+        }
+    )
 
 # Create async engine for FastAPI with asyncpg
 # Convert the connection string to use asyncpg
 connection_string = str(DATABASE_URL).replace("postgresql://", "postgresql+asyncpg://")
 
+# Add statement_cache_size=0 to the connection string for pgbouncer compatibility
+# This is required when using pgbouncer in transaction or statement pooling mode
+if '?' in connection_string:
+    connection_string += '&statement_cache_size=0'
+else:
+    connection_string += '?statement_cache_size=0'
+
+# Add TCP keepalive parameters to maintain stable database connections
+# These settings help detect and recover from network issues
+if '?' in connection_string:
+    connection_string += '&'
+else:
+    connection_string += '?'
+connection_string += 'keepalives=1&keepalives_idle=30&keepalives_interval=10&keepalives_count=5'
+
+# Configure the async SQLAlchemy engine
+# 
+# Important configuration notes:
+# - echo=True: Enables SQL query logging for debugging (disable in production)
+# - pool_pre_ping: Verifies connections before using them to handle connection timeouts
+# - pool_size/max_overflow: Controls the connection pool size
+# - pool_recycle: Recycles connections to prevent stale connections
+# - pool_timeout: Maximum time to wait for a connection from the pool
+# 
+# For pgbouncer compatibility:
+# - statement_cache_size=0 is set in the connection string above
+# - This disables prepared statement caching which can cause issues with pgbouncer
 async_engine = create_async_engine(
     connection_string,
     echo=True,  # Enable SQL query logging for debugging
     pool_pre_ping=True,  # Enable connection health checks
-    pool_size=5,
-    max_overflow=10,
-    pool_recycle=300,  # Recycle connections after 5 minutes
-    pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
-    # For AWS Pooler, we don't need additional connect_args as they're in the connection string
-    # Remove connect_args to avoid conflicts with the connection string parameters
+    pool_size=5,  # Number of connections to keep open in the pool
+    max_overflow=10,  # Maximum number of connections that can be created beyond pool_size
+    pool_recycle=300,  # Recycle connections after 5 minutes to prevent stale connections
+    pool_timeout=30   # Wait 30 seconds before giving up on getting a connection
 )
 
 # Session factories

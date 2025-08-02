@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-// import { supabase } from '@/integrations/supabase/client'; // Supabase removed
 import { useAuth } from './useAuth';
+import { API_ENDPOINTS, getApiUrl } from '@/config/api';
 
 export interface TestCase {
   id: string;
@@ -29,24 +29,43 @@ export function useTestCases(projectId?: string) {
   const { user } = useAuth();
 
   const fetchTestCases = async () => {
-    if (!user) return;
+    if (!user) {
+      console.log('No user found, skipping test cases fetch');
+      return;
+    }
     
     try {
       setLoading(true);
       const token = localStorage.getItem('access_token');
-      let url = `http://127.0.0.1:8001/api/test-cases`;
-      if (projectId) {
-        url += `?project_id=${projectId}`;
-      }
-      const response = await fetch(url, {
+      const url = projectId 
+        ? `${API_ENDPOINTS.TEST_CASES}?project_id=${projectId}`
+        : API_ENDPOINTS.TEST_CASES;
+      
+      const fullUrl = getApiUrl(url);
+      console.log('Fetching test cases from:', fullUrl);
+      console.log('Using token:', token ? 'Token available' : 'No token found');
+      
+      const response = await fetch(fullUrl, {
         headers: {
+          'Content-Type': 'application/json',
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})
-        }
+        },
+        credentials: 'include'  // Important for cookies/sessions if using them
       });
-      if (!response.ok) throw new Error('Failed to fetch test cases');
+      
+      console.log('Test cases response status:', response.status, response.statusText);
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        console.error('Error response:', errorData);
+        throw new Error(errorData.detail || 'Failed to fetch test cases');
+      }
+      
       const data = await response.json();
+      console.log('Test cases data:', data);
       setTestCases(data || []);
     } catch (err) {
+      console.error('Error in fetchTestCases:', err);
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
       setLoading(false);
@@ -56,7 +75,7 @@ export function useTestCases(projectId?: string) {
   const createTestCase = async (testCaseData: Omit<TestCase, 'id' | 'created_at' | 'updated_at' | 'created_by'>) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch('http://127.0.0.1:8001/api/test-cases', {
+      const response = await fetch(getApiUrl(API_ENDPOINTS.TEST_CASES), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +100,7 @@ export function useTestCases(projectId?: string) {
   const updateTestCase = async (id: string, updates: Partial<TestCase>) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8001/api/test-cases/${id}`, {
+const response = await fetch(getApiUrl(`${API_ENDPOINTS.TEST_CASES}/${id}`), {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -103,7 +122,7 @@ export function useTestCases(projectId?: string) {
   const deleteTestCase = async (id: string) => {
     try {
       const token = localStorage.getItem('access_token');
-      const response = await fetch(`http://127.0.0.1:8001/api/test-cases/${id}`, {
+const response = await fetch(getApiUrl(`${API_ENDPOINTS.TEST_CASES}/${id}`), {
         method: 'DELETE',
         headers: {
           ...(token ? { 'Authorization': `Bearer ${token}` } : {})

@@ -3,6 +3,7 @@ import sys
 import logging
 import json
 import traceback
+import uuid  # For generating unique request IDs
 import asyncio
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional, Set, Union
@@ -12,16 +13,83 @@ from sqlalchemy import text, create_engine
 from sqlalchemy.engine import Engine
 from sqlalchemy.orm import Session
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, WebSocket, WebSocketDisconnect, Request, status, BackgroundTasks, Response
+from fastapi.middleware.cors import CORSMiddleware
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
+from app.db.session import get_db
+from app.models.db_models import (
+    Project as DBProject, 
+    User, 
+    Team, 
+    TestCase, 
+    TestStep, 
+    TestPlan, 
+    TestExecution,
+    Comment as DBComment,
+    TestStep,
+    TestPlanTestCase,
+    TeamMember,
+    Environment,
+    Attachment,
+    ActivityLog
+)
+    
+# Configure logging
+if not os.path.exists("logs"):
+    os.makedirs("logs")
+
+# Create a custom formatter
+formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 # Configure root logger
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('app.log')
-    ]
+logger = logging.getLogger()
+
+# Set log level from environment variable or default to INFO
+log_level = os.getenv("LOG_LEVEL", "INFO").upper()
+logger.setLevel(getattr(logging, log_level, logging.INFO))
+
+# Clear any existing handlers
+for handler in logger.handlers[:]:
+    logger.removeHandler(handler)
+
+# Create logs directory if it doesn't exist
+os.makedirs("logs", exist_ok=True)
+
+# Create formatters
+console_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
 )
+
+file_formatter = logging.Formatter(
+    "%(asctime)s - %(name)s - %(levelname)s - %(filename)s:%(lineno)d - %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
+
+# Add console handler
+console_handler = logging.StreamHandler()
+console_handler.setFormatter(console_formatter)
+logger.addHandler(console_handler)
+
+# Add file handler with rotation
+from logging.handlers import RotatingFileHandler
+file_handler = RotatingFileHandler(
+    "logs/app.log", 
+    maxBytes=10*1024*1024,  # 10 MB
+    backupCount=5
+)
+file_handler.setFormatter(file_formatter)
+logger.addHandler(file_handler)
+
+# Log startup message
+logger.info("=" * 80)
+logger.info(f"Application starting with enhanced logging (level: {log_level})")
+logger.info(f"Python version: {sys.version}")
+logger.info(f"Working directory: {os.getcwd()}")
+logger.info("=" * 80)
 
 # Get logger for this module
 logger = logging.getLogger(__name__)
@@ -261,12 +329,13 @@ origins = [
     "http://127.0.0.1:5175",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:8001",
-    "http://127.0.0.1:8001",
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
     "http://localhost:8001",
     "http://127.0.0.1:8001",
     "http://192.168.1.2:5175",  # Network IP for frontend access
-    "http://192.168.1.2:5173"   # Additional port for frontend
+    "http://192.168.1.2:5173",  # Additional port for frontend
+    "http://localhost:5175"     # Ensure localhost with port 5175 is included
 ]
 
 # Access token expiration time in minutes
@@ -288,18 +357,26 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Only allow specified origins
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_methods=["*"],  # Allow all methods for now, can be restricted later
     allow_headers=[
-        "Authorization",
-        "Content-Type",
-        "Accept",
-        "Origin",
-        "X-Requested-With",
-        "X-CSRF-Token"
+        "*",  # Allow all headers for now to debug CORS issues
     ],
-    expose_headers=["Content-Length", "X-Total-Count"],
+    expose_headers=["*"],
     max_age=600  # Cache preflight requests for 10 minutes
 )
+
+# Add middleware to add CORS headers to every response
+@app.middleware("http")
+async def add_cors_headers(request: Request, call_next):
+    response = await call_next(request)
+    origin = request.headers.get('origin')
+    if origin in origins:
+        response.headers['Access-Control-Allow-Origin'] = origin
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS, PATCH'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization, X-Requested-With, X-CSRF-Token, Accept, Origin, Accept-Encoding, Accept-Language, Cache-Control, Connection, DNT, Pragma, Referer, User-Agent'
+        response.headers['Access-Control-Expose-Headers'] = 'Content-Length, X-Total-Count, Content-Range'
+    return response
 
 
 # CORS is now handled by the CORSMiddleware above
@@ -370,7 +447,7 @@ async def websocket_endpoint(websocket: WebSocket, user_id: str):
 async def register(
     request: Request,
     user_data: UserCreate,
-    db: Session = Depends(get_db)
+    db: AsyncSession = Depends(get_db)
 ):
     """
     Register a new user
@@ -385,39 +462,90 @@ async def register(
     - token_type: Bearer token type
     - user: User information
     """
-    logger.info(f"Registration attempt for email: {user_data.email}")
+    request_id = str(uuid.uuid4())
+    logger.info(f"[REGISTER-{request_id}] Starting registration for email: {user_data.email}")
+    logger.debug(f"[REGISTER-{request_id}] Request URL: {request.url}")
+    logger.debug(f"[REGISTER-{request_id}] Request headers: {dict(request.headers)}")
     
     try:
+        # Log the request body if possible
+        body = await request.body()
+        if body:
+            logger.debug(f"[REGISTER-{request_id}] Request body: {body.decode()}")
+    except Exception as e:
+        logger.warning(f"[REGISTER-{request_id}] Could not log request body: {str(e)}")
+    
+    try:
+        # Initialize AuthService with the database session
+        logger.info(f"[REGISTER-{request_id}] Initializing AuthService")
         auth_service = AuthService(db)
         
-        # Validate and create user
-        user = await auth_service.create_user({
+        # Prepare user data dictionary
+        logger.debug(f"[REGISTER-{request_id}] Preparing user data")
+        user_data_dict = {
             "email": user_data.email,
             "password": user_data.password,
             "full_name": user_data.full_name,
             "role": "tester"  # Default role
-        })
+        }
+        logger.info(f"[REGISTER] User data prepared: {user_data_dict}")
+        
+        # Validate and create user
+        logger.info("[REGISTER] Calling auth_service.create_user")
+        user = await auth_service.create_user(user_data_dict)
+        logger.info(f"[REGISTER] User created successfully: {user}")
         
         # Create access token
-        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        access_token = create_access_token(
-            data={"sub": str(user["id"]), "email": user["email"], "role": user["role"]},
-            expires_delta=access_token_expires
-        )
+        logger.info("[REGISTER] Creating access token")
+        try:
+            access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            token_data = {"sub": str(user["id"]), "email": user["email"], "role": user["role"]}
+            logger.info(f"[REGISTER] Token data: {token_data}")
+            
+            access_token = create_access_token(
+                data=token_data,
+                expires_delta=access_token_expires
+            )
+            logger.info("[REGISTER] Access token created successfully")
+            
+            response_data = {
+                "access_token": access_token,
+                "token_type": "bearer",
+                "user": user
+            }
+            logger.info(f"[REGISTER] Registration successful for user: {user['email']}")
+            return response_data
+            
+        except Exception as token_error:
+            logger.error(f"[REGISTER] Error creating access token: {str(token_error)}")
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Error creating access token"
+            )
         
-        return {
-            "access_token": access_token,
-            "token_type": "bearer",
-            "user": user
+    except HTTPException as http_exc:
+        logger.error(f"[REGISTER] HTTP Exception: {str(http_exc.detail) if hasattr(http_exc, 'detail') else str(http_exc)}")
+        logger.debug(f"[REGISTER] HTTP Exception traceback: {traceback.format_exc()}")
+        raise http_exc
+    except Exception as e:
+        error_msg = f"[REGISTER] Unexpected error during registration: {str(e)}"
+        logger.error(error_msg)
+        logger.debug(f"[REGISTER] Error traceback: {traceback.format_exc()}")
+        
+        # Provide more detailed error information in development
+        error_detail = {
+            "detail": "Registration failed due to an unexpected error",
+            "error": str(e),
+            "type": e.__class__.__name__
         }
         
-    except HTTPException:
-        raise
-    except Exception as e:
-        logger.error(f"Registration error: {str(e)}")
+        # Only include traceback in development
+        if os.getenv("ENVIRONMENT", "development").lower() == "development":
+            error_detail["traceback"] = traceback.format_exc()
+            
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="Registration failed"
+            detail=error_detail
         )
 
 @api_router.post("/auth/login", response_model=dict)
@@ -439,11 +567,28 @@ async def login(
     - user: User information
     """
     try:
+        logger.info(f"Login attempt for email: {user_data.email}")
+        logger.info(f"Request headers: {dict(request.headers)}")
+        logger.info(f"Request body: {await request.body()}")
+        
         auth_service = AuthService(db)
         
+        # Log the type of db session
+        logger.info(f"DB session type: {type(db).__name__}")
+        
         # Authenticate user
-        user = await auth_service.authenticate_user(user_data.email, user_data.password)
+        try:
+            user = await auth_service.authenticate_user(user_data.email, user_data.password)
+            logger.info(f"User authentication result: {bool(user)}")
+        except Exception as auth_error:
+            logger.error(f"Error in authenticate_user: {str(auth_error)}", exc_info=True)
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail=f"Authentication error: {str(auth_error)}"
+            )
+            
         if not user:
+            logger.warning(f"Authentication failed for email: {user_data.email}")
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="Incorrect email or password",
@@ -451,17 +596,26 @@ async def login(
             )
         
         # Create access token
-        access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-        access_token = create_access_token(
-            data={"sub": str(user["id"])},  # Keep only the user ID in the token
-            expires_delta=access_token_expires
-        )
+        try:
+            access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+            logger.info(f"Creating access token for user ID: {user.get('id')}")
+            access_token = create_access_token(
+                data={"sub": str(user["id"])},  # Keep only the user ID in the token
+                expires_delta=access_token_expires
+            )
+            logger.info("Access token created successfully")
+        except Exception as token_error:
+            logger.error(f"Error creating access token: {str(token_error)}", exc_info=True)
+            raise HTTPException(
+                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                detail="Error creating access token"
+            )
         
         # Remove sensitive data before returning
         if "hashed_password" in user:
             del user["hashed_password"]
             
-        logger.info(f"User logged in: {user_data.email}")
+        logger.info(f"User logged in successfully: {user_data.email}")
         
         return {
             "access_token": access_token,
@@ -476,7 +630,7 @@ async def login(
         logger.error(f"Unexpected error during login for {user_data.email}: {str(e)}", exc_info=True)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail="An unexpected error occurred during login"
+            detail=f"An unexpected error occurred during login: {str(e)}"
         )
 
 @api_router.get("/auth/me", response_model=dict)
@@ -1259,8 +1413,8 @@ try:
     app.include_router(api_router)
     
     # Include other routers as they become available
-    # app.include_router(test_cases.router, prefix="/test-cases", tags=["Test Cases"])
-    # app.include_router(projects.router, prefix="/projects", tags=["Projects"])
+    app.include_router(projects.router, prefix="/v1/projects", tags=["Projects"])
+    app.include_router(test_cases.router, prefix="/api/v1/test-cases", tags=["Test Cases"])
     
     logger.info("API routers initialized successfully")
 except Exception as e:

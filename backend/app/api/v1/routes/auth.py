@@ -70,6 +70,26 @@ async def login(
     logger.info(f"Login attempt for user: {form_data.username}")
     logger.debug(f"Form data: {log_form_data}")
     
+    # Log the actual form data received
+    try:
+        body = await request.body()
+        logger.debug(f"Raw request body: {body.decode()}")
+    except Exception as e:
+        logger.error(f"Error reading request body: {str(e)}")
+    
+    # Validate form data
+    if not form_data.username or not form_data.password:
+        logger.error("Missing username or password in form data")
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+            detail="Username and password are required",
+        )
+    
+    # Log the type of form data
+    logger.debug(f"Form data type: {type(form_data).__name__}")
+    logger.debug(f"Form data fields: {form_data.__dict__.keys() if hasattr(form_data, '__dict__') else 'No __dict__'}")
+    logger.debug(f"Form data values: {form_data.dict() if hasattr(form_data, 'dict') else 'No dict method'}")
+    
     # Get database session
     db = None
     try:
@@ -182,27 +202,41 @@ async def register(
     """
     Create new user
     """
-    # Check if user already exists
-    result = await db.execute(
-        select(User).where(User.email == user_in.email)
-    )
-    if result.scalars().first():
-        raise HTTPException(
-            status_code=400,
-            detail="The user with this email already exists in the system.",
+    try:
+        # Check if user already exists
+        result = await db.execute(
+            select(User).where(User.email == user_in.email)
         )
-    
-    # Create new user
-    user = User(
-        email=user_in.email,
-        hashed_password=get_password_hash(user_in.password),
-        full_name=user_in.full_name,
-        is_active=True,
-        is_superuser=False,
-    )
-    
-    # Add and commit the new user
-    db.add(user)
-    await db.commit()
-    await db.refresh(user)
-    return user
+        if result.scalars().first():
+            raise HTTPException(
+                status_code=400,
+                detail="The user with this email already exists in the system.",
+            )
+        
+        # Create new user
+        user = User(
+            email=user_in.email,
+            hashed_password=get_password_hash(user_in.password),
+            full_name=user_in.full_name,
+            is_active=True,
+            is_superuser=False,
+        )
+        
+        # Add and commit the new user
+        db.add(user)
+        await db.commit()
+        await db.refresh(user)
+        
+        return user
+        
+    except HTTPException as he:
+        await db.rollback()
+        raise he
+    except Exception as e:
+        await db.rollback()
+        logger.error(f"Error in user registration: {str(e)}")
+        logger.error(traceback.format_exc())
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to create user: {str(e)}"
+        )

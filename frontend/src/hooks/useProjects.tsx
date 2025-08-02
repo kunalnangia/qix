@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from './useAuth';
+import { API_ENDPOINTS, getApiUrl } from '@/config/api';
 
 export interface Project {
   id: string;
@@ -31,7 +32,6 @@ export function useProjects() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { user } = useAuth();
-  const API_BASE_URL = 'http://localhost:8001/api/v1';
 
   const getAuthHeaders = useCallback(() => {
     const token = localStorage.getItem('access_token');
@@ -46,7 +46,7 @@ export function useProjects() {
     
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/projects`, {
+      const response = await fetch(getApiUrl(API_ENDPOINTS.PROJECTS), {
         headers: getAuthHeaders()
       });
       
@@ -69,7 +69,7 @@ export function useProjects() {
   const createProject = async (projectData: ProjectCreate) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/projects`, {
+      const response = await fetch(getApiUrl(API_ENDPOINTS.PROJECTS), {
         method: 'POST',
         headers: getAuthHeaders(),
         body: JSON.stringify({
@@ -98,7 +98,7 @@ export function useProjects() {
   const updateProject = async ({ id, ...updateData }: ProjectUpdate) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+      const response = await fetch(getApiUrl(`${API_ENDPOINTS.PROJECTS}/${id}`), {
         method: 'PUT',
         headers: getAuthHeaders(),
         body: JSON.stringify(updateData)
@@ -124,7 +124,7 @@ export function useProjects() {
   const deleteProject = async (id: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+      const response = await fetch(getApiUrl(`${API_ENDPOINTS.PROJECTS}/${id}`), {
         method: 'DELETE',
         headers: getAuthHeaders()
       });
@@ -149,7 +149,7 @@ export function useProjects() {
   const getProjectById = useCallback(async (id: string) => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/projects/${id}`, {
+      const response = await fetch(getApiUrl(`${API_ENDPOINTS.PROJECTS}/${id}`), {
         headers: getAuthHeaders()
       });
       
