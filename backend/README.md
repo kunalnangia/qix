@@ -2,52 +2,54 @@
 
 [![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
 [![FastAPI](https://img.shields.io/badge/FastAPI-0.95.0-009688.svg)](https://fastapi.tiangolo.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-13+-336791.svg)](https://www.postgresql.org/)
+[![Redis](https://img.shields.io/badge/Redis-6.0+-DC382D.svg)](https://redis.io/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
-A modern, AI-powered test automation platform built with FastAPI, PostgreSQL, and Supabase. EmergentIntelliTest helps teams manage test cases, execute tests, and generate intelligent test scenarios using AI.
+A modern, AI-powered test automation platform built with FastAPI, PostgreSQL, and Redis. EmergentIntelliTest helps teams manage test cases, execute tests, and generate intelligent test scenarios using AI.
 
 ## ✨ Features
 
-- **AI-Powered Test Generation**
-  - Automatically generate test cases from requirements
-  - Smart test step suggestions
-  - Natural language processing for test creation
+### AI-Powered Testing
+- **Smart Test Generation**: Automatically generate test cases from requirements using AI
+- **Natural Language Processing**: Create and modify tests using simple descriptions
+- **Test Optimization**: AI-powered test case optimization and prioritization
 
-- **Comprehensive Test Management**
-  - Hierarchical test organization
-  - Version control for test cases
-  - Tagging and categorization
+### Test Management
+- **Structured Organization**: Hierarchical test case management
+- **Version Control**: Track changes to test cases over time
+- **Advanced Search**: Powerful search and filtering capabilities
 
-- **Powerful Execution Engine**
-  - Parallel test execution
-  - Detailed execution history
-  - Real-time status updates
+### Execution Engine
+- **Parallel Execution**: Run multiple test cases simultaneously
+- **Real-time Monitoring**: Track test execution in real-time
+- **Detailed Logging**: Comprehensive execution logs for debugging
 
-- **Collaboration Tools**
-  - Team workspaces
-  - Comments and discussions
-  - Role-based access control
+### Integration
+- **RESTful API**: Fully documented API for integration with other tools
+- **Webhook Support**: Get notified about test execution events
+- **CI/CD Ready**: Seamless integration with popular CI/CD pipelines
 
-- **Analytics & Reporting**
-  - Test coverage analysis
-  - Execution trends
-  - Customizable dashboards
+### Security
+- **JWT Authentication**: Secure API access with JSON Web Tokens
+- **Role-based Access Control**: Fine-grained permissions system
+- **Data Encryption**: Sensitive data protection at rest and in transit
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
-- Python 3.8+
-- PostgreSQL 12+
-- Redis (for caching and background tasks)
-- [Poetry](https://python-poetry.org/) (recommended)
+- Python 3.8 or higher
+- PostgreSQL 13 or higher
+- Redis 6.0 or higher (for caching and background tasks)
+- [Poetry](https://python-poetry.org/) (recommended) or pip
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-org/emergent-intellitest.git
-   cd emergent-intellitest/backend
+   git clone https://github.com/kunalnangia/qix.git
+   cd qix/backend
    ```
 
 2. **Set up environment variables**

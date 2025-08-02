@@ -1,29 +1,38 @@
-# IntelliTest AI Platform - Quick Start Guide
+# EmergentIntelliTest - Quick Start Guide
 
 ## 🚀 Getting Started
 
 ### Prerequisites
 
 1. **Python 3.8+** - [Download here](https://python.org/downloads)
-2. **PostgreSQL** - [Installation guide](https://postgresql.org/download)
-3. **Git** - [Download here](https://git-scm.com/downloads)
+2. **PostgreSQL 13+** - [Installation guide](https://postgresql.org/download)
+3. **Redis 6.0+** - [Installation guide](https://redis.io/download)
+4. **Git** - [Download here](https://git-scm.com/downloads)
+5. **Poetry** (recommended) - [Installation guide](https://python-poetry.org/docs/)
 
-### 📦 Installation Steps
+## 🛠️ Installation
 
-#### 1. Clone and Navigate to Project
+### 1. Clone the Repository
+
 ```bash
-cd c:\Users\kunal\Downloads\EmergentIntelliTest-main\backend
+git clone https://github.com/kunalnangia/qix.git
+cd qix/backend
 ```
 
-#### 2. Run Automated Setup
+### 2. Automated Setup (Recommended)
+
+Run the setup script to configure everything automatically:
+
 ```bash
 python setup.py
 ```
 
-#### 3. Manual Setup (if automated setup fails)
+### 3. Manual Setup
 
-##### Create Virtual Environment
+#### Create and Activate Virtual Environment
+
 ```bash
+# Create virtual environment
 python -m venv .venv
 
 # Activate virtual environment
@@ -33,21 +42,63 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-##### Install Dependencies
+#### Install Dependencies
+
+Using Poetry (recommended):
+```bash
+poetry install
+```
+
+Or using pip:
 ```bash
 pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-##### Setup Database
+#### Configure Environment Variables
+
+Create a `.env` file in the backend directory with the following variables:
+
+```env
+# Database
+DATABASE_URL=postgresql://user:password@localhost:5432/intellitest
+
+# Redis
+REDIS_URL=redis://localhost:6379/0
+
+# JWT
+SECRET_KEY=your-secret-key-here
+ALGORITHM=HS256
+ACCESS_TOKEN_EXPIRE_MINUTES=30
+
+# CORS
+FRONTEND_URL=http://localhost:3000
+```
+
+#### Initialize Database
+
 ```bash
-# Create PostgreSQL database
+# Create PostgreSQL database (if not exists)
 createdb intellitest
 
-# Initialize migrations
-alembic init alembic
-alembic revision --autogenerate -m "Initial migration"
+# Run database migrations
 alembic upgrade head
+```
+
+#### Start the Development Server
+
+```bash
+uvicorn app.main:app --reload
+```
+
+The API will be available at `http://localhost:8001`
+
+## 📚 API Documentation
+
+Once the server is running, you can access:
+
+- **Swagger UI**: `http://localhost:8001/docs`
+- **ReDoc**: `http://localhost:8001/redoc`
 ```
 
 #### 4. Configure Environment
