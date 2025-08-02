@@ -3,12 +3,33 @@ import sys
 import logging
 import json
 import traceback
+import asyncio
 from datetime import datetime, timedelta
 from typing import List, Dict, Any, Optional, Set, Union
 from contextlib import asynccontextmanager
 from pathlib import Path
-from sqlalchemy import text
+from sqlalchemy import text, create_engine
+from sqlalchemy.engine import Engine
+from sqlalchemy.orm import Session
 from fastapi import FastAPI, APIRouter, HTTPException, Depends, WebSocket, WebSocketDisconnect, Request, status, BackgroundTasks, Response
+
+# Configure root logger
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('app.log')
+    ]
+)
+
+# Get logger for this module
+logger = logging.getLogger(__name__)
+
+# Enable SQLAlchemy logging
+logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
+logging.getLogger('sqlalchemy.pool').setLevel(logging.DEBUG)
+logging.getLogger('sqlalchemy.orm').setLevel(logging.INFO)
 
 
 # Add the parent directory to the Python path
@@ -38,15 +59,39 @@ async def initialize_database():
     max_retries = 3
     for attempt in range(max_retries):
         try:
+            logger.info(f"Attempting to connect to database (Attempt {attempt + 1}/{max_retries})")
+            logger.debug(f"Using connection string: {os.getenv('DATABASE_URL')}")
+            
             with sync_engine.connect() as conn:
-                # Your existing database initialization code
-                logger.info("Database connected successfully")
-                break
-        except OperationalError as e:
-            if "timeout" in str(e).lower() and attempt < max_retries - 1:
-                logger.warning(f"Connection timeout, retrying... ({attempt + 1}/{max_retries})")
-                await asyncio.sleep(5)
+                # Test the connection with a simple query
+                result = conn.execute(text("SELECT version();"))
+                version = result.scalar()
+                logger.info(f"Successfully connected to PostgreSQL version: {version}")
+                
+                # Check if tables exist
+                table_check = conn.execute(text("""
+                    SELECT table_name 
+                    FROM information_schema.tables 
+                    WHERE table_schema = 'public';
+                """))
+                tables = [row[0] for row in table_check]
+                logger.info(f"Found {len(tables)} tables in the database")
+                if tables:
+                    logger.debug(f"Tables: {', '.join(tables)}")
+                
+                logger.info("Database connection test successful")
+                return True
+                
+        except Exception as e:
+            logger.error(f"Database connection error (Attempt {attempt + 1}/{max_retries}): {str(e)}")
+            logger.debug(f"Error details: {traceback.format_exc()}")
+            
+            if attempt < max_retries - 1:
+                wait_time = 5 * (attempt + 1)  # Exponential backoff
+                logger.warning(f"Retrying in {wait_time} seconds...")
+                await asyncio.sleep(wait_time)
             else:
+                logger.critical("Max retries reached. Could not connect to database.")
                 raise
 
 # Import API routers
@@ -206,7 +251,7 @@ async def lifespan(app: FastAPI):
     yield
     logger.info("Application shutdown")
 
-# Configure CORS with all necessary origins
+# Configure CORS with specific allowed origins
 origins = [
     "http://localhost:5173",
     "http://localhost:5174", 
@@ -219,7 +264,9 @@ origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "http://localhost:8001",
-    "http://127.0.0.1:8001"
+    "http://127.0.0.1:8001",
+    "http://192.168.1.2:5175",  # Network IP for frontend access
+    "http://192.168.1.2:5173"   # Additional port for frontend
 ]
 
 # Access token expiration time in minutes
@@ -236,14 +283,22 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Add CORS middleware with comprehensive configuration
+# Add CORS middleware with specific configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=origins,  # Only allow specified origins
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allow_headers=["*"],
-    expose_headers=["*"]
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"],
+    allow_headers=[
+        "Authorization",
+        "Content-Type",
+        "Accept",
+        "Origin",
+        "X-Requested-With",
+        "X-CSRF-Token"
+    ],
+    expose_headers=["Content-Length", "X-Total-Count"],
+    max_age=600  # Cache preflight requests for 10 minutes
 )
 
 

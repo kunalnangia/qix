@@ -52,18 +52,48 @@ engine = create_engine(
 
 # Create async engine for FastAPI with asyncpg
 # Note: asyncpg requires connection parameters in the connection string
-connection_string = (
-    str(DATABASE_URL)
-    .replace("postgresql://", "postgresql+asyncpg://")
-    + "?connect_timeout=10"
-    + "&keepalives=1"
-    + "&keepalives_idle=30"
-    + "&keepalives_interval=10"
-    + "&keepalives_count=5"
-    + "&command_timeout=60"
-    + "&application_name=intellitest_backend"
-    + "&statement_timeout=60000"
-)
+# For AWS Pooler, we need to ensure the username is properly formatted
+connection_string = str(DATABASE_URL)
+
+# If using AWS Pooler, we need to modify the connection string for asyncpg
+if "pooler.supabase.com" in connection_string:
+    # Extract the username and password from the connection string
+    from urllib.parse import urlparse, parse_qs, urlunparse, urlencode
+    
+    # Parse the connection URL
+    parsed = urlparse(connection_string)
+    
+    # Get the username and password
+    username = parsed.username
+    password = parsed.password
+    
+    # Reconstruct the connection string for asyncpg
+    connection_string = f"postgresql+asyncpg://{username}:{password}@{parsed.hostname}:{parsed.port}{parsed.path}"
+    
+    # Add query parameters
+    query_params = {
+        'connect_timeout': '10',
+        'keepalives': '1',
+        'keepalives_idle': '30',
+        'keepalives_interval': '10',
+        'keepalives_count': '5',
+        'command_timeout': '60',
+        'application_name': 'intellitest_backend',
+        'statement_timeout': '60000',
+        'sslmode': 'require'  # Important for Supabase connections
+    }
+    
+    # Add any existing query parameters
+    existing_params = parse_qs(parsed.query)
+    for key, value in existing_params.items():
+        if key not in query_params:  # Don't override our settings
+            query_params[key] = value[0] if value else ''
+    
+    # Rebuild the connection string with query parameters
+    connection_string = f"{connection_string}?{urlencode(query_params)}"
+else:
+    # For non-AWS Pooler connections, use the standard approach
+    connection_string = connection_string.replace("postgresql://", "postgresql+asyncpg://")
 
 async_engine = create_async_engine(
     connection_string,
@@ -73,13 +103,8 @@ async_engine = create_async_engine(
     max_overflow=10,
     pool_recycle=300,  # Recycle connections after 5 minutes
     pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
-    # No connect_args for asyncpg - all parameters should be in the connection string
-    connect_args={
-        'server_settings': {
-            'application_name': 'intellitest_backend',
-            'statement_timeout': '60000'  # 60 seconds statement timeout
-        }
-    }
+    # For AWS Pooler, we don't need additional connect_args as they're in the connection string
+    # Remove connect_args to avoid conflicts with the connection string parameters
 )
 
 # Session factories

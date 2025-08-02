@@ -17,7 +17,8 @@ load_dotenv(env_path)
 
 # Import database configuration
 try:
-    from backend.database_postgres import engine, Base
+    sys.path.append(os.path.join(os.path.dirname(__file__), 'backend'))
+    from database.database_postgres import engine, Base
 except ImportError:
     print("Error: Could not import database configuration. Make sure you're in the project root directory.")
     sys.exit(1)
