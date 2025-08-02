@@ -2,7 +2,7 @@ import requests
 import sys
 
 def test_backend():
-    base_url = "http://localhost:8000/api/v1"
+    base_url = "http://localhost:8001/api/v1"
     
     # Test health check
     print("Testing health check...")

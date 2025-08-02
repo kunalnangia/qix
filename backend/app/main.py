@@ -261,8 +261,8 @@ origins = [
     "http://127.0.0.1:5175",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
+    "http://localhost:8001",
+    "http://127.0.0.1:8001",
     "http://localhost:8001",
     "http://127.0.0.1:8001",
     "http://192.168.1.2:5175",  # Network IP for frontend access

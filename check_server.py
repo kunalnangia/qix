@@ -3,7 +3,7 @@ import requests
 import time
 from datetime import datetime
 
-def check_port(host='localhost', port=8000, timeout=5):
+def check_port(host='localhost', port=8001, timeout=5):
     """Check if a port is open on the specified host"""
     try:
         socket.setdefaulttimeout(timeout)
@@ -35,17 +35,17 @@ def check_http_endpoint(url, timeout=5):
 def main():
     print("Checking server status...")
     
-    # Check if port 8000 is open
+    # Check if port 8001 is open
     port_open = check_port()
-    print(f"Port 8000 is {'open' if port_open else 'closed'}")
+    print(f"Port 8001 is {'open' if port_open else 'closed'}")
     
     if not port_open:
-        print("Server is not running on port 8000. Please start the server first.")
+        print("Server is not running on port 8001. Please start the server first.")
         return
     
     # Check health endpoint
     print("\nTesting health endpoint...")
-    health_url = "http://localhost:8000/health"
+    health_url = "http://localhost:8001/health"
     health_status = check_http_endpoint(health_url)
     
     if health_status['status'] == 'up':
@@ -55,7 +55,7 @@ def main():
     
     # Check API version endpoint
     print("\nTesting API version endpoint...")
-    api_version_url = "http://localhost:8000/api/version"
+    api_version_url = "http://localhost:8001/api/version"
     api_status = check_http_endpoint(api_version_url)
     
     if api_status['status'] == 'up':
@@ -65,7 +65,7 @@ def main():
     
     # Check root endpoint
     print("\nTesting root endpoint...")
-    root_url = "http://localhost:8000/"
+    root_url = "http://localhost:8001/"
     root_status = check_http_endpoint(root_url)
     
     if root_status['status'] == 'up':

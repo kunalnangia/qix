@@ -62,8 +62,8 @@ This document provides detailed instructions for deploying the EmergentIntelliTe
    ```
 
 8. **Access the application**
-   - API: http://localhost:8000
-   - Documentation: http://localhost:8000/docs
+   - API: http://localhost:8001
+   - Documentation: http://localhost:8001/docs
 
 ## Production Deployment
 

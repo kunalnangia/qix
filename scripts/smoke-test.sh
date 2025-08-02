@@ -9,7 +9,7 @@ RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 # Default values
-API_URL="http://localhost:8000/api/v1"
+API_URL="http://localhost:8001/api/v1"
 
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do

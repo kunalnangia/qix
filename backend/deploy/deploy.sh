@@ -86,7 +86,7 @@ User=$APP_USER
 Group=$APP_GROUP
 WorkingDirectory=$APP_DIR
 Environment="PATH=$VENV_DIR/bin"
-ExecStart=$VENV_DIR/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+ExecStart=$VENV_DIR/bin/uvicorn app.main:app --host 0.0.0.0 --port 8001 --workers 4
 Restart=always
 RestartSec=5
 
@@ -122,8 +122,8 @@ SERVICE_STATUS=$(systemctl is-active $SERVICE_NAME)
 if [ "$SERVICE_STATUS" = "active" ]; then
     echo -e "${GREEN}✅ $APP_NAME is now running!${NC}"
     echo -e "\n${GREEN}✨ Deployment completed successfully!${NC}"
-    echo -e "\nApplication URL: http://your-server-ip:8000"
-    echo -e "API Documentation: http://your-server-ip:8000/docs"
+    echo -e "\nApplication URL: http://your-server-ip:8001"
+    echo -e "API Documentation: http://your-server-ip:8001/docs"
     echo -e "\nView logs with: ${YELLOW}journalctl -u $SERVICE_NAME -f${NC}"
 else
     echo -e "${RED}❌ Failed to start $APP_NAME service${NC}"

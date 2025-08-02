@@ -14374,3 +14374,1588 @@ sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to serve
 
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
 
+2025-08-02 17:30:33,142 - app.db.session - INFO - Loading environment from: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+2025-08-02 17:30:33,147 - app.db.session - INFO - Database URL configured
+2025-08-02 17:30:33,258 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,258 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(assigned_test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,259 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(activity_logs, _RelationshipDeclared)
+2025-08-02 17:30:33,259 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:30:33,259 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:30:33,260 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_projects, _RelationshipDeclared)
+2025-08-02 17:30:33,260 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(team_memberships, _RelationshipDeclared)
+2025-08-02 17:30:33,260 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(uploaded_attachments, _RelationshipDeclared)
+2025-08-02 17:30:33,261 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(id, Column)
+2025-08-02 17:30:33,262 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(email, Column)
+2025-08-02 17:30:33,263 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(full_name, Column)
+2025-08-02 17:30:33,263 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(hashed_password, Column)
+2025-08-02 17:30:33,264 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(role, Column)
+2025-08-02 17:30:33,265 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(is_active, Column)
+2025-08-02 17:30:33,266 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_at, Column)
+2025-08-02 17:30:33,269 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,272 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) Identified primary key columns: OrderedSet([Column('id', String(), table=<users>, primary_key=True, nullable=False, default=CallableColumnDefault(<function User.<lambda> at 0x000002526EF693A0>))])
+2025-08-02 17:30:33,272 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) constructed
+2025-08-02 17:30:33,276 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:30:33,276 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:30:33,277 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,277 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:30:33,278 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(environments, _RelationshipDeclared)
+2025-08-02 17:30:33,284 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(id, Column)
+2025-08-02 17:30:33,284 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(name, Column)
+2025-08-02 17:30:33,290 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(description, Column)
+2025-08-02 17:30:33,290 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_by, Column)
+2025-08-02 17:30:33,291 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team_id, Column)
+2025-08-02 17:30:33,292 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(is_active, Column)
+2025-08-02 17:30:33,295 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_at, Column)
+2025-08-02 17:30:33,295 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) Identified primary key columns: OrderedSet([Column('id', String(), table=<projects>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Project.<lambda> at 0x000002526F204E00>))])
+2025-08-02 17:30:33,297 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) constructed
+2025-08-02 17:30:33,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:30:33,302 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(id, Column)
+2025-08-02 17:30:33,303 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case_id, Column)
+2025-08-02 17:30:33,305 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(step_number, Column)
+2025-08-02 17:30:33,306 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(description, Column)
+2025-08-02 17:30:33,306 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(expected_result, Column)
+2025-08-02 17:30:33,306 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(actual_result, Column)
+2025-08-02 17:30:33,308 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(status, Column)
+2025-08-02 17:30:33,309 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_steps>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestStep.<lambda> at 0x000002526F206A20>))])
+2025-08-02 17:30:33,310 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) constructed
+2025-08-02 17:30:33,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:30:33,318 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:30:33,318 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assignee, _RelationshipDeclared)
+2025-08-02 17:30:33,319 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(steps, _RelationshipDeclared)
+2025-08-02 17:30:33,319 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:30:33,319 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:30:33,320 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:30:33,320 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,320 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(id, Column)
+2025-08-02 17:30:33,321 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(title, Column)
+2025-08-02 17:30:33,322 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(description, Column)
+2025-08-02 17:30:33,322 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project_id, Column)
+2025-08-02 17:30:33,322 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_type, Column)
+2025-08-02 17:30:33,323 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(priority, Column)
+2025-08-02 17:30:33,324 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(status, Column)
+2025-08-02 17:30:33,324 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(expected_result, Column)
+2025-08-02 17:30:33,325 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_by, Column)
+2025-08-02 17:30:33,325 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assigned_to, Column)
+2025-08-02 17:30:33,326 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(tags, Column)
+2025-08-02 17:30:33,326 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(ai_generated, Column)
+2025-08-02 17:30:33,327 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(self_healing_enabled, Column)
+2025-08-02 17:30:33,327 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(prerequisites, Column)
+2025-08-02 17:30:33,328 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_data, Column)
+2025-08-02 17:30:33,328 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(automation_config, Column)
+2025-08-02 17:30:33,329 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_at, Column)
+2025-08-02 17:30:33,330 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,330 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestCase.<lambda> at 0x000002526F207A60>))])
+2025-08-02 17:30:33,331 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) constructed
+2025-08-02 17:30:33,334 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:30:33,334 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:30:33,335 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,335 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:30:33,336 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(id, Column)
+2025-08-02 17:30:33,336 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(name, Column)
+2025-08-02 17:30:33,336 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(description, Column)
+2025-08-02 17:30:33,337 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project_id, Column)
+2025-08-02 17:30:33,337 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_by, Column)
+2025-08-02 17:30:33,337 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(status, Column)
+2025-08-02 17:30:33,338 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_start, Column)
+2025-08-02 17:30:33,338 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_end, Column)
+2025-08-02 17:30:33,338 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_at, Column)
+2025-08-02 17:30:33,339 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,340 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plans>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlan.<lambda> at 0x000002526F233380>))])
+2025-08-02 17:30:33,340 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) constructed
+2025-08-02 17:30:33,345 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:30:33,346 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:30:33,346 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executor, _RelationshipDeclared)
+2025-08-02 17:30:33,346 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment, _RelationshipDeclared)
+2025-08-02 17:30:33,346 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(id, Column)
+2025-08-02 17:30:33,347 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case_id, Column)
+2025-08-02 17:30:33,349 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan_id, Column)
+2025-08-02 17:30:33,349 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executed_by, Column)
+2025-08-02 17:30:33,349 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment_id, Column)
+2025-08-02 17:30:33,350 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(status, Column)
+2025-08-02 17:30:33,351 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(started_at, Column)
+2025-08-02 17:30:33,352 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(completed_at, Column)
+2025-08-02 17:30:33,352 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(duration, Column)
+2025-08-02 17:30:33,352 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(result, Column)
+2025-08-02 17:30:33,352 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(logs, Column)
+2025-08-02 17:30:33,353 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(screenshots, Column)
+2025-08-02 17:30:33,353 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(error_message, Column)
+2025-08-02 17:30:33,354 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(ai_analysis, Column)
+2025-08-02 17:30:33,354 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(created_at, Column)
+2025-08-02 17:30:33,354 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,354 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_executions>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestExecution.<lambda> at 0x000002526F25D300>))])
+2025-08-02 17:30:33,354 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) constructed
+2025-08-02 17:30:33,358 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:30:33,361 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:30:33,362 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment, _RelationshipDeclared)
+2025-08-02 17:30:33,362 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(replies, _RelationshipDeclared)
+2025-08-02 17:30:33,363 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(id, Column)
+2025-08-02 17:30:33,363 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case_id, Column)
+2025-08-02 17:30:33,364 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_id, Column)
+2025-08-02 17:30:33,364 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_name, Column)
+2025-08-02 17:30:33,365 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(comment_type, Column)
+2025-08-02 17:30:33,365 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(content, Column)
+2025-08-02 17:30:33,365 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment_id, Column)
+2025-08-02 17:30:33,367 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(resolved, Column)
+2025-08-02 17:30:33,368 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(created_at, Column)
+2025-08-02 17:30:33,369 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,370 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) Identified primary key columns: OrderedSet([Column('id', String(), table=<comments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Comment.<lambda> at 0x000002526F25F7E0>))])
+2025-08-02 17:30:33,371 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) constructed
+2025-08-02 17:30:33,373 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(members, _RelationshipDeclared)
+2025-08-02 17:30:33,374 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(projects, _RelationshipDeclared)
+2025-08-02 17:30:33,375 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(id, Column)
+2025-08-02 17:30:33,376 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(name, Column)
+2025-08-02 17:30:33,376 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(description, Column)
+2025-08-02 17:30:33,376 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_by, Column)
+2025-08-02 17:30:33,377 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_at, Column)
+2025-08-02 17:30:33,377 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,378 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) Identified primary key columns: OrderedSet([Column('id', String(), table=<teams>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Team.<lambda> at 0x000002526F2818A0>))])
+2025-08-02 17:30:33,378 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) constructed
+2025-08-02 17:30:33,380 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:30:33,381 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:30:33,381 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(id, Column)
+2025-08-02 17:30:33,382 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team_id, Column)
+2025-08-02 17:30:33,382 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user_id, Column)
+2025-08-02 17:30:33,383 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(role, Column)
+2025-08-02 17:30:33,383 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(joined_at, Column)
+2025-08-02 17:30:33,384 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) Identified primary key columns: OrderedSet([Column('id', String(), table=<team_members>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TeamMember.<lambda> at 0x000002526F282C00>))])
+2025-08-02 17:30:33,384 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) constructed
+2025-08-02 17:30:33,388 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:30:33,388 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:30:33,390 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(id, Column)
+2025-08-02 17:30:33,392 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(name, Column)
+2025-08-02 17:30:33,392 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(description, Column)
+2025-08-02 17:30:33,393 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(base_url, Column)
+2025-08-02 17:30:33,394 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project_id, Column)
+2025-08-02 17:30:33,394 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(is_active, Column)
+2025-08-02 17:30:33,395 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(variables, Column)
+2025-08-02 17:30:33,396 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(created_at, Column)
+2025-08-02 17:30:33,397 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(updated_at, Column)
+2025-08-02 17:30:33,398 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) Identified primary key columns: OrderedSet([Column('id', String(), table=<environments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Environment.<lambda> at 0x000002526F283F60>))])
+2025-08-02 17:30:33,398 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) constructed
+2025-08-02 17:30:33,401 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploader, _RelationshipDeclared)
+2025-08-02 17:30:33,401 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(id, Column)
+2025-08-02 17:30:33,402 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_name, Column)
+2025-08-02 17:30:33,403 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_path, Column)
+2025-08-02 17:30:33,403 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_size, Column)
+2025-08-02 17:30:33,404 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_type, Column)
+2025-08-02 17:30:33,404 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_type, Column)
+2025-08-02 17:30:33,404 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_id, Column)
+2025-08-02 17:30:33,405 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploaded_by, Column)
+2025-08-02 17:30:33,405 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(description, Column)
+2025-08-02 17:30:33,405 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(created_at, Column)
+2025-08-02 17:30:33,406 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) Identified primary key columns: OrderedSet([Column('id', String(), table=<attachments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Attachment.<lambda> at 0x000002526F2A9620>))])
+2025-08-02 17:30:33,407 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) constructed
+2025-08-02 17:30:33,410 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:30:33,411 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:30:33,411 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:30:33,411 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(id, Column)
+2025-08-02 17:30:33,412 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan_id, Column)
+2025-08-02 17:30:33,413 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case_id, Column)
+2025-08-02 17:30:33,413 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(order, Column)
+2025-08-02 17:30:33,414 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(is_mandatory, Column)
+2025-08-02 17:30:33,415 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_at, Column)
+2025-08-02 17:30:33,415 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_by, Column)
+2025-08-02 17:30:33,415 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plan_test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlanTestCase.<lambda> at 0x000002526F2AA8E0>))])
+2025-08-02 17:30:33,416 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) constructed
+2025-08-02 17:30:33,418 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:30:33,419 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(id, Column)
+2025-08-02 17:30:33,419 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_id, Column)
+2025-08-02 17:30:33,420 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_name, Column)
+2025-08-02 17:30:33,420 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(action, Column)
+2025-08-02 17:30:33,420 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_type, Column)
+2025-08-02 17:30:33,421 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_id, Column)
+2025-08-02 17:30:33,421 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_name, Column)
+2025-08-02 17:30:33,422 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(details, Column)
+2025-08-02 17:30:33,423 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(ip_address, Column)
+2025-08-02 17:30:33,423 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_agent, Column)
+2025-08-02 17:30:33,423 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(created_at, Column)
+2025-08-02 17:30:33,424 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) Identified primary key columns: OrderedSet([Column('id', String(), table=<activity_logs>, primary_key=True, nullable=False, default=CallableColumnDefault(<function ActivityLog.<lambda> at 0x000002526F2CC540>))])
+2025-08-02 17:30:33,424 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) constructed
+2025-08-02 17:30:33,705 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-08-02 17:30:33,707 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-08-02 17:30:33,709 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-08-02 17:30:33,722 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-08-02 17:30:35,012 - app.main - INFO - Initializing API routers...
+2025-08-02 17:30:35,029 - app.main - INFO - API routers initialized successfully
+2025-08-02 17:30:35,033 - app.main - INFO - Starting database initialization...
+2025-08-02 17:30:35,599 - sqlalchemy.pool.impl.QueuePool - DEBUG - Error on connect(): connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+2025-08-02 17:30:35,604 - app.main - ERROR - Error initializing database: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-02 17:30:35,614 - app.main - ERROR - Traceback (most recent call last):
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\app\main.py", line 206, in lifespan
+    with sync_engine.connect() as conn:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-08-02 17:31:23,155 - app.db.session - INFO - Loading environment from: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+2025-08-02 17:31:23,158 - app.db.session - INFO - Database URL configured
+2025-08-02 17:31:23,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(assigned_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(activity_logs, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_projects, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(team_memberships, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(uploaded_attachments, _RelationshipDeclared)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(id, Column)
+2025-08-02 17:31:23,231 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(email, Column)
+2025-08-02 17:31:23,235 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(full_name, Column)
+2025-08-02 17:31:23,235 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(hashed_password, Column)
+2025-08-02 17:31:23,235 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(role, Column)
+2025-08-02 17:31:23,235 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(is_active, Column)
+2025-08-02 17:31:23,237 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_at, Column)
+2025-08-02 17:31:23,237 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,237 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) Identified primary key columns: OrderedSet([Column('id', String(), table=<users>, primary_key=True, nullable=False, default=CallableColumnDefault(<function User.<lambda> at 0x000001C7BE07D3A0>))])
+2025-08-02 17:31:23,237 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) constructed
+2025-08-02 17:31:23,240 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:23,241 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:31:23,241 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,242 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:31:23,243 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(environments, _RelationshipDeclared)
+2025-08-02 17:31:23,243 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(id, Column)
+2025-08-02 17:31:23,244 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(name, Column)
+2025-08-02 17:31:23,245 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(description, Column)
+2025-08-02 17:31:23,245 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_by, Column)
+2025-08-02 17:31:23,246 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team_id, Column)
+2025-08-02 17:31:23,246 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(is_active, Column)
+2025-08-02 17:31:23,246 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_at, Column)
+2025-08-02 17:31:23,246 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,248 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) Identified primary key columns: OrderedSet([Column('id', String(), table=<projects>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Project.<lambda> at 0x000001C7BE310E00>))])
+2025-08-02 17:31:23,248 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) constructed
+2025-08-02 17:31:23,250 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:23,250 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(id, Column)
+2025-08-02 17:31:23,250 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case_id, Column)
+2025-08-02 17:31:23,252 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(step_number, Column)
+2025-08-02 17:31:23,253 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(description, Column)
+2025-08-02 17:31:23,253 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(expected_result, Column)
+2025-08-02 17:31:23,253 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(actual_result, Column)
+2025-08-02 17:31:23,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(status, Column)
+2025-08-02 17:31:23,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_steps>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestStep.<lambda> at 0x000001C7BE312A20>))])
+2025-08-02 17:31:23,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) constructed
+2025-08-02 17:31:23,261 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:23,261 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:23,263 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assignee, _RelationshipDeclared)
+2025-08-02 17:31:23,263 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(steps, _RelationshipDeclared)
+2025-08-02 17:31:23,263 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:23,264 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:31:23,264 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:31:23,266 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,266 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(id, Column)
+2025-08-02 17:31:23,266 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(title, Column)
+2025-08-02 17:31:23,268 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(description, Column)
+2025-08-02 17:31:23,268 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project_id, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_type, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(priority, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(status, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(expected_result, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_by, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assigned_to, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(tags, Column)
+2025-08-02 17:31:23,269 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(ai_generated, Column)
+2025-08-02 17:31:23,272 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(self_healing_enabled, Column)
+2025-08-02 17:31:23,272 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(prerequisites, Column)
+2025-08-02 17:31:23,272 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_data, Column)
+2025-08-02 17:31:23,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(automation_config, Column)
+2025-08-02 17:31:23,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_at, Column)
+2025-08-02 17:31:23,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestCase.<lambda> at 0x000001C7BE313A60>))])
+2025-08-02 17:31:23,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) constructed
+2025-08-02 17:31:23,276 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(id, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(name, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(description, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project_id, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_by, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(status, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_start, Column)
+2025-08-02 17:31:23,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_end, Column)
+2025-08-02 17:31:23,285 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_at, Column)
+2025-08-02 17:31:23,285 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,285 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plans>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlan.<lambda> at 0x000001C7BE343380>))])
+2025-08-02 17:31:23,285 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) constructed
+2025-08-02 17:31:23,289 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:23,289 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:31:23,290 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executor, _RelationshipDeclared)
+2025-08-02 17:31:23,291 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment, _RelationshipDeclared)
+2025-08-02 17:31:23,291 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(id, Column)
+2025-08-02 17:31:23,292 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case_id, Column)
+2025-08-02 17:31:23,292 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan_id, Column)
+2025-08-02 17:31:23,292 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executed_by, Column)
+2025-08-02 17:31:23,293 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment_id, Column)
+2025-08-02 17:31:23,293 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(status, Column)
+2025-08-02 17:31:23,294 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(started_at, Column)
+2025-08-02 17:31:23,294 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(completed_at, Column)
+2025-08-02 17:31:23,294 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(duration, Column)
+2025-08-02 17:31:23,295 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(result, Column)
+2025-08-02 17:31:23,295 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(logs, Column)
+2025-08-02 17:31:23,295 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(screenshots, Column)
+2025-08-02 17:31:23,295 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(error_message, Column)
+2025-08-02 17:31:23,295 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(ai_analysis, Column)
+2025-08-02 17:31:23,299 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(created_at, Column)
+2025-08-02 17:31:23,299 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,299 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_executions>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestExecution.<lambda> at 0x000001C7BE369300>))])
+2025-08-02 17:31:23,299 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) constructed
+2025-08-02 17:31:23,302 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:23,302 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:23,302 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment, _RelationshipDeclared)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(replies, _RelationshipDeclared)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(id, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case_id, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_id, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_name, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(comment_type, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(content, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment_id, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(resolved, Column)
+2025-08-02 17:31:23,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(created_at, Column)
+2025-08-02 17:31:23,309 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,310 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) Identified primary key columns: OrderedSet([Column('id', String(), table=<comments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Comment.<lambda> at 0x000001C7BE36B7E0>))])
+2025-08-02 17:31:23,310 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) constructed
+2025-08-02 17:31:23,312 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(members, _RelationshipDeclared)
+2025-08-02 17:31:23,312 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(projects, _RelationshipDeclared)
+2025-08-02 17:31:23,312 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(id, Column)
+2025-08-02 17:31:23,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(name, Column)
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(description, Column)
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_by, Column)
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_at, Column)
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) Identified primary key columns: OrderedSet([Column('id', String(), table=<teams>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Team.<lambda> at 0x000001C7BE38D8A0>))])
+2025-08-02 17:31:23,314 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) constructed
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(id, Column)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team_id, Column)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user_id, Column)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(role, Column)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(joined_at, Column)
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) Identified primary key columns: OrderedSet([Column('id', String(), table=<team_members>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TeamMember.<lambda> at 0x000001C7BE38EC00>))])
+2025-08-02 17:31:23,317 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) constructed
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(id, Column)
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(name, Column)
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(description, Column)
+2025-08-02 17:31:23,323 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(base_url, Column)
+2025-08-02 17:31:23,325 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project_id, Column)
+2025-08-02 17:31:23,325 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(is_active, Column)
+2025-08-02 17:31:23,325 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(variables, Column)
+2025-08-02 17:31:23,325 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(created_at, Column)
+2025-08-02 17:31:23,327 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(updated_at, Column)
+2025-08-02 17:31:23,327 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) Identified primary key columns: OrderedSet([Column('id', String(), table=<environments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Environment.<lambda> at 0x000001C7BE38FF60>))])
+2025-08-02 17:31:23,328 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) constructed
+2025-08-02 17:31:23,329 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploader, _RelationshipDeclared)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(id, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_name, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_path, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_size, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_type, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_type, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_id, Column)
+2025-08-02 17:31:23,330 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploaded_by, Column)
+2025-08-02 17:31:23,333 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(description, Column)
+2025-08-02 17:31:23,334 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(created_at, Column)
+2025-08-02 17:31:23,335 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) Identified primary key columns: OrderedSet([Column('id', String(), table=<attachments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Attachment.<lambda> at 0x000001C7BE3B9620>))])
+2025-08-02 17:31:23,335 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) constructed
+2025-08-02 17:31:23,336 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:31:23,337 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:23,338 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:23,338 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(id, Column)
+2025-08-02 17:31:23,339 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan_id, Column)
+2025-08-02 17:31:23,339 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case_id, Column)
+2025-08-02 17:31:23,339 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(order, Column)
+2025-08-02 17:31:23,340 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(is_mandatory, Column)
+2025-08-02 17:31:23,341 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_at, Column)
+2025-08-02 17:31:23,341 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_by, Column)
+2025-08-02 17:31:23,342 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plan_test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlanTestCase.<lambda> at 0x000001C7BE3BA8E0>))])
+2025-08-02 17:31:23,342 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) constructed
+2025-08-02 17:31:23,344 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:23,345 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(id, Column)
+2025-08-02 17:31:23,345 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_id, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_name, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(action, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_type, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_id, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_name, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(details, Column)
+2025-08-02 17:31:23,346 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(ip_address, Column)
+2025-08-02 17:31:23,349 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_agent, Column)
+2025-08-02 17:31:23,350 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(created_at, Column)
+2025-08-02 17:31:23,351 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) Identified primary key columns: OrderedSet([Column('id', String(), table=<activity_logs>, primary_key=True, nullable=False, default=CallableColumnDefault(<function ActivityLog.<lambda> at 0x000001C7BE3D8540>))])
+2025-08-02 17:31:23,360 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) constructed
+2025-08-02 17:31:23,549 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-08-02 17:31:23,549 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-08-02 17:31:23,550 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-08-02 17:31:23,557 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-08-02 17:31:24,546 - app.main - INFO - Initializing API routers...
+2025-08-02 17:31:24,563 - app.main - INFO - API routers initialized successfully
+2025-08-02 17:31:24,569 - app.main - INFO - Starting database initialization...
+2025-08-02 17:31:25,105 - sqlalchemy.pool.impl.QueuePool - DEBUG - Error on connect(): connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+2025-08-02 17:31:25,105 - app.main - ERROR - Error initializing database: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-02 17:31:25,116 - app.main - ERROR - Traceback (most recent call last):
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\app\main.py", line 206, in lifespan
+    with sync_engine.connect() as conn:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-08-02 17:31:55,954 - app.db.session - INFO - Loading environment from: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+2025-08-02 17:31:55,958 - app.db.session - INFO - Database URL configured
+2025-08-02 17:31:56,013 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,022 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(assigned_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,023 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(activity_logs, _RelationshipDeclared)
+2025-08-02 17:31:56,023 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_projects, _RelationshipDeclared)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(team_memberships, _RelationshipDeclared)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(uploaded_attachments, _RelationshipDeclared)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(id, Column)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(email, Column)
+2025-08-02 17:31:56,024 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(full_name, Column)
+2025-08-02 17:31:56,027 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(hashed_password, Column)
+2025-08-02 17:31:56,027 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(role, Column)
+2025-08-02 17:31:56,027 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(is_active, Column)
+2025-08-02 17:31:56,029 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_at, Column)
+2025-08-02 17:31:56,029 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,029 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) Identified primary key columns: OrderedSet([Column('id', String(), table=<users>, primary_key=True, nullable=False, default=CallableColumnDefault(<function User.<lambda> at 0x0000023A66BED3A0>))])
+2025-08-02 17:31:56,029 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) constructed
+2025-08-02 17:31:56,033 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:56,037 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:31:56,037 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,037 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:31:56,038 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(environments, _RelationshipDeclared)
+2025-08-02 17:31:56,039 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(id, Column)
+2025-08-02 17:31:56,040 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(name, Column)
+2025-08-02 17:31:56,040 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(description, Column)
+2025-08-02 17:31:56,041 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_by, Column)
+2025-08-02 17:31:56,042 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team_id, Column)
+2025-08-02 17:31:56,042 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(is_active, Column)
+2025-08-02 17:31:56,042 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_at, Column)
+2025-08-02 17:31:56,043 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,043 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) Identified primary key columns: OrderedSet([Column('id', String(), table=<projects>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Project.<lambda> at 0x0000023A66EB0E00>))])
+2025-08-02 17:31:56,045 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) constructed
+2025-08-02 17:31:56,047 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:56,047 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(id, Column)
+2025-08-02 17:31:56,047 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case_id, Column)
+2025-08-02 17:31:56,049 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(step_number, Column)
+2025-08-02 17:31:56,049 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(description, Column)
+2025-08-02 17:31:56,049 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(expected_result, Column)
+2025-08-02 17:31:56,050 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(actual_result, Column)
+2025-08-02 17:31:56,051 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(status, Column)
+2025-08-02 17:31:56,051 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_steps>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestStep.<lambda> at 0x0000023A66EB2A20>))])
+2025-08-02 17:31:56,051 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) constructed
+2025-08-02 17:31:56,056 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:56,056 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:56,056 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assignee, _RelationshipDeclared)
+2025-08-02 17:31:56,056 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(steps, _RelationshipDeclared)
+2025-08-02 17:31:56,058 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:56,059 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:31:56,059 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:31:56,059 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,059 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(id, Column)
+2025-08-02 17:31:56,059 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(title, Column)
+2025-08-02 17:31:56,061 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(description, Column)
+2025-08-02 17:31:56,061 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project_id, Column)
+2025-08-02 17:31:56,061 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_type, Column)
+2025-08-02 17:31:56,061 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(priority, Column)
+2025-08-02 17:31:56,062 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(status, Column)
+2025-08-02 17:31:56,062 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(expected_result, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_by, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assigned_to, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(tags, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(ai_generated, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(self_healing_enabled, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(prerequisites, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_data, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(automation_config, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_at, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestCase.<lambda> at 0x0000023A66EB3A60>))])
+2025-08-02 17:31:56,063 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) constructed
+2025-08-02 17:31:56,067 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:56,067 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:56,067 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,070 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:31:56,070 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(id, Column)
+2025-08-02 17:31:56,070 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(name, Column)
+2025-08-02 17:31:56,070 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(description, Column)
+2025-08-02 17:31:56,070 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project_id, Column)
+2025-08-02 17:31:56,072 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_by, Column)
+2025-08-02 17:31:56,072 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(status, Column)
+2025-08-02 17:31:56,072 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_start, Column)
+2025-08-02 17:31:56,072 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_end, Column)
+2025-08-02 17:31:56,075 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_at, Column)
+2025-08-02 17:31:56,076 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,076 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plans>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlan.<lambda> at 0x0000023A66EE3380>))])
+2025-08-02 17:31:56,076 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) constructed
+2025-08-02 17:31:56,077 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executor, _RelationshipDeclared)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment, _RelationshipDeclared)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(id, Column)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case_id, Column)
+2025-08-02 17:31:56,079 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan_id, Column)
+2025-08-02 17:31:56,081 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executed_by, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment_id, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(status, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(started_at, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(completed_at, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(duration, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(result, Column)
+2025-08-02 17:31:56,082 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(logs, Column)
+2025-08-02 17:31:56,083 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(screenshots, Column)
+2025-08-02 17:31:56,083 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(error_message, Column)
+2025-08-02 17:31:56,083 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(ai_analysis, Column)
+2025-08-02 17:31:56,083 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(created_at, Column)
+2025-08-02 17:31:56,083 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,085 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_executions>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestExecution.<lambda> at 0x0000023A66F05300>))])
+2025-08-02 17:31:56,086 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) constructed
+2025-08-02 17:31:56,089 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:56,089 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:56,091 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment, _RelationshipDeclared)
+2025-08-02 17:31:56,091 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(replies, _RelationshipDeclared)
+2025-08-02 17:31:56,091 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(id, Column)
+2025-08-02 17:31:56,091 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case_id, Column)
+2025-08-02 17:31:56,092 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_id, Column)
+2025-08-02 17:31:56,093 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_name, Column)
+2025-08-02 17:31:56,093 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(comment_type, Column)
+2025-08-02 17:31:56,094 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(content, Column)
+2025-08-02 17:31:56,095 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment_id, Column)
+2025-08-02 17:31:56,097 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(resolved, Column)
+2025-08-02 17:31:56,097 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(created_at, Column)
+2025-08-02 17:31:56,099 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,099 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) Identified primary key columns: OrderedSet([Column('id', String(), table=<comments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Comment.<lambda> at 0x0000023A66F077E0>))])
+2025-08-02 17:31:56,099 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) constructed
+2025-08-02 17:31:56,100 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(members, _RelationshipDeclared)
+2025-08-02 17:31:56,100 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(projects, _RelationshipDeclared)
+2025-08-02 17:31:56,100 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(id, Column)
+2025-08-02 17:31:56,103 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(name, Column)
+2025-08-02 17:31:56,104 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(description, Column)
+2025-08-02 17:31:56,105 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_by, Column)
+2025-08-02 17:31:56,105 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_at, Column)
+2025-08-02 17:31:56,105 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,106 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) Identified primary key columns: OrderedSet([Column('id', String(), table=<teams>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Team.<lambda> at 0x0000023A66F2D8A0>))])
+2025-08-02 17:31:56,106 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) constructed
+2025-08-02 17:31:56,108 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:31:56,108 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:56,110 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(id, Column)
+2025-08-02 17:31:56,110 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team_id, Column)
+2025-08-02 17:31:56,110 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user_id, Column)
+2025-08-02 17:31:56,112 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(role, Column)
+2025-08-02 17:31:56,112 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(joined_at, Column)
+2025-08-02 17:31:56,113 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) Identified primary key columns: OrderedSet([Column('id', String(), table=<team_members>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TeamMember.<lambda> at 0x0000023A66F2EC00>))])
+2025-08-02 17:31:56,114 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) constructed
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(id, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(name, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(description, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(base_url, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project_id, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(is_active, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(variables, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(created_at, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(updated_at, Column)
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) Identified primary key columns: OrderedSet([Column('id', String(), table=<environments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Environment.<lambda> at 0x0000023A66F2FF60>))])
+2025-08-02 17:31:56,116 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) constructed
+2025-08-02 17:31:56,123 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploader, _RelationshipDeclared)
+2025-08-02 17:31:56,123 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(id, Column)
+2025-08-02 17:31:56,123 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_name, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_path, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_size, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_type, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_type, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_id, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploaded_by, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(description, Column)
+2025-08-02 17:31:56,124 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(created_at, Column)
+2025-08-02 17:31:56,126 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) Identified primary key columns: OrderedSet([Column('id', String(), table=<attachments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Attachment.<lambda> at 0x0000023A66F59620>))])
+2025-08-02 17:31:56,126 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) constructed
+2025-08-02 17:31:56,126 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:31:56,126 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(id, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan_id, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case_id, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(order, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(is_mandatory, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_at, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_by, Column)
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plan_test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlanTestCase.<lambda> at 0x0000023A66F5A8E0>))])
+2025-08-02 17:31:56,129 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) constructed
+2025-08-02 17:31:56,133 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:31:56,134 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(id, Column)
+2025-08-02 17:31:56,134 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_id, Column)
+2025-08-02 17:31:56,134 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_name, Column)
+2025-08-02 17:31:56,134 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(action, Column)
+2025-08-02 17:31:56,134 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_type, Column)
+2025-08-02 17:31:56,137 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_id, Column)
+2025-08-02 17:31:56,137 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_name, Column)
+2025-08-02 17:31:56,138 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(details, Column)
+2025-08-02 17:31:56,138 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(ip_address, Column)
+2025-08-02 17:31:56,138 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_agent, Column)
+2025-08-02 17:31:56,138 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(created_at, Column)
+2025-08-02 17:31:56,139 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) Identified primary key columns: OrderedSet([Column('id', String(), table=<activity_logs>, primary_key=True, nullable=False, default=CallableColumnDefault(<function ActivityLog.<lambda> at 0x0000023A66F7C540>))])
+2025-08-02 17:31:56,139 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) constructed
+2025-08-02 17:31:56,334 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-08-02 17:31:56,336 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-08-02 17:31:56,336 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-08-02 17:31:56,344 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-08-02 17:31:57,397 - app.main - INFO - Initializing API routers...
+2025-08-02 17:31:57,415 - app.main - INFO - API routers initialized successfully
+2025-08-02 17:31:57,415 - app.main - INFO - Starting database initialization...
+2025-08-02 17:31:57,963 - sqlalchemy.pool.impl.QueuePool - DEBUG - Error on connect(): connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+2025-08-02 17:31:57,965 - app.main - ERROR - Error initializing database: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-02 17:31:57,973 - app.main - ERROR - Traceback (most recent call last):
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\app\main.py", line 206, in lifespan
+    with sync_engine.connect() as conn:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-08-02 17:32:46,664 - app.db.session - INFO - Loading environment from: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+2025-08-02 17:32:46,666 - app.db.session - INFO - Database URL configured
+2025-08-02 17:32:46,744 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,744 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(assigned_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,745 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(activity_logs, _RelationshipDeclared)
+2025-08-02 17:32:46,745 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:32:46,746 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:46,746 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_projects, _RelationshipDeclared)
+2025-08-02 17:32:46,746 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(team_memberships, _RelationshipDeclared)
+2025-08-02 17:32:46,746 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(uploaded_attachments, _RelationshipDeclared)
+2025-08-02 17:32:46,746 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(id, Column)
+2025-08-02 17:32:46,749 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(email, Column)
+2025-08-02 17:32:46,749 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(full_name, Column)
+2025-08-02 17:32:46,749 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(hashed_password, Column)
+2025-08-02 17:32:46,749 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(role, Column)
+2025-08-02 17:32:46,750 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(is_active, Column)
+2025-08-02 17:32:46,750 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_at, Column)
+2025-08-02 17:32:46,750 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,752 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) Identified primary key columns: OrderedSet([Column('id', String(), table=<users>, primary_key=True, nullable=False, default=CallableColumnDefault(<function User.<lambda> at 0x00000222C8E0D3A0>))])
+2025-08-02 17:32:46,752 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) constructed
+2025-08-02 17:32:46,752 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:46,752 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:32:46,754 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,754 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:32:46,756 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(environments, _RelationshipDeclared)
+2025-08-02 17:32:46,756 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(id, Column)
+2025-08-02 17:32:46,756 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(name, Column)
+2025-08-02 17:32:46,756 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(description, Column)
+2025-08-02 17:32:46,758 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_by, Column)
+2025-08-02 17:32:46,758 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team_id, Column)
+2025-08-02 17:32:46,758 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(is_active, Column)
+2025-08-02 17:32:46,758 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_at, Column)
+2025-08-02 17:32:46,758 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,760 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) Identified primary key columns: OrderedSet([Column('id', String(), table=<projects>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Project.<lambda> at 0x00000222C90C0E00>))])
+2025-08-02 17:32:46,761 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) constructed
+2025-08-02 17:32:46,762 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:46,762 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(id, Column)
+2025-08-02 17:32:46,762 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case_id, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(step_number, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(description, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(expected_result, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(actual_result, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(status, Column)
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_steps>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestStep.<lambda> at 0x00000222C90C2A20>))])
+2025-08-02 17:32:46,764 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) constructed
+2025-08-02 17:32:46,770 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:46,770 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:46,771 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assignee, _RelationshipDeclared)
+2025-08-02 17:32:46,771 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(steps, _RelationshipDeclared)
+2025-08-02 17:32:46,771 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:46,771 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:32:46,772 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:32:46,773 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,775 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(id, Column)
+2025-08-02 17:32:46,777 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(title, Column)
+2025-08-02 17:32:46,778 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(description, Column)
+2025-08-02 17:32:46,778 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project_id, Column)
+2025-08-02 17:32:46,779 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_type, Column)
+2025-08-02 17:32:46,779 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(priority, Column)
+2025-08-02 17:32:46,781 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(status, Column)
+2025-08-02 17:32:46,782 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(expected_result, Column)
+2025-08-02 17:32:46,784 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_by, Column)
+2025-08-02 17:32:46,784 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assigned_to, Column)
+2025-08-02 17:32:46,785 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(tags, Column)
+2025-08-02 17:32:46,786 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(ai_generated, Column)
+2025-08-02 17:32:46,787 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(self_healing_enabled, Column)
+2025-08-02 17:32:46,789 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(prerequisites, Column)
+2025-08-02 17:32:46,792 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_data, Column)
+2025-08-02 17:32:46,794 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(automation_config, Column)
+2025-08-02 17:32:46,794 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_at, Column)
+2025-08-02 17:32:46,794 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,795 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestCase.<lambda> at 0x00000222C90C3A60>))])
+2025-08-02 17:32:46,795 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) constructed
+2025-08-02 17:32:46,798 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:46,799 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:46,800 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,801 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:46,801 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(id, Column)
+2025-08-02 17:32:46,801 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(name, Column)
+2025-08-02 17:32:46,802 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(description, Column)
+2025-08-02 17:32:46,802 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project_id, Column)
+2025-08-02 17:32:46,803 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_by, Column)
+2025-08-02 17:32:46,803 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(status, Column)
+2025-08-02 17:32:46,805 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_start, Column)
+2025-08-02 17:32:46,805 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_end, Column)
+2025-08-02 17:32:46,805 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_at, Column)
+2025-08-02 17:32:46,805 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,806 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plans>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlan.<lambda> at 0x00000222C90F3380>))])
+2025-08-02 17:32:46,807 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) constructed
+2025-08-02 17:32:46,810 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:46,810 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:32:46,811 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executor, _RelationshipDeclared)
+2025-08-02 17:32:46,812 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment, _RelationshipDeclared)
+2025-08-02 17:32:46,812 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(id, Column)
+2025-08-02 17:32:46,812 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case_id, Column)
+2025-08-02 17:32:46,813 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan_id, Column)
+2025-08-02 17:32:46,813 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executed_by, Column)
+2025-08-02 17:32:46,813 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment_id, Column)
+2025-08-02 17:32:46,813 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(status, Column)
+2025-08-02 17:32:46,813 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(started_at, Column)
+2025-08-02 17:32:46,815 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(completed_at, Column)
+2025-08-02 17:32:46,815 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(duration, Column)
+2025-08-02 17:32:46,815 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(result, Column)
+2025-08-02 17:32:46,816 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(logs, Column)
+2025-08-02 17:32:46,817 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(screenshots, Column)
+2025-08-02 17:32:46,817 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(error_message, Column)
+2025-08-02 17:32:46,818 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(ai_analysis, Column)
+2025-08-02 17:32:46,818 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(created_at, Column)
+2025-08-02 17:32:46,819 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,819 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_executions>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestExecution.<lambda> at 0x00000222C9115300>))])
+2025-08-02 17:32:46,820 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) constructed
+2025-08-02 17:32:46,822 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:46,822 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:46,823 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment, _RelationshipDeclared)
+2025-08-02 17:32:46,824 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(replies, _RelationshipDeclared)
+2025-08-02 17:32:46,824 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(id, Column)
+2025-08-02 17:32:46,825 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case_id, Column)
+2025-08-02 17:32:46,826 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_id, Column)
+2025-08-02 17:32:46,827 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_name, Column)
+2025-08-02 17:32:46,828 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(comment_type, Column)
+2025-08-02 17:32:46,828 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(content, Column)
+2025-08-02 17:32:46,828 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment_id, Column)
+2025-08-02 17:32:46,828 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(resolved, Column)
+2025-08-02 17:32:46,829 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(created_at, Column)
+2025-08-02 17:32:46,830 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,830 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) Identified primary key columns: OrderedSet([Column('id', String(), table=<comments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Comment.<lambda> at 0x00000222C91177E0>))])
+2025-08-02 17:32:46,831 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) constructed
+2025-08-02 17:32:46,832 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(members, _RelationshipDeclared)
+2025-08-02 17:32:46,833 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(projects, _RelationshipDeclared)
+2025-08-02 17:32:46,833 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(id, Column)
+2025-08-02 17:32:46,834 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(name, Column)
+2025-08-02 17:32:46,834 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(description, Column)
+2025-08-02 17:32:46,835 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_by, Column)
+2025-08-02 17:32:46,835 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_at, Column)
+2025-08-02 17:32:46,835 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,835 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) Identified primary key columns: OrderedSet([Column('id', String(), table=<teams>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Team.<lambda> at 0x00000222C913D8A0>))])
+2025-08-02 17:32:46,835 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) constructed
+2025-08-02 17:32:46,837 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:32:46,838 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:46,838 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(id, Column)
+2025-08-02 17:32:46,838 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team_id, Column)
+2025-08-02 17:32:46,839 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user_id, Column)
+2025-08-02 17:32:46,840 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(role, Column)
+2025-08-02 17:32:46,840 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(joined_at, Column)
+2025-08-02 17:32:46,841 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) Identified primary key columns: OrderedSet([Column('id', String(), table=<team_members>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TeamMember.<lambda> at 0x00000222C913EC00>))])
+2025-08-02 17:32:46,842 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) constructed
+2025-08-02 17:32:46,843 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:46,843 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:46,844 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(id, Column)
+2025-08-02 17:32:46,844 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(name, Column)
+2025-08-02 17:32:46,844 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(description, Column)
+2025-08-02 17:32:46,844 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(base_url, Column)
+2025-08-02 17:32:46,846 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project_id, Column)
+2025-08-02 17:32:46,846 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(is_active, Column)
+2025-08-02 17:32:46,847 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(variables, Column)
+2025-08-02 17:32:46,847 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(created_at, Column)
+2025-08-02 17:32:46,847 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(updated_at, Column)
+2025-08-02 17:32:46,847 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) Identified primary key columns: OrderedSet([Column('id', String(), table=<environments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Environment.<lambda> at 0x00000222C913FF60>))])
+2025-08-02 17:32:46,848 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) constructed
+2025-08-02 17:32:46,850 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploader, _RelationshipDeclared)
+2025-08-02 17:32:46,850 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(id, Column)
+2025-08-02 17:32:46,851 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_name, Column)
+2025-08-02 17:32:46,851 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_path, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_size, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_type, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_type, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_id, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploaded_by, Column)
+2025-08-02 17:32:46,852 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(description, Column)
+2025-08-02 17:32:46,853 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(created_at, Column)
+2025-08-02 17:32:46,853 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) Identified primary key columns: OrderedSet([Column('id', String(), table=<attachments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Attachment.<lambda> at 0x00000222C9169620>))])
+2025-08-02 17:32:46,854 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) constructed
+2025-08-02 17:32:46,857 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:32:46,858 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:46,858 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:46,858 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(id, Column)
+2025-08-02 17:32:46,859 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan_id, Column)
+2025-08-02 17:32:46,859 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case_id, Column)
+2025-08-02 17:32:46,859 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(order, Column)
+2025-08-02 17:32:46,860 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(is_mandatory, Column)
+2025-08-02 17:32:46,860 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_at, Column)
+2025-08-02 17:32:46,861 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_by, Column)
+2025-08-02 17:32:46,861 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plan_test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlanTestCase.<lambda> at 0x00000222C916A8E0>))])
+2025-08-02 17:32:46,862 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) constructed
+2025-08-02 17:32:46,863 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:46,863 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(id, Column)
+2025-08-02 17:32:46,863 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_id, Column)
+2025-08-02 17:32:46,864 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_name, Column)
+2025-08-02 17:32:46,864 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(action, Column)
+2025-08-02 17:32:46,864 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_type, Column)
+2025-08-02 17:32:46,865 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_id, Column)
+2025-08-02 17:32:46,865 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_name, Column)
+2025-08-02 17:32:46,866 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(details, Column)
+2025-08-02 17:32:46,866 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(ip_address, Column)
+2025-08-02 17:32:46,867 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_agent, Column)
+2025-08-02 17:32:46,867 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(created_at, Column)
+2025-08-02 17:32:46,867 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) Identified primary key columns: OrderedSet([Column('id', String(), table=<activity_logs>, primary_key=True, nullable=False, default=CallableColumnDefault(<function ActivityLog.<lambda> at 0x00000222C918C540>))])
+2025-08-02 17:32:46,868 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) constructed
+2025-08-02 17:32:47,047 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-08-02 17:32:47,049 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-08-02 17:32:47,050 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-08-02 17:32:47,057 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-08-02 17:32:48,124 - app.main - INFO - Initializing API routers...
+2025-08-02 17:32:48,141 - app.main - INFO - API routers initialized successfully
+2025-08-02 17:32:48,145 - app.main - INFO - Starting database initialization...
+2025-08-02 17:32:48,662 - sqlalchemy.pool.impl.QueuePool - DEBUG - Error on connect(): connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+2025-08-02 17:32:48,663 - app.main - ERROR - Error initializing database: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-02 17:32:48,674 - app.main - ERROR - Traceback (most recent call last):
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\app\main.py", line 206, in lifespan
+    with sync_engine.connect() as conn:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+2025-08-02 17:32:54,160 - app.db.session - INFO - Loading environment from: C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\.env
+2025-08-02 17:32:54,163 - app.db.session - INFO - Database URL configured
+2025-08-02 17:32:54,223 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,223 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(assigned_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,225 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(activity_logs, _RelationshipDeclared)
+2025-08-02 17:32:54,225 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:32:54,225 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:54,226 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_projects, _RelationshipDeclared)
+2025-08-02 17:32:54,226 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(team_memberships, _RelationshipDeclared)
+2025-08-02 17:32:54,227 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(uploaded_attachments, _RelationshipDeclared)
+2025-08-02 17:32:54,227 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(id, Column)
+2025-08-02 17:32:54,227 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(email, Column)
+2025-08-02 17:32:54,229 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(full_name, Column)
+2025-08-02 17:32:54,229 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(hashed_password, Column)
+2025-08-02 17:32:54,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(role, Column)
+2025-08-02 17:32:54,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(is_active, Column)
+2025-08-02 17:32:54,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(created_at, Column)
+2025-08-02 17:32:54,230 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,232 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) Identified primary key columns: OrderedSet([Column('id', String(), table=<users>, primary_key=True, nullable=False, default=CallableColumnDefault(<function User.<lambda> at 0x00000245C54CD3A0>))])
+2025-08-02 17:32:54,232 - sqlalchemy.orm.mapper.Mapper - INFO - (User|users) constructed
+2025-08-02 17:32:54,234 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:54,234 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:32:54,234 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,237 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:32:54,238 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(environments, _RelationshipDeclared)
+2025-08-02 17:32:54,238 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(id, Column)
+2025-08-02 17:32:54,238 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(name, Column)
+2025-08-02 17:32:54,238 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(description, Column)
+2025-08-02 17:32:54,239 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_by, Column)
+2025-08-02 17:32:54,240 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(team_id, Column)
+2025-08-02 17:32:54,240 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(is_active, Column)
+2025-08-02 17:32:54,241 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(created_at, Column)
+2025-08-02 17:32:54,241 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,243 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) Identified primary key columns: OrderedSet([Column('id', String(), table=<projects>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Project.<lambda> at 0x00000245C5760E00>))])
+2025-08-02 17:32:54,243 - sqlalchemy.orm.mapper.Mapper - INFO - (Project|projects) constructed
+2025-08-02 17:32:54,244 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(id, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(test_case_id, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(step_number, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(description, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(expected_result, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(actual_result, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) _configure_property(status, Column)
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_steps>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestStep.<lambda> at 0x00000245C5762A20>))])
+2025-08-02 17:32:54,245 - sqlalchemy.orm.mapper.Mapper - INFO - (TestStep|test_steps) constructed
+2025-08-02 17:32:54,252 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:54,252 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:54,252 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assignee, _RelationshipDeclared)
+2025-08-02 17:32:54,252 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(steps, _RelationshipDeclared)
+2025-08-02 17:32:54,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:54,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(comments, _RelationshipDeclared)
+2025-08-02 17:32:54,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plans, _RelationshipDeclared)
+2025-08-02 17:32:54,254 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(id, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(title, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(description, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(project_id, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_type, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(priority, Column)
+2025-08-02 17:32:54,256 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(status, Column)
+2025-08-02 17:32:54,259 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(expected_result, Column)
+2025-08-02 17:32:54,260 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_by, Column)
+2025-08-02 17:32:54,260 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(assigned_to, Column)
+2025-08-02 17:32:54,260 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(tags, Column)
+2025-08-02 17:32:54,260 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(ai_generated, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(self_healing_enabled, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(prerequisites, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(test_data, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(automation_config, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(created_at, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,262 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestCase.<lambda> at 0x00000245C5763A60>))])
+2025-08-02 17:32:54,263 - sqlalchemy.orm.mapper.Mapper - INFO - (TestCase|test_cases) constructed
+2025-08-02 17:32:54,263 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(test_plan_test_cases, _RelationshipDeclared)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(id, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(name, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(description, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(project_id, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_by, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(status, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_start, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(scheduled_end, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(created_at, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plans>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlan.<lambda> at 0x00000245C5793380>))])
+2025-08-02 17:32:54,267 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlan|test_plans) constructed
+2025-08-02 17:32:54,274 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:54,275 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:32:54,275 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executor, _RelationshipDeclared)
+2025-08-02 17:32:54,275 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment, _RelationshipDeclared)
+2025-08-02 17:32:54,275 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(id, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_case_id, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(test_plan_id, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(executed_by, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(environment_id, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(status, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(started_at, Column)
+2025-08-02 17:32:54,277 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(completed_at, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(duration, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(result, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(logs, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(screenshots, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(error_message, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(ai_analysis, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(created_at, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,279 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_executions>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestExecution.<lambda> at 0x00000245C57B9300>))])
+2025-08-02 17:32:54,282 - sqlalchemy.orm.mapper.Mapper - INFO - (TestExecution|test_executions) constructed
+2025-08-02 17:32:54,283 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:54,283 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:54,283 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment, _RelationshipDeclared)
+2025-08-02 17:32:54,283 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(replies, _RelationshipDeclared)
+2025-08-02 17:32:54,287 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(id, Column)
+2025-08-02 17:32:54,287 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(test_case_id, Column)
+2025-08-02 17:32:54,287 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_id, Column)
+2025-08-02 17:32:54,287 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(user_name, Column)
+2025-08-02 17:32:54,287 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(comment_type, Column)
+2025-08-02 17:32:54,289 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(content, Column)
+2025-08-02 17:32:54,289 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(parent_comment_id, Column)
+2025-08-02 17:32:54,290 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(resolved, Column)
+2025-08-02 17:32:54,290 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(created_at, Column)
+2025-08-02 17:32:54,291 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,291 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) Identified primary key columns: OrderedSet([Column('id', String(), table=<comments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Comment.<lambda> at 0x00000245C57BB7E0>))])
+2025-08-02 17:32:54,292 - sqlalchemy.orm.mapper.Mapper - INFO - (Comment|comments) constructed
+2025-08-02 17:32:54,294 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(members, _RelationshipDeclared)
+2025-08-02 17:32:54,294 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(projects, _RelationshipDeclared)
+2025-08-02 17:32:54,294 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(id, Column)
+2025-08-02 17:32:54,294 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(name, Column)
+2025-08-02 17:32:54,294 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(description, Column)
+2025-08-02 17:32:54,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_by, Column)
+2025-08-02 17:32:54,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(created_at, Column)
+2025-08-02 17:32:54,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) Identified primary key columns: OrderedSet([Column('id', String(), table=<teams>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Team.<lambda> at 0x00000245C57DD8A0>))])
+2025-08-02 17:32:54,296 - sqlalchemy.orm.mapper.Mapper - INFO - (Team|teams) constructed
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team, _RelationshipDeclared)
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(id, Column)
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(team_id, Column)
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(user_id, Column)
+2025-08-02 17:32:54,300 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(role, Column)
+2025-08-02 17:32:54,302 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) _configure_property(joined_at, Column)
+2025-08-02 17:32:54,302 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) Identified primary key columns: OrderedSet([Column('id', String(), table=<team_members>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TeamMember.<lambda> at 0x00000245C57DEC00>))])
+2025-08-02 17:32:54,302 - sqlalchemy.orm.mapper.Mapper - INFO - (TeamMember|team_members) constructed
+2025-08-02 17:32:54,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project, _RelationshipDeclared)
+2025-08-02 17:32:54,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(test_executions, _RelationshipDeclared)
+2025-08-02 17:32:54,304 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(id, Column)
+2025-08-02 17:32:54,306 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(name, Column)
+2025-08-02 17:32:54,306 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(description, Column)
+2025-08-02 17:32:54,306 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(base_url, Column)
+2025-08-02 17:32:54,306 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(project_id, Column)
+2025-08-02 17:32:54,307 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(is_active, Column)
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(variables, Column)
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(created_at, Column)
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) _configure_property(updated_at, Column)
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) Identified primary key columns: OrderedSet([Column('id', String(), table=<environments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Environment.<lambda> at 0x00000245C57DFF60>))])
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Environment|environments) constructed
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploader, _RelationshipDeclared)
+2025-08-02 17:32:54,308 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(id, Column)
+2025-08-02 17:32:54,312 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_name, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_path, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_size, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(file_type, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_type, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(entity_id, Column)
+2025-08-02 17:32:54,313 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(uploaded_by, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(description, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) _configure_property(created_at, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) Identified primary key columns: OrderedSet([Column('id', String(), table=<attachments>, primary_key=True, nullable=False, default=CallableColumnDefault(<function Attachment.<lambda> at 0x00000245C5809620>))])
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (Attachment|attachments) constructed
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan, _RelationshipDeclared)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case, _RelationshipDeclared)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(creator, _RelationshipDeclared)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(id, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_plan_id, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(test_case_id, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(order, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(is_mandatory, Column)
+2025-08-02 17:32:54,315 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_at, Column)
+2025-08-02 17:32:54,323 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) _configure_property(created_by, Column)
+2025-08-02 17:32:54,323 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) Identified primary key columns: OrderedSet([Column('id', String(), table=<test_plan_test_cases>, primary_key=True, nullable=False, default=CallableColumnDefault(<function TestPlanTestCase.<lambda> at 0x00000245C580A8E0>))])
+2025-08-02 17:32:54,323 - sqlalchemy.orm.mapper.Mapper - INFO - (TestPlanTestCase|test_plan_test_cases) constructed
+2025-08-02 17:32:54,323 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user, _RelationshipDeclared)
+2025-08-02 17:32:54,325 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(id, Column)
+2025-08-02 17:32:54,326 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_id, Column)
+2025-08-02 17:32:54,326 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_name, Column)
+2025-08-02 17:32:54,327 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(action, Column)
+2025-08-02 17:32:54,327 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_type, Column)
+2025-08-02 17:32:54,327 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_id, Column)
+2025-08-02 17:32:54,327 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(target_name, Column)
+2025-08-02 17:32:54,327 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(details, Column)
+2025-08-02 17:32:54,329 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(ip_address, Column)
+2025-08-02 17:32:54,329 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(user_agent, Column)
+2025-08-02 17:32:54,329 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) _configure_property(created_at, Column)
+2025-08-02 17:32:54,329 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) Identified primary key columns: OrderedSet([Column('id', String(), table=<activity_logs>, primary_key=True, nullable=False, default=CallableColumnDefault(<function ActivityLog.<lambda> at 0x00000245C582C540>))])
+2025-08-02 17:32:54,329 - sqlalchemy.orm.mapper.Mapper - INFO - (ActivityLog|activity_logs) constructed
+2025-08-02 17:32:54,570 - passlib.utils.compat - DEBUG - loaded lazy attr 'SafeConfigParser': <class 'configparser.ConfigParser'>
+2025-08-02 17:32:54,570 - passlib.utils.compat - DEBUG - loaded lazy attr 'NativeStringIO': <class '_io.StringIO'>
+2025-08-02 17:32:54,570 - passlib.utils.compat - DEBUG - loaded lazy attr 'BytesIO': <class '_io.BytesIO'>
+2025-08-02 17:32:54,579 - passlib.registry - DEBUG - registered 'bcrypt' handler: <class 'passlib.handlers.bcrypt.bcrypt'>
+2025-08-02 17:32:55,729 - app.main - INFO - Initializing API routers...
+2025-08-02 17:32:55,756 - app.main - INFO - API routers initialized successfully
+2025-08-02 17:32:55,760 - app.main - INFO - Starting database initialization...
+2025-08-02 17:32:56,305 - sqlalchemy.pool.impl.QueuePool - DEBUG - Error on connect(): connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+2025-08-02 17:32:56,312 - app.main - ERROR - Error initializing database: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-08-02 17:32:56,321 - app.main - ERROR - Traceback (most recent call last):
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+psycopg2.OperationalError: connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\kunal\Downloads\EmergentIntelliTest-main\backend\app\main.py", line 206, in lifespan
+    with sync_engine.connect() as conn:
+         ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 147, in __init__
+    Connection._handle_dbapi_exception_noconnection(
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+                             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+          ^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 179, in _do_get
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 901, in __connect
+    with util.safe_reraise():
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\kunal\AppData\Roaming\Python\Python312\site-packages\psycopg2\__init__.py", line 122, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlalchemy.exc.OperationalError: (psycopg2.OperationalError) connection to server at "aws-0-ap-southeast-1.pooler.supabase.com" (52.74.252.201), port 5432 failed: error received from server in SCRAM exchange: Wrong password
+
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+

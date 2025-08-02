@@ -84,9 +84,9 @@ SECURITY_PASSWORD_SALT=your-password-salt-here
 ### 📚 API Documentation
 
 Once running, visit:
-- **Swagger UI**: http://localhost:8000/api/v1/docs
-- **ReDoc**: http://localhost:8000/api/v1/redoc
-- **Health Check**: http://localhost:8000/api/health
+- **Swagger UI**: http://localhost:8001/api/v1/docs
+- **ReDoc**: http://localhost:8001/api/v1/redoc
+- **Health Check**: http://localhost:8001/api/health
 
 ### 🐛 Troubleshooting
 
@@ -104,8 +104,8 @@ Once running, visit:
 
 3. **Port Already in Use**
    ```bash
-   # Kill process on port 8000
-   lsof -ti:8000 | xargs kill -9
+   # Kill process on port 8001
+   lsof -ti:8001 | xargs kill -9
    ```
 
 4. **Migration Issues**
@@ -126,7 +126,7 @@ pip install -r requirements.txt --force-reinstall
 
 1. **Start Development Server**
    ```bash
-   uvicorn main:app --reload --host 0.0.0.0 --port 8000
+   uvicorn main:app --reload --host 0.0.0.0 --port 8001
    ```
 
 2. **Run Tests**
@@ -169,8 +169,8 @@ Test your setup:
 python main.py
 
 # Check API endpoints
-curl http://localhost:8000/api/health
-curl http://localhost:8000/api/v1/status
+curl http://localhost:8001/api/health
+curl http://localhost:8001/api/v1/status
 ```
 
 ### 🆘 Need Help?

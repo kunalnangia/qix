@@ -49,7 +49,7 @@ services:
       - SERVER_HOST=${SERVER_HOST:-http://localhost}
       - BACKEND_CORS_ORIGINS='["http://localhost:3000"]'
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - ./backend/app:/app/app
       - ./backend/logs:/app/logs
@@ -63,7 +63,7 @@ services:
     depends_on:
       - backend
     environment:
-      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000/api/v1}
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8001/api/v1}
     ports:
       - "3000:3000"
     volumes:

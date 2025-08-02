@@ -24,7 +24,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str = "your-secret-key-here"
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24 * 8  # 8 days
     SERVER_NAME: str = "localhost"
-    SERVER_HOST: str = "http://localhost:8000"
+    SERVER_HOST: str = "http://localhost:8001"
     
     # CORS settings - using a default list of allowed origins
     # This is set directly in code to avoid environment parsing issues
@@ -35,7 +35,7 @@ class Settings(BaseSettings):
         "http://localhost:5173",
         "http://127.0.0.1:3000",
         "http://127.0.0.1:3001",
-        "http://127.0.0.1:8000",
+        "http://127.0.0.1:8001",
         "http://127.0.0.1:8080"
     ]
     
