@@ -317,8 +317,23 @@ class AuthService:
             HTTPException: If authentication fails
         """
         try:
-            # Find user by email
-            user = self.db.query(models.User).filter(models.User.email == email).first()
+            # Find user by email using async SQLAlchemy
+            from sqlalchemy import select
+            from sqlalchemy.ext.asyncio import AsyncSession
+            
+            if not isinstance(self.db, AsyncSession):
+                raise HTTPException(
+                    status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                    detail="Database session is not async",
+                    headers={"WWW-Authenticate": "Bearer"}
+                )
+                
+            # Use async query
+            result = await self.db.execute(
+                select(models.User).where(models.User.email == email)
+            )
+            user = result.scalars().first()
+            
             if not user:
                 raise HTTPException(
                     status_code=status.HTTP_401_UNAUTHORIZED,

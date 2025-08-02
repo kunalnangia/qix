@@ -42,7 +42,6 @@ engine = create_engine(
     pool_recycle=300,  # Recycle connections after 5 minutes
     pool_timeout=30,   # Wait 30 seconds before giving up on getting a connection
     connect_args={
-        'connect_timeout': 10,  # 10 seconds connection timeout
         'keepalives': 1,  # Enable TCP keepalive
         'keepalives_idle': 30,  # Start sending keepalive packets after 30 seconds of inactivity
         'keepalives_interval': 10,  # Send keepalive packets every 10 seconds
@@ -72,7 +71,6 @@ if "pooler.supabase.com" in connection_string:
     
     # Add query parameters
     query_params = {
-        'connect_timeout': '10',
         'keepalives': '1',
         'keepalives_idle': '30',
         'keepalives_interval': '10',
