@@ -9,6 +9,7 @@ from sqlalchemy.exc import SQLAlchemyError
 import os
 import logging
 import traceback
+import re
 
 from app.db import get_db
 from app.models import User
