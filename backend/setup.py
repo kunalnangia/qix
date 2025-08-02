@@ -119,7 +119,7 @@ def main():
     logger.info("1. Edit .env file with your configuration")
     logger.info("2. Ensure PostgreSQL is running")
     logger.info("3. Run: python main.py")
-    logger.info("4. Visit: http://localhost:8000/docs")
+    logger.info("4. Visit: http://localhost:8001/docs")
 
 if __name__ == "__main__":
     main()

@@ -11,7 +11,7 @@ def test_connection():
         'host': 'aws-0-ap-southeast-1.pooler.supabase.com',
         'database': 'postgres',
         'user': 'postgres.lflecyuvttemfoyixngi',
-        'password': 'Ayeshaayesha12@',
+        'password': 'Ayeshaayesha121',
         'port': '5432'
     }
     

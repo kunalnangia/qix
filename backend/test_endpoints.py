@@ -9,9 +9,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # API configuration
-BASE_URL = "http://localhost:8000/api"
+BASE_URL = "http://localhost:8001/api"
 TEST_EMAIL = os.getenv("TEST_EMAIL", "test@example.com")
-TEST_PASSWORD = os.getenv("TEST_PASSWORD", "testpassword")
+TEST_PASSWORD = os.getenv("TEST_PASSWORD", "test1234")
 
 # Test client
 @pytest.fixture(scope="module")

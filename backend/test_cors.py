@@ -5,7 +5,7 @@ def test_endpoint(url, method='GET', headers=None, data=None):
     
     # Default headers
     default_headers = {
-        'Origin': 'http://localhost:5174',
+        'Origin': 'http://localhost:5175',
         'Content-Type': 'application/json'
     }
     
@@ -73,7 +73,7 @@ def test_cors():
     # 4. Test with different origin
     test_endpoint(
         f"{base_url}/",
-        headers={'Origin': 'http://localhost:3000'}
+        headers={'Origin': 'http://localhost:5175'}
     )
 
 if __name__ == "__main__":

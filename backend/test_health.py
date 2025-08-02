@@ -2,7 +2,7 @@ import requests
 import sys
 
 def test_health_endpoint():
-    url = "http://localhost:8000/health"
+    url = "http://localhost:8001/health"
     print(f"Testing health endpoint at {url}")
     
     try:

@@ -18,15 +18,15 @@ if __name__ == "__main__":
     print(f"   Python version: {sys.version}")
     print(f"   Working directory: {os.getcwd()}")
     print("   Endpoints:")
-    print("   - http://localhost:8000/")
-    print("   - http://localhost:8000/health")
+    print("   - http://localhost:8001/")
+    print("   - http://localhost:8001/health")
     print("\nPress Ctrl+C to stop the server\n")
     
     try:
-        uvicorn.run(app, host="0.0.0.0", port=8000)
+        uvicorn.run(app, host="0.0.0.0", port=8001)
     except Exception as e:
         print(f"\n❌ Error starting server: {e}")
         print("\nTroubleshooting steps:")
-        print("1. Make sure port 8000 is not in use")
+        print("1. Make sure port 8001 is not in use")
         print("2. Check if uvicorn is installed: pip install uvicorn")
         print("3. Try a different port: uvicorn test_fastapi:app --port 8001")
