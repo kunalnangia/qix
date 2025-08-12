@@ -553,90 +553,6 @@ async def register(
             detail=error_detail
         )
 
-@api_router.post("/auth/login", response_model=dict)
-async def login(
-    request: Request,
-    user_data: UserLogin,
-    db: Session = Depends(get_db)
-):
-    """
-    Authenticate user and return JWT token
-    
-    Request body:
-    - email: User's email address
-    - password: User's password
-    
-    Returns:
-    - access_token: JWT token for authentication
-    - token_type: Bearer token type
-    - user: User information
-    """
-    try:
-        logger.info(f"Login attempt for email: {user_data.email}")
-        logger.info(f"Request headers: {dict(request.headers)}")
-        logger.info(f"Request body: {await request.body()}")
-        
-        auth_service = AuthService(db)
-        
-        # Log the type of db session
-        logger.info(f"DB session type: {type(db).__name__}")
-        
-        # Authenticate user
-        try:
-            user = await auth_service.authenticate_user(user_data.email, user_data.password)
-            logger.info(f"User authentication result: {bool(user)}")
-        except Exception as auth_error:
-            logger.error(f"Error in authenticate_user: {str(auth_error)}", exc_info=True)
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail=f"Authentication error: {str(auth_error)}"
-            )
-            
-        if not user:
-            logger.warning(f"Authentication failed for email: {user_data.email}")
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Incorrect email or password",
-                headers={"WWW-Authenticate": "Bearer"},
-            )
-        
-        # Create access token
-        try:
-            access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-            logger.info(f"Creating access token for user ID: {user.get('id')}")
-            access_token = create_access_token(
-                data={"sub": str(user["id"])},  # Keep only the user ID in the token
-                expires_delta=access_token_expires
-            )
-            logger.info("Access token created successfully")
-        except Exception as token_error:
-            logger.error(f"Error creating access token: {str(token_error)}", exc_info=True)
-            raise HTTPException(
-                status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                detail="Error creating access token"
-            )
-        
-        # Remove sensitive data before returning
-        if "hashed_password" in user:
-            del user["hashed_password"]
-            
-        logger.info(f"User logged in successfully: {user_data.email}")
-        
-        return {
-            "access_token": access_token,
-            "token_type": "bearer",
-            "user": user
-        }
-        
-    except HTTPException as he:
-        logger.warning(f"Login failed for {user_data.email}: {str(he.detail)}")
-        raise
-    except Exception as e:
-        logger.error(f"Unexpected error during login for {user_data.email}: {str(e)}", exc_info=True)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"An unexpected error occurred during login: {str(e)}"
-        )
 
 @api_router.get("/auth/me", response_model=dict)
 async def get_current_user_info(
@@ -1418,6 +1334,7 @@ try:
     app.include_router(api_router)
     
     # Include other routers as they become available
+    app.include_router(auth.router, prefix="/api/v1/auth", tags=["Authentication"])
     app.include_router(projects.router, prefix="/v1/projects", tags=["Projects"])
     app.include_router(test_cases.router, prefix="/api/v1/test-cases", tags=["Test Cases"])
     

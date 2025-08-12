@@ -1,21 +1,21 @@
 // Base URL for API requests
-export const API_BASE_URL = 'http://127.0.0.1:8001/api';
+export const API_BASE_URL = 'http://127.0.0.1:8001';
 
 // API endpoints
 export const API_ENDPOINTS = {
   AUTH: {
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
-    ME: '/auth/me',
+    LOGIN: '/api/v1/auth/login',
+    REGISTER: '/api/v1/auth/register',
+    ME: '/api/auth/me',
   },
-  PROJECTS: '/v1/projects',
-  TEST_CASES: '/v1/test-cases',
-  TEAMS: '/v1/teams',
-  EXECUTIONS: '/v1/executions',
-  COMMENTS: '/v1/comments',
-  ATTACHMENTS: '/v1/attachments',
-  ENVIRONMENTS: '/v1/environments',
-  AI: '/v1/ai',
+  PROJECTS: '/api/v1/projects',
+  TEST_CASES: '/api/v1/test-cases',
+  TEAMS: '/api/v1/teams',
+  EXECUTIONS: '/api/v1/executions',
+  COMMENTS: '/api/v1/comments',
+  ATTACHMENTS: '/api/v1/attachments',
+  ENVIRONMENTS: '/api/v1/environments',
+  AI: '/api/v1/ai',
 };
 
 // Helper function to get full API URL
