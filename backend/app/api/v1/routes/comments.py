@@ -1,101 +1,61 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List
-import uuid
-from datetime import datetime
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import get_db
-from app.models.db_models import Comment
-from app.models.db_models import TestCase as DBTestCase
-from app.models.db_models import User
-from app.schemas.comment import CommentCreate, CommentInDB
+from app.schemas.comment import CommentCreate, Comment as CommentSchema
 from app.core.security import get_current_user
+from app.services.comment_service import CommentService
+from app.websocket.manager import websocket_manager
 
-router = APIRouter(prefix="/comments", tags=["comments"])
+router = APIRouter()
 
-@router.post("/", response_model=CommentInDB, status_code=status.HTTP_201_CREATED)
-def create_comment(
+
+def get_comment_service(db: AsyncSession = Depends(get_db)) -> CommentService:
+    return CommentService(db)
+
+
+@router.post("/", response_model=CommentSchema, status_code=status.HTTP_201_CREATED)
+async def create_comment(
     comment_in: CommentCreate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: dict = Depends(get_current_user),
+    comment_service: CommentService = Depends(get_comment_service),
 ):
     """
-    Create a new comment on a test case
+    Create a new comment.
     """
-    # Verify test case exists
-    test_case = db.query(TestCase).filter(TestCase.id == comment_in.test_case_id).first()
-    if not test_case:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Test case with id {comment_in.test_case_id} not found"
-        )
-    
-    comment = Comment(
-        id=str(uuid.uuid4()),
-        content=comment_in.content,
-        test_case_id=comment_in.test_case_id,
-        created_by=current_user.id,
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
+    comment = await comment_service.create_comment(
+        comment_data=comment_in,
+        user_id=current_user["id"],
+        user_name=current_user["full_name"],
     )
-    
-    db.add(comment)
-    db.commit()
-    db.refresh(comment)
-    
+    await websocket_manager.broadcast_comment_update(comment.dict())
     return comment
 
-@router.get("/test-case/{test_case_id}", response_model=List[CommentInDB])
-def get_comments_for_test_case(
-    test_case_id: str,
-    skip: int = 0,
-    limit: int = 100,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """
-    Get all comments for a test case
-    """
-    # Verify test case exists
-    test_case = db.query(TestCase).filter(TestCase.id == test_case_id).first()
-    if not test_case:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail=f"Test case with id {test_case_id} not found"
-        )
-    
-    comments = db.query(Comment).filter(
-        Comment.test_case_id == test_case_id
-    ).order_by(
-        Comment.created_at.desc()
-    ).offset(skip).limit(limit).all()
-    
-    return comments
 
-@router.delete("/{comment_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_comment(
-    comment_id: str,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+@router.get("/{test_case_id}", response_model=List[CommentSchema])
+async def get_comments(
+    test_case_id: str,
+    current_user: dict = Depends(get_current_user),
+    comment_service: CommentService = Depends(get_comment_service),
 ):
     """
-    Delete a comment (only allowed by comment author or admin)
+    Get comments for a test case.
     """
-    comment = db.query(Comment).filter(Comment.id == comment_id).first()
-    if not comment:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Comment not found"
-        )
-    
-    # Only allow comment author or admin to delete
-    if comment.created_by != current_user.id and not current_user.is_superuser:
-        raise HTTPException(
-            status_code=status.HTTP_403_FORBIDDEN,
-            detail="Not authorized to delete this comment"
-        )
-    
-    db.delete(comment)
-    db.commit()
-    
-    return None
+    return await comment_service.get_comments_for_test_case(test_case_id=test_case_id)
+
+
+@router.put("/{comment_id}/resolve", response_model=CommentSchema)
+async def resolve_comment(
+    comment_id: str,
+    current_user: dict = Depends(get_current_user),
+    comment_service: CommentService = Depends(get_comment_service),
+):
+    """
+    Resolve a comment.
+    """
+    comment = await comment_service.resolve_comment(
+        comment_id=comment_id, user_id=current_user["id"]
+    )
+    await websocket_manager.broadcast_comment_update(comment.dict())
+    return comment

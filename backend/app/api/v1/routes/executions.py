@@ -1,160 +1,64 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
 from typing import List, Optional
-import uuid
-from datetime import datetime
+from fastapi import APIRouter, Depends, status
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.db.session import get_db
-from app.models.db_models import TestExecution, ExecutionStatus
-from app.models.db_models import TestCase as DBTestCase
-from app.models.db_models import User
-from app.schemas.execution import TestExecutionCreate, TestExecutionInDB
+from app.schemas.execution import (
+    TestExecutionCreate,
+    TestExecutionResponse,
+    ExecutionStatus,
+)
 from app.core.security import get_current_user
+from app.services.execution_service import ExecutionService
+from app.websocket.manager import websocket_manager
 
-router = APIRouter(prefix="/executions", tags=["executions"])
+router = APIRouter()
 
-@router.post("/", response_model=TestExecutionInDB, status_code=status.HTTP_201_CREATED)
-def create_test_execution(
+
+def get_execution_service(db: AsyncSession = Depends(get_db)) -> ExecutionService:
+    return ExecutionService(db)
+
+
+@router.post("/", response_model=TestExecutionResponse, status_code=status.HTTP_201_CREATED)
+async def create_test_execution(
     execution_in: TestExecutionCreate,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: dict = Depends(get_current_user),
+    execution_service: ExecutionService = Depends(get_execution_service),
 ):
     """
-    Create a new test execution record
+    Create a new test execution.
     """
-    # Verify test case exists and user has access
-    test_case = db.query(TestCase).filter(
-        (TestCase.id == execution_in.test_case_id) &
-        (TestCase.created_by == current_user.id)
-    ).first()
-    
-    if not test_case:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Test case not found or access denied"
-        )
-    
-    execution = TestExecution(
-        id=str(uuid.uuid4()),
-        test_case_id=execution_in.test_case_id,
-        status=ExecutionStatus.PENDING,
-        started_by=current_user.id,
-        started_at=datetime.utcnow(),
-        created_at=datetime.utcnow(),
-        updated_at=datetime.utcnow()
+    execution = await execution_service.create_test_execution(
+        execution_data=execution_in, user_id=current_user["id"]
     )
-    
-    # Update test case status
-    test_case.status = ExecutionStatus.IN_PROGRESS
-    test_case.updated_at = datetime.utcnow()
-    
-    db.add(execution)
-    db.add(test_case)
-    db.commit()
-    db.refresh(execution)
-    
+    await websocket_manager.broadcast_test_execution_update(execution.dict())
     return execution
 
-@router.get("/{execution_id}", response_model=TestExecutionInDB)
-def get_test_execution(
-    execution_id: str,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+
+@router.get("/", response_model=List[TestExecutionResponse])
+async def get_test_executions(
+    test_case_id: Optional[str] = None,
+    current_user: dict = Depends(get_current_user),
+    execution_service: ExecutionService = Depends(get_execution_service),
 ):
     """
-    Get a test execution by ID
+    Get test executions.
     """
-    execution = db.query(TestExecution).join(
-        TestCase,
-        TestExecution.test_case_id == TestCase.id
-    ).filter(
-        (TestExecution.id == execution_id) &
-        (TestCase.created_by == current_user.id)
-    ).first()
-    
-    if not execution:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Test execution not found or access denied"
-        )
-    
-    return execution
+    return await execution_service.get_test_executions(test_case_id=test_case_id)
 
-@router.get("/test-case/{test_case_id}", response_model=List[TestExecutionInDB])
-def get_test_case_executions(
-    test_case_id: str,
-    limit: int = 100,
-    skip: int = 0,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
-):
-    """
-    Get all executions for a test case
-    """
-    # Verify test case exists and user has access
-    test_case = db.query(TestCase).filter(
-        (TestCase.id == test_case_id) &
-        (TestCase.created_by == current_user.id)
-    ).first()
-    
-    if not test_case:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Test case not found or access denied"
-        )
-    
-    executions = db.query(TestExecution).filter(
-        TestExecution.test_case_id == test_case_id
-    ).order_by(
-        TestExecution.started_at.desc()
-    ).offset(skip).limit(limit).all()
-    
-    return executions
 
-@router.put("/{execution_id}/status/{status}", response_model=TestExecutionInDB)
-def update_execution_status(
+@router.put("/{execution_id}/status", response_model=TestExecutionResponse)
+async def update_execution_status(
     execution_id: str,
     status: ExecutionStatus,
-    db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    current_user: dict = Depends(get_current_user),
+    execution_service: ExecutionService = Depends(get_execution_service),
 ):
     """
-    Update the status of a test execution
+    Update execution status.
     """
-    execution = db.query(TestExecution).join(
-        TestCase,
-        TestExecution.test_case_id == TestCase.id
-    ).filter(
-        (TestExecution.id == execution_id) &
-        (TestCase.created_by == current_user.id)
-    ).first()
-    
-    if not execution:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Test execution not found or access denied"
-        )
-    
-    # Update execution status
-    execution.status = status
-    execution.updated_at = datetime.utcnow()
-    
-    # If execution is completed, update the test case status
-    if status in [ExecutionStatus.PASSED, ExecutionStatus.FAILED, ExecutionStatus.BLOCKED]:
-        execution.completed_at = datetime.utcnow()
-        
-        # Update test case status
-        test_case = db.query(TestCase).filter(
-            TestCase.id == execution.test_case_id
-        ).first()
-        
-        if test_case:
-            test_case.status = status
-            test_case.updated_at = datetime.utcnow()
-            db.add(test_case)
-    
-    db.add(execution)
-    db.commit()
-    db.refresh(execution)
-    
+    execution = await execution_service.update_execution_status(
+        execution_id=execution_id, new_status=status
+    )
+    await websocket_manager.broadcast_test_execution_update(execution.dict())
     return execution
