@@ -28075,3 +28075,16 @@ Tables in the database:
 2025-08-12 15:03:16 - test_connection - INFO - test_connection.py:21 - Imported required modules successfully
 2025-08-12 15:03:16 - test_db - INFO - test_db.py:20 - ✅ Successfully imported required modules
 2025-08-12 15:03:16 - test_db_insert - ERROR - test_db_insert.py:35 - Failed to import required modules: cannot import name 'SQLALCHEMY_DATABASE_URL' from 'app.db.session' (/app/backend/app/db/session.py)
+2025-08-12 15:15:39 - root - INFO - main.py:88 - ================================================================================
+2025-08-12 15:15:39 - root - INFO - main.py:89 - Application starting with enhanced logging (level: INFO)
+2025-08-12 15:15:39 - root - INFO - main.py:90 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:15:39 - root - INFO - main.py:91 - Working directory: /app/backend
+2025-08-12 15:15:39 - root - INFO - main.py:92 - ================================================================================
+2025-08-12 15:15:41 - app.main - INFO - main.py:1407 - Initializing API routers...
+2025-08-12 15:15:41 - app.main - INFO - main.py:1419 - API routers initialized successfully
+2025-08-12 15:15:41 - passlib.handlers.bcrypt - WARNING - bcrypt.py:622 - (trapped) error reading bcrypt version
+Traceback (most recent call last):
+  File "/home/jules/.pyenv/versions/3.12.11/lib/python3.12/site-packages/passlib/handlers/bcrypt.py", line 620, in _load_backend_mixin
+    version = _bcrypt.__about__.__version__
+              ^^^^^^^^^^^^^^^^^
+AttributeError: module 'bcrypt' has no attribute '__about__'

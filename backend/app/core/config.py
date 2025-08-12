@@ -52,6 +52,11 @@ class Settings(BaseSettings):
         """Build database URI from components"""
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
     
+    # Redis settings
+    REDIS_HOST: str = "localhost"
+    REDIS_PORT: int = 6379
+    REDIS_DB: int = 0
+
     # Email settings
     SMTP_TLS: bool = True
     SMTP_PORT: Optional[int] = None
