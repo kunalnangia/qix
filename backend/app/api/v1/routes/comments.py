@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from typing import List
 import uuid
 from datetime import datetime
@@ -64,7 +64,9 @@ def get_comments_for_test_case(
             detail=f"Test case with id {test_case_id} not found"
         )
     
-    comments = db.query(Comment).filter(
+    comments = db.query(Comment).options(
+        joinedload(Comment.user)
+    ).filter(
         Comment.test_case_id == test_case_id
     ).order_by(
         Comment.created_at.desc()

@@ -44,9 +44,18 @@ def main():
                 with test_engine.connect() as conn:
                     logger.info(f"Connection attempt {attempt + 1}/{max_retries}")
                     
+                    # Enable slow query logging for this session
+                    conn.execute(text("SET log_min_duration_statement = 100"))
+                    logger.info("Set log_min_duration_statement = 100 for this session.")
+
                     # Execute a simple query
                     result = conn.execute(text("SELECT 1"))
                     logger.info(f"Test query result: {result.scalar()}")
+
+                    # Execute an intentionally slow query to test logging
+                    logger.info("Executing intentionally slow query (pg_sleep(1))...")
+                    conn.execute(text("SELECT pg_sleep(1)"))
+                    logger.info("Slow query executed.")
                     
                     # Check if users table exists
                     result = conn.execute(text("""

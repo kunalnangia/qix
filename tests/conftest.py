@@ -1,12 +1,19 @@
 import os
+import sys
+from pathlib import Path
 import pytest
+
+# Add project root to the Python path to allow for absolute imports
+project_root = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(project_root))
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-from backend.database.config import Base, get_db
-from backend.main import app
+from backend.app.db.base import Base
+from backend.app.db.session import get_db
+from backend.app.main import app
 
 # Test database URL - using SQLite in-memory for testing
 SQLALCHEMY_DATABASE_URL = "sqlite:///:memory:"

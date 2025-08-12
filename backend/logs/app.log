@@ -27971,3 +27971,107 @@ TypeError: connect() got an unexpected keyword argument 'keepalives'
 
 2025-08-02 21:52:26 - app.db.session - ERROR - session.py:126 - Database session error: 500: An error occurred during authentication: connect() got an unexpected keyword argument 'keepalives'
 2025-08-02 21:52:26 - app.main - WARNING - main.py:391 - HTTP Exception: 500 - An error occurred during authentication: connect() got an unexpected keyword argument 'keepalives' - Path: /api/v1/test-cases/
+2025-08-12 15:02:15 - root - INFO - main.py:88 - ================================================================================
+2025-08-12 15:02:15 - root - INFO - main.py:89 - Application starting with enhanced logging (level: INFO)
+2025-08-12 15:02:15 - root - INFO - main.py:90 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:02:15 - root - INFO - main.py:91 - Working directory: /app/backend
+2025-08-12 15:02:15 - root - INFO - main.py:92 - ================================================================================
+2025-08-12 15:02:16 - app.main - INFO - main.py:1407 - Initializing API routers...
+2025-08-12 15:02:16 - app.main - INFO - main.py:1419 - API routers initialized successfully
+2025-08-12 15:02:16 - root - INFO - main.py:88 - ================================================================================
+2025-08-12 15:02:16 - root - INFO - main.py:89 - Application starting with enhanced logging (level: INFO)
+2025-08-12 15:02:16 - root - INFO - main.py:90 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:02:16 - root - INFO - main.py:91 - Working directory: /app/backend
+2025-08-12 15:02:16 - root - INFO - main.py:92 - ================================================================================
+2025-08-12 15:02:16 - backend.app.main - INFO - main.py:1407 - Initializing API routers...
+2025-08-12 15:02:16 - backend.app.main - INFO - main.py:1419 - API routers initialized successfully
+2025-08-12 15:02:16 - backend.app.db.session - INFO - session.py:21 - Loading environment from: /app/backend/.env
+2025-08-12 15:02:16 - backend.app.db.session - INFO - session.py:31 - Database URL configured
+2025-08-12 15:03:10 - root - INFO - main.py:88 - ================================================================================
+2025-08-12 15:03:10 - root - INFO - main.py:89 - Application starting with enhanced logging (level: INFO)
+2025-08-12 15:03:10 - root - INFO - main.py:90 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:03:10 - root - INFO - main.py:91 - Working directory: /app/backend
+2025-08-12 15:03:10 - root - INFO - main.py:92 - ================================================================================
+2025-08-12 15:03:11 - app.main - INFO - main.py:1407 - Initializing API routers...
+2025-08-12 15:03:11 - app.main - INFO - main.py:1419 - API routers initialized successfully
+2025-08-12 15:03:11 - root - INFO - main.py:88 - ================================================================================
+2025-08-12 15:03:11 - root - INFO - main.py:89 - Application starting with enhanced logging (level: INFO)
+2025-08-12 15:03:11 - root - INFO - main.py:90 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:03:11 - root - INFO - main.py:91 - Working directory: /app/backend
+2025-08-12 15:03:11 - root - INFO - main.py:92 - ================================================================================
+2025-08-12 15:03:11 - backend.app.main - INFO - main.py:1407 - Initializing API routers...
+2025-08-12 15:03:11 - backend.app.main - INFO - main.py:1419 - API routers initialized successfully
+2025-08-12 15:03:11 - backend.app.db.session - INFO - session.py:21 - Loading environment from: /app/backend/.env
+2025-08-12 15:03:11 - backend.app.db.session - INFO - session.py:31 - Database URL configured
+2025-08-12 15:03:12 - simple_db_test - ERROR - simple_db_test.py:29 - Failed to import required modules: cannot import name 'SQLALCHEMY_DATABASE_URL' from 'app.db.session' (/app/backend/app/db/session.py)
+2025-08-12 15:03:12 - auth_test - INFO - test_auth.py:34 - Successfully imported required modules
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:22 - ================================================================================
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:23 - STARTING DATABASE CONNECTION TEST
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:24 - ================================================================================
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:25 - Python version: 3.12.11 (main, Jul 29 2025, 18:21:07) [GCC 13.3.0]
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:26 - Working directory: /app/backend
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:27 - Project root: /app/backend
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:32 - Loading .env from: /app/backend/.env
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:39 - ✅ Loaded .env file
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:51 -
+Environment variables:
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   DATABASE_URL: postgresql://postgres.lflecyuvttemfoyixngi:Ayeshaayesha121@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   POSTGRES_SERVER: Not set
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   POSTGRES_USER: Not set
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   POSTGRES_PASSWORD: Not set
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   POSTGRES_DB: Not set
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:56 -   POSTGRES_PORT: Not set
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:60 -
+SQLAlchemy version: 2.0.43
+2025-08-12 15:03:12 - test_conn - INFO - test_conn.py:72 -
+Attempting to connect to: postgresql+psycopg2://postgres.lflecyuvttemfoyixngi:Ayeshaayesha121@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres
+2025-08-12 15:03:14 - sqlalchemy.pool.impl.QueuePool - DEBUG - base.py:896 - Created new connection <connection object at 0x7f880758a0c0; dsn: 'user=postgres.lflecyuvttemfoyixngi password=xxx connect_timeout=10 dbname=postgres host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=5', closed: 0>
+2025-08-12 15:03:14 - sqlalchemy.engine.Engine - INFO - base.py:1846 - select pg_catalog.version()
+2025-08-12 15:03:14 - sqlalchemy.engine.Engine - INFO - base.py:1846 - [raw sql] {}
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - select current_schema()
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - [raw sql] {}
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - show standard_conforming_strings
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - [raw sql] {}
+2025-08-12 15:03:15 - sqlalchemy.pool.impl.QueuePool - DEBUG - base.py:737 - Connection <connection object at 0x7f880758a0c0; dsn: 'user=postgres.lflecyuvttemfoyixngi password=xxx connect_timeout=10 dbname=postgres host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=5', closed: 0> checked out from pool
+2025-08-12 15:03:15 - sqlalchemy.pool.impl.QueuePool - DEBUG - base.py:1313 - Connection <connection object at 0x7f880758a0c0; dsn: 'user=postgres.lflecyuvttemfoyixngi password=xxx connect_timeout=10 dbname=postgres host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=5', closed: 0> is fresh, skipping pre-ping
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:2702 - BEGIN (implicit)
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - SELECT version();
+2025-08-12 15:03:15 - sqlalchemy.engine.Engine - INFO - base.py:1846 - [generated in 0.00040s] {}
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:91 -
+✅ Successfully connected to database!
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:92 - Database version: PostgreSQL 17.4 on aarch64-unknown-linux-gnu, compiled by gcc (GCC) 13.2.0, 64-bit
+2025-08-12 15:03:16 - sqlalchemy.engine.Engine - INFO - base.py:1846 -
+            SELECT table_name
+            FROM information_schema.tables
+            WHERE table_schema = 'public';
+
+2025-08-12 15:03:16 - sqlalchemy.engine.Engine - INFO - base.py:1846 - [generated in 0.00028s] {}
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:103 -
+Tables in the database:
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - activity_logs
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - ai_analyses
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - alembic_version
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - attachments
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - comments
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - environments
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - projects
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - team_members
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - teams
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - test_cases
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - test_executions
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - test_plan_test_cases
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - test_plans
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - test_steps
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:105 - - users
+2025-08-12 15:03:16 - sqlalchemy.engine.Engine - INFO - base.py:2705 - ROLLBACK
+2025-08-12 15:03:16 - sqlalchemy.pool.impl.QueuePool - DEBUG - base.py:970 - Connection <connection object at 0x7f880758a0c0; dsn: 'user=postgres.lflecyuvttemfoyixngi password=xxx connect_timeout=10 dbname=postgres host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=5', closed: 0> being returned to pool
+2025-08-12 15:03:16 - sqlalchemy.pool.impl.QueuePool - DEBUG - base.py:1423 - Connection <connection object at 0x7f880758a0c0; dsn: 'user=postgres.lflecyuvttemfoyixngi password=xxx connect_timeout=10 dbname=postgres host=aws-0-ap-southeast-1.pooler.supabase.com port=6543 keepalives=1 keepalives_idle=30 keepalives_interval=10 keepalives_count=5', closed: 0> reset, transaction already reset
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:109 -
+✅ Database connection test completed successfully!
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:119 -
+================================================================================
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:120 - DATABASE CONNECTION TEST COMPLETED
+2025-08-12 15:03:16 - test_conn - INFO - test_conn.py:121 - ================================================================================
+2025-08-12 15:03:16 - test_connection - INFO - test_connection.py:21 - Imported required modules successfully
+2025-08-12 15:03:16 - test_db - INFO - test_db.py:20 - ✅ Successfully imported required modules
+2025-08-12 15:03:16 - test_db_insert - ERROR - test_db_insert.py:35 - Failed to import required modules: cannot import name 'SQLALCHEMY_DATABASE_URL' from 'app.db.session' (/app/backend/app/db/session.py)
