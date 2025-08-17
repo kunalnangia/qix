@@ -111,3 +111,6 @@ Backend tests are organized into specific directories under `backend/tests/`:
 *   `api/`: Tests for API endpoints (HTTP requests/responses).
 *   `e2e/`: End-to-End tests for complete user flows.
 *   `performance/`: Performance tests.
+*   `conftest.py`: Contains shared fixtures.
+
+Frontend tests are typically located in `frontend/src/__tests__/`.
